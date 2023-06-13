@@ -1,0 +1,10 @@
+{
+  "filters": {
+    "council": "some-council-string",
+    "demographics": {
+      "age_range": "some-age-range-string",
+      "ethnicity": "some-ethnicity-string",
+      "gender": "some-gender-string"
+    }
+  }
+}

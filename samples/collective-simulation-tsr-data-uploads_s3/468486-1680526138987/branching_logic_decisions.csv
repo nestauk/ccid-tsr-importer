@@ -1,0 +1,3 @@
+session_id,cast_uuid,stage_id,payload,active_branch,past_branches
+9b76e62edbba6caa69fbfa37d3d2faf8ce0b6b9230292d6487300273610bc6b8c83883c7122db7cb94c4422338e22e08,pip,branching-logic-input,"{""t1-VID-travel-introduction"":true,""h1-VID-heat-introduction"":false,""f0-intro-card"":false}",t1-VID-travel-introduction,[]
+9b76e62edbba6caa69fbfa37d3d2faf8ce0b6b9230292d6487300273610bc6b8c83883c7122db7cb94c4422338e22e08,pip,branching-logic-input-intro-type,"{""i3-your-team-basic"":true,""i3-your-team-collective"":false}",i3-your-team-basic,[]

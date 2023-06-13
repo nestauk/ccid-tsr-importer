@@ -1,0 +1,3772 @@
+{
+  "session-id": "4743cd7cf697fc5724c07d278d1f184c9af18d0d59c8d0f79bac39435f3ff6b3dc3248fb038d2785c737103823ee8d0f",
+  "council": "London Borough of Lambeth",
+  "datetime": "1677181321",
+  "modules": {
+    "food": false,
+    "heat": true,
+    "travel": false
+  },
+  "participants": [
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "539B5FC2-0E1C-4D53-8497-EA1F6838D1FF",
+          "result": {
+            "h12_a1": true,
+            "h12_a2": false,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "539B5FC2-0E1C-4D53-8497-EA1F6838D1FF",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "539B5FC2-0E1C-4D53-8497-EA1F6838D1FF",
+          "result": {
+            "h14_a1": true,
+            "h14_a2": false,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": false
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "26-35",
+        "ethnicity": "\"English",
+        "first_half_postcode": "none-provided",
+        "gender": "female"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "8",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "10",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "7",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "3",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "7",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "9",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "3",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "7",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "8",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "8",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "9",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "6",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "8",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-2"
+        }
+      ],
+      "uuid": "539B5FC2-0E1C-4D53-8497-EA1F6838D1FF"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "C4705CA8-29AE-488B-9C79-ADD1401E0F0D",
+          "result": {
+            "h12_a1": true,
+            "h12_a2": false,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "C4705CA8-29AE-488B-9C79-ADD1401E0F0D",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "C4705CA8-29AE-488B-9C79-ADD1401E0F0D",
+          "result": {
+            "h14_a1": true,
+            "h14_a2": false,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": false
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "36-45",
+        "ethnicity": "Chinese",
+        "first_half_postcode": "Sw19",
+        "gender": "male"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "8",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "9",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "8",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "8",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "9",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "7",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "3",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "0",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "10",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "10",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-5"
+        }
+      ],
+      "uuid": "C4705CA8-29AE-488B-9C79-ADD1401E0F0D"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "5E6D883E-9F7C-4685-9E61-9E3996DA298B",
+          "result": {
+            "h12_a1": false,
+            "h12_a2": false,
+            "h12_a3": true
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "5E6D883E-9F7C-4685-9E61-9E3996DA298B",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "5E6D883E-9F7C-4685-9E61-9E3996DA298B",
+          "result": {
+            "h14_a1": false,
+            "h14_a2": true,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": false
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "18-25",
+        "ethnicity": "Any other Mixed or multiple ethnic background",
+        "first_half_postcode": "SW2",
+        "gender": "female"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "8",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "10",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "10",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "10",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "0",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "7",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "3",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "0",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "3",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "3",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "0",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "0",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "0",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "7",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "5",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "10",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "7",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-4"
+        }
+      ],
+      "uuid": "5E6D883E-9F7C-4685-9E61-9E3996DA298B"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "AEC02919-91AB-435E-AF48-2CD6FE95B998",
+          "result": {
+            "h12_a1": false,
+            "h12_a2": true,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "AEC02919-91AB-435E-AF48-2CD6FE95B998",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "AEC02919-91AB-435E-AF48-2CD6FE95B998",
+          "result": {
+            "h14_a1": true,
+            "h14_a2": false,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": false
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "26-35",
+        "ethnicity": "\"English",
+        "first_half_postcode": "none-provided",
+        "gender": "female"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "7",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "10",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "10",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "4",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "3",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "6",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "6",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "0",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "7",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "6",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "4",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "8",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "6",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "7",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "8",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-5-4"
+        }
+      ],
+      "uuid": "AEC02919-91AB-435E-AF48-2CD6FE95B998"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "E0F2E3AC-9619-4A53-9564-81D8EE37C099",
+          "result": {
+            "h12_a1": false,
+            "h12_a2": true,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "E0F2E3AC-9619-4A53-9564-81D8EE37C099",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "E0F2E3AC-9619-4A53-9564-81D8EE37C099",
+          "result": {
+            "h14_a1": true,
+            "h14_a2": false,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": false
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "14-17",
+        "ethnicity": "African",
+        "first_half_postcode": "SW9",
+        "gender": "female"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "3",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "8",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "10",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "4",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "5",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "1",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "7",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "1",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "6",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "6",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "4",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "7",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "5",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "3",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "10",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-3"
+        }
+      ],
+      "uuid": "E0F2E3AC-9619-4A53-9564-81D8EE37C099"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "5AC38610-E523-4AD9-8D2D-107AAA8873CF",
+          "result": {
+            "h12_a1": true,
+            "h12_a2": false,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "5AC38610-E523-4AD9-8D2D-107AAA8873CF",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "5AC38610-E523-4AD9-8D2D-107AAA8873CF",
+          "result": {
+            "h14_a1": false,
+            "h14_a2": false,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": true
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "14-17",
+        "ethnicity": "\"Any other Black",
+        "first_half_postcode": "none-provided",
+        "gender": "male"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "7",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "5",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "5",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "8",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "4",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "4",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "0",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "8",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "10",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "8",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "8",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "8",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "7",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "7",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-4"
+        }
+      ],
+      "uuid": "5AC38610-E523-4AD9-8D2D-107AAA8873CF"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "8FD9F1C4-A537-4AF4-9996-31C30F2E94A2",
+          "result": {
+            "h12_a1": false,
+            "h12_a2": true,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "8FD9F1C4-A537-4AF4-9996-31C30F2E94A2",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "8FD9F1C4-A537-4AF4-9996-31C30F2E94A2",
+          "result": {
+            "h14_a1": false,
+            "h14_a2": true,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": false
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "26-35",
+        "ethnicity": "\"English",
+        "first_half_postcode": "none-provided",
+        "gender": "male"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "10",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "10",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "9",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "3",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "7",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "9",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "5",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "9",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "7",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "7",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "5",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-1-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-5-2"
+        }
+      ],
+      "uuid": "8FD9F1C4-A537-4AF4-9996-31C30F2E94A2"
+    },
+    {
+      "checkbox": [
+        {
+          "cast_uuid": "B05A9D40-9B36-41F9-926E-AD48EE6560F2",
+          "result": {
+            "h12_a1": true,
+            "h12_a2": false,
+            "h12_a3": false
+          },
+          "stage_id": "h12-poll"
+        },
+        {
+          "cast_uuid": "B05A9D40-9B36-41F9-926E-AD48EE6560F2",
+          "result": {
+            "h14-5_a1": false,
+            "h14-5_a2": true
+          },
+          "stage_id": "h14-5-poll"
+        },
+        {
+          "cast_uuid": "B05A9D40-9B36-41F9-926E-AD48EE6560F2",
+          "result": {
+            "h14_a1": false,
+            "h14_a2": false,
+            "h14_a3": false,
+            "h14_a4": false,
+            "h14_a5": true
+          },
+          "stage_id": "h14-poll"
+        }
+      ],
+      "demographics": {
+        "age_range": "14-17",
+        "ethnicity": "prefer-not-to-answer",
+        "first_half_postcode": "SE5",
+        "gender": "male"
+      },
+      "responses": [
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h3-poll",
+          "vote": "8",
+          "vote_id": "h3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h6-poll",
+          "vote": "4",
+          "vote_id": "h6-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "6",
+          "vote_id": "h8-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h8-poll",
+          "vote": "8",
+          "vote_id": "h8-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "8",
+          "vote_id": "h11-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "10",
+          "vote_id": "h11-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "7",
+          "vote_id": "h11-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h11-poll",
+          "vote": "8",
+          "vote_id": "h11-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "6",
+          "vote_id": "h15-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "10",
+          "vote_id": "h15-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h15-taking-temperature",
+          "vote": "7",
+          "vote_id": "h15-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "2",
+          "vote_id": "h17-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "8",
+          "vote_id": "h17-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "h17-final-vote",
+          "vote": "10",
+          "vote_id": "h17-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o2-poll",
+          "vote": "10",
+          "vote_id": "o2-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "8",
+          "vote_id": "o3-q1"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q3"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "10",
+          "vote_id": "o3-q2"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o3-poll",
+          "vote": "8",
+          "vote_id": "o3-q4"
+        },
+        {
+          "max_boundary": "10",
+          "min_boundary": "0",
+          "stage_id": "o4-poll",
+          "vote": "10",
+          "vote_id": "o4-q1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-1-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-1-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-7"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-2-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-2-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-2-4"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-1"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-3-2"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-3-3"
+        },
+        {
+          "max_boundary": "4",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-3-4"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-1"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-2"
+        },
+        {
+          "max_boundary": "6",
+          "min_boundary": "0",
+          "stage_id": "final-questions",
+          "vote": "6",
+          "vote_id": "fq-4-3"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "7",
+          "vote_id": "fq-5-1"
+        },
+        {
+          "max_boundary": "7",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "5",
+          "vote_id": "fq-5-4"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-6-1"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "4",
+          "vote_id": "fq-6-2"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "2",
+          "vote_id": "fq-6-3"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "3",
+          "vote_id": "fq-1-5"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-6"
+        },
+        {
+          "max_boundary": "5",
+          "min_boundary": "1",
+          "stage_id": "final-questions",
+          "vote": "1",
+          "vote_id": "fq-1-4"
+        }
+      ],
+      "uuid": "B05A9D40-9B36-41F9-926E-AD48EE6560F2"
+    }
+  ],
+  "unfilterable_polls": [
+    {
+      "result": {
+        "3": 1,
+        "7": 2,
+        "8": 4,
+        "10": 1
+      },
+      "stage_id": "h3-poll",
+      "vote_id": "h3-q1"
+    },
+    {
+      "result": {
+        "4": 1,
+        "5": 1,
+        "8": 1,
+        "9": 1,
+        "10": 4
+      },
+      "stage_id": "h6-poll",
+      "vote_id": "h6-q1"
+    },
+    {
+      "result": {
+        "5": 1,
+        "7": 1,
+        "8": 2,
+        "9": 1,
+        "10": 3
+      },
+      "stage_id": "h8-poll",
+      "vote_id": "h8-q1"
+    },
+    {
+      "result": {
+        "3": 2,
+        "4": 2,
+        "6": 1,
+        "8": 2,
+        "10": 1
+      },
+      "stage_id": "h8-poll",
+      "vote_id": "h8-q2"
+    },
+    {
+      "result": {
+        "0": 1,
+        "3": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 3
+      },
+      "stage_id": "h11-poll",
+      "vote_id": "h11-q1"
+    },
+    {
+      "result": {
+        "7": 1,
+        "9": 1,
+        "10": 6
+      },
+      "stage_id": "h11-poll",
+      "vote_id": "h11-q2"
+    },
+    {
+      "result": {
+        "3": 1,
+        "6": 1,
+        "7": 3,
+        "10": 3
+      },
+      "stage_id": "h11-poll",
+      "vote_id": "h11-q3"
+    },
+    {
+      "result": {
+        "0": 1,
+        "5": 1,
+        "6": 1,
+        "8": 1,
+        "9": 1,
+        "10": 3
+      },
+      "stage_id": "h11-poll",
+      "vote_id": "h11-q4"
+    },
+    {
+      "result": {
+        "0": 1,
+        "1": 1,
+        "3": 3,
+        "4": 1,
+        "6": 1,
+        "10": 1
+      },
+      "stage_id": "h15-taking-temperature",
+      "vote_id": "h15-q1"
+    },
+    {
+      "result": {
+        "4": 1,
+        "7": 2,
+        "10": 5
+      },
+      "stage_id": "h15-taking-temperature",
+      "vote_id": "h15-q2"
+    },
+    {
+      "result": {
+        "3": 1,
+        "7": 1,
+        "10": 6
+      },
+      "stage_id": "h15-taking-temperature",
+      "vote_id": "h15-q3"
+    },
+    {
+      "result": {
+        "0": 2,
+        "1": 1,
+        "2": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1
+      },
+      "stage_id": "h17-final-vote",
+      "vote_id": "h17-q1"
+    },
+    {
+      "result": {
+        "0": 1,
+        "6": 1,
+        "8": 1,
+        "10": 5
+      },
+      "stage_id": "h17-final-vote",
+      "vote_id": "h17-q2"
+    },
+    {
+      "result": {
+        "0": 1,
+        "8": 1,
+        "10": 6
+      },
+      "stage_id": "h17-final-vote",
+      "vote_id": "h17-q3"
+    },
+    {
+      "result": {
+        "0": 1,
+        "4": 1,
+        "6": 1,
+        "8": 1,
+        "9": 1,
+        "10": 3
+      },
+      "stage_id": "o2-poll",
+      "vote_id": "o2-q1"
+    },
+    {
+      "result": {
+        "4": 1,
+        "7": 2,
+        "8": 2,
+        "9": 1,
+        "10": 2
+      },
+      "stage_id": "o3-poll",
+      "vote_id": "o3-q1"
+    },
+    {
+      "result": {
+        "7": 3,
+        "8": 1,
+        "10": 4
+      },
+      "stage_id": "o3-poll",
+      "vote_id": "o3-q2"
+    },
+    {
+      "result": {
+        "3": 1,
+        "8": 1,
+        "10": 6
+      },
+      "stage_id": "o3-poll",
+      "vote_id": "o3-q3"
+    },
+    {
+      "result": {
+        "5": 2,
+        "6": 2,
+        "8": 1,
+        "10": 3
+      },
+      "stage_id": "o3-poll",
+      "vote_id": "o3-q4"
+    },
+    {
+      "result": {
+        "5": 1,
+        "8": 3,
+        "10": 4
+      },
+      "stage_id": "o4-poll",
+      "vote_id": "o4-q1"
+    },
+    {
+      "result": {
+        "2": 2,
+        "3": 1,
+        "4": 2,
+        "5": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-1"
+    },
+    {
+      "result": {
+        "1": 2,
+        "2": 1,
+        "3": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-5"
+    },
+    {
+      "result": {
+        "1": 4,
+        "2": 1,
+        "3": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-6"
+    },
+    {
+      "result": {
+        "2": 5,
+        "3": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-3"
+    },
+    {
+      "result": {
+        "3": 4,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-4"
+    },
+    {
+      "result": {
+        "2": 2,
+        "3": 3,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-1"
+    },
+    {
+      "result": {
+        "4": 4,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-2"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 1,
+        "4": 3,
+        "5": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-3"
+    },
+    {
+      "result": {
+        "3": 4,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 3,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-4"
+    },
+    {
+      "result": {
+        "3": 1,
+        "5": 1,
+        "6": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-1"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-4"
+    },
+    {
+      "result": {
+        "4": 1,
+        "5": 1,
+        "6": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-2"
+    },
+    {
+      "result": {
+        "5": 1,
+        "6": 5
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-3"
+    },
+    {
+      "result": {
+        "5": 2,
+        "6": 1,
+        "7": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-1"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 2,
+        "7": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "3": 1,
+        "4": 2,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 2,
+        "4": 1,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-1"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 1,
+        "4": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-2"
+    },
+    {
+      "result": {
+        "3": 1,
+        "4": 3,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "4": 2,
+        "5": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-4"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-3"
+    },
+    {
+      "result": {
+        "1": 3,
+        "2": 1,
+        "3": 1,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-7"
+    },
+    {
+      "result": {
+        "3": 5,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-1"
+    },
+    {
+      "result": {
+        "3": 2,
+        "4": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-2"
+    },
+    {
+      "result": {
+        "2": 2,
+        "3": 1,
+        "4": 2,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-1"
+    },
+    {
+      "result": {
+        "1": 2,
+        "2": 1,
+        "3": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-5"
+    },
+    {
+      "result": {
+        "1": 4,
+        "2": 1,
+        "3": 1,
+        "5": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-6"
+    },
+    {
+      "result": {
+        "2": 5,
+        "3": 1,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 4,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-4"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-1"
+    },
+    {
+      "result": {
+        "3": 1,
+        "4": 4,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 3,
+        "5": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-3"
+    },
+    {
+      "result": {
+        "3": 4,
+        "4": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 3,
+        "4": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-4"
+    },
+    {
+      "result": {
+        "3": 1,
+        "5": 1,
+        "6": 5
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-1"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 2,
+        "3": 1,
+        "4": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-4"
+    },
+    {
+      "result": {
+        "4": 1,
+        "5": 2,
+        "6": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-2"
+    },
+    {
+      "result": {
+        "5": 1,
+        "6": 6
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-3"
+    },
+    {
+      "result": {
+        "5": 3,
+        "6": 1,
+        "7": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-1"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 2,
+        "4": 1,
+        "5": 2,
+        "7": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "3": 1,
+        "4": 2,
+        "5": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 2,
+        "4": 2,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-1"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 2,
+        "4": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-2"
+    },
+    {
+      "result": {
+        "3": 2,
+        "4": 3,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "3": 1,
+        "4": 2,
+        "5": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-4"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 1,
+        "4": 3,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-3"
+    },
+    {
+      "result": {
+        "1": 3,
+        "2": 2,
+        "3": 1,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-7"
+    },
+    {
+      "result": {
+        "3": 5,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-1"
+    },
+    {
+      "result": {
+        "3": 2,
+        "4": 5
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-2"
+    },
+    {
+      "result": {
+        "2": 2,
+        "3": 1,
+        "4": 3,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-1"
+    },
+    {
+      "result": {
+        "1": 3,
+        "2": 1,
+        "3": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-5"
+    },
+    {
+      "result": {
+        "1": 5,
+        "2": 1,
+        "3": 1,
+        "5": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-6"
+    },
+    {
+      "result": {
+        "2": 5,
+        "3": 2,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 5,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-4"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 2,
+        "3": 4,
+        "4": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-1"
+    },
+    {
+      "result": {
+        "3": 1,
+        "4": 4,
+        "5": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 4,
+        "5": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-3"
+    },
+    {
+      "result": {
+        "3": 4,
+        "4": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-3"
+    },
+    {
+      "result": {
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-4"
+    },
+    {
+      "result": {
+        "3": 1,
+        "5": 2,
+        "6": 5
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-1"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 3,
+        "3": 1,
+        "4": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-4"
+    },
+    {
+      "result": {
+        "4": 1,
+        "5": 2,
+        "6": 5
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-2"
+    },
+    {
+      "result": {
+        "5": 1,
+        "6": 7
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-4-3"
+    },
+    {
+      "result": {
+        "5": 3,
+        "6": 2,
+        "7": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-1"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 3,
+        "4": 1,
+        "5": 2,
+        "7": 1
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-3"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 2,
+        "4": 3,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-1"
+    },
+    {
+      "result": {
+        "2": 1,
+        "3": 3,
+        "4": 4
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-3-2"
+    },
+    {
+      "result": {
+        "3": 2,
+        "4": 4,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-2"
+    },
+    {
+      "result": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 3
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-5-4"
+    },
+    {
+      "result": {
+        "2": 2,
+        "3": 1,
+        "4": 3,
+        "5": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-6-3"
+    },
+    {
+      "result": {
+        "1": 3,
+        "2": 2,
+        "3": 1,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-1-7"
+    },
+    {
+      "result": {
+        "3": 6,
+        "4": 2
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-1"
+    },
+    {
+      "result": {
+        "3": 3,
+        "4": 5
+      },
+      "stage_id": "final-questions",
+      "vote_id": "fq-2-2"
+    },
+    {
+      "result": {},
+      "stage_id": "",
+      "vote_id": ""
+    }
+  ]
+}

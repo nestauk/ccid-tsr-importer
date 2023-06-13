@@ -1,0 +1,49 @@
+{
+  /* All filters are optional.
+     If a filter is not specified, the data matched all. */
+  "filters": {
+    "council": "some-council-string",
+    "demographics": {
+      "age_range": "some-age-range-string",
+      "ethnicity": "some-ethnicity-string",
+      "gender": "some-gender-string"
+    }
+  },
+  "summaries": [
+    {
+      "id": "f3-q1",
+      "stage_id": "f3-something",
+      "question": "q1",
+      "value": "I currently think about what is healthy when making food choices",
+      "labels": ["don't agree at all", "", "strongly agree"],
+      "total": [6, 22, 102]
+    },
+    {
+      "vote_id": "f15-q1",
+      "stage_id": "f15-something",
+      "question": "q1",
+      "value": "one of the policies",
+      "labels": ["don't agree at all", "", "strongly agree"],
+      "total": [6, 22, 102],
+      "min": 1, // minimum value possible
+      "max": 5, // maximum value possible
+      "mean": 4.5, // mean of all responses
+      /* Some questions represent a poll from after discussion.
+         These will have a change object attached. */
+      "change": {
+        "prior_question": {
+          "vote_id": "f13-q1",
+          "stage_id": "f13-something",
+          "question": "q1",
+          "value": "one of the policies",
+          "labels": ["don't agree at all", "", "strongly agree"],
+          "total": [6, 22, 102],
+          "min": 1, // minimum value possible
+          "max": 5, // maximum value possible
+          "mean": 4.4 // mean of all responses
+        },
+        "mean_percent_change": 2.0 // this is the change in mean value
+      }
+    }
+  ]
+}
