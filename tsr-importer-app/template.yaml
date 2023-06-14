@@ -3,13 +3,77 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   tsr-importer-app
 
-  Sample SAM Template for tsr-importer-app
+  Imports data from the TSR S3 bucket into our database, and generates demographic summary data
 
 Globals:
   Function:
     Timeout: 30
 
+Parameters:
+  DataPlatformTableName:
+    Type: String
+    Description: The name of the DynamoDB table that holds all TSR data (1 record per session)
+    Default: tsr-data-platform
+  QuestionsTableName:
+    Type: String
+    Description: The name of the DynamoDB table that holds all question data
+    Default: tsr-questions
+  SummaryTableName:
+    Type: String
+    Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by demographic)
+    Default: tsr-summary
+
 Resources:
+  SummaryTable:
+    Type: AWS::Serverless::SimpleTable
+    TableName: !Ref SummaryTableName
+    PrimaryKey:
+      Name: DemographicCode
+      Type: String
+
+  SummariserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: tsr-summariser/
+      Handler: app.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DataPlatformTableName
+      Environment:
+        Variables:
+          TSR_QUESTIONS_TABLE_NAME: !Ref QuestionsTableName
+          TSR_DATA_PLATFORM_TABLE_NAME: !Ref DataPlatformTableName
+          TSR_SUMMARY_TABLE_NAME: !Ref SummaryTableName
+
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - app.ts
+
+  ImporterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: tsr-importer/
+      Handler: app.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - app.ts
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -40,22 +104,39 @@ Resources:
         Fn::Sub: ApplicationInsights-SAM-${AWS::StackName}
       ResourceQuery:
         Type: CLOUDFORMATION_STACK_1_0
+
   ApplicationInsightsMonitoring:
     Type: AWS::ApplicationInsights::Application
     Properties:
       ResourceGroupName:
         Ref: ApplicationResourceGroup
       AutoConfigurationEnabled: "true"
+
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  SummariserFunctionARN:
+    Description: Hello World Lambda Function ARN
+    Value: !GetAtt SummariserFunction.Arn
+
+  SummariserFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value: !GetAtt SummariserFunctionRole.Arn
+
+  ImporterFunctionARN:
+    Description: Hello World Lambda Function ARN
+    Value: !GetAtt ImporterFunction.Arn
+
+  ImporterFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value: !GetAtt ImporterFunctionRole.Arn
+
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
+
+  HelloWorldFunctionARN:
     Description: Hello World Lambda Function ARN
     Value: !GetAtt HelloWorldFunction.Arn
+
   HelloWorldFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
     Value: !GetAtt HelloWorldFunctionRole.Arn
