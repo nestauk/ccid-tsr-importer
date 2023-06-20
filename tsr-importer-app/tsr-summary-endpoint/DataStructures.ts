@@ -16,3 +16,25 @@ export interface Summary {
     demographic: string;
     questionTotals: { [key: string]: QuestionTotals };
 }
+
+export interface Demographics {
+    ages: string[];
+    ethnicities: string[];
+    genders: string[];
+    codes: string[];
+    councils: string[];
+}
+
+export interface DemographicQuery {
+    council: string;
+    age: string;
+    ethnicity: string;
+    gender: string;
+}
+
+export interface SearchDetail {
+    summary: Summary;
+    demographics: Demographics;
+    foundDemographics: string[];
+    notFoundDemographics: string[];
+}

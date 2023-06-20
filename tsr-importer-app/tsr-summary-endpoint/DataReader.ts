@@ -5,7 +5,6 @@ import { Summary } from './DataStructures';
 export class DataReader {
     public constructor(private dynamo: DynamoDBClient) {}
 
-    // TODO: type this properly
     public async read(table: string): Promise<Summary[]> {
         console.log(`Reading all records from: ${table}...`);
         let results: any[] = [];

@@ -35,7 +35,7 @@ There are a number of data tables. Their names are provided as parameters to `te
 
 Generates summaries from the data table, and stores them in the summary table.
 
-Data is aggregated by demographic code. A demographic code looks like: `age=*:ethnicity=*:gender=*` (where `*` is a wildcard)
+Data is aggregated by demographic code. A demographic code looks like: `council=*:age=*:ethnicity=*:gender=*` (where `*` is a wildcard)
 
 Each participant from each session has demographic data associated with them. Each is assigned a demographic code, and then voting information is totalled for each unique demographic code found.
 
@@ -46,23 +46,26 @@ The summariser function is triggered by the data table's DynamoDb Stream. This m
 
 ## Summaries endpoint
 
-- Provide query string parameters `gender`, `ethnicity`, and `age` to search - each of these should be a value you already know
+- Provide some or none of query string parameters `council`, `gender`, `ethnicity`, and `age` to search
 
 Notes
 
-- You can leave any parameter blank to match all values
-- You can provide the ethnic code as you have it, and it'll be normalised (as best as possible)
+- Each of these should be a value you already know
+- Leave out any demographic parameters to match all values in their category
+- You can provide the concil and ethnic code as you have it, and it'll be normalised (as best as possible)
 - To help with debugging, all demographics known to the system are in the `.all_demographics` property of the output from this endpoint
 
 Examples:
 
 - `<endpoint>/Prod/summary?gender=male`
-- `<endpoint>/Prod//summary?ethnicity=Bangladeshi`
+- `<endpoint>/Prod/summary?ethnicity=Bangladeshi`
 - `<endpoint>/Prod/summary?age=18-25`
+- `<endpoint>/Prod/summary?council=LondonBoroughOfLambeth`
 
 Combine these filters as you'd expect:
 
 - `<endpoint>/Prod/summary?age=18-25&gender=male`
+- `<endpoint>/Prod/summary?age=18-25&gender=male&council=LondonBoroughOfLambeth`
 
 ### Successful output
 

@@ -9,7 +9,13 @@ export class SessionScanner {
 
     public getUniqueDemographicCodes() {
         let codes = this.sessions
-            .map((session) => session.participants)
+            .map((session) =>
+                session.participants.map((ppt: any) => {
+                    // assign the session council to each participant
+                    ppt.council = session.council;
+                    return ppt;
+                }),
+            )
             .flat()
             .map((participant) => this.createDemographicCode(participant))
             .filter((value, index, self) => self.indexOf(value) === index);
@@ -71,16 +77,23 @@ export class SessionScanner {
 
     private createDemographicCode(participant: any): string {
         return this.composeDemographicCode(
+            participant.council,
             participant.demographics.age_range,
             participant.demographics.ethnicity,
             participant.demographics.gender,
         );
     }
 
-    public composeDemographicCode(age: string, ethnicity: string, gender: string): string {
-        return `age=${this.normaliseAgeRange(age)}:ethnicity=${this.normaliseEthnicityCode(
-            ethnicity,
-        )}:gender=${this.normaliseGender(gender)}`;
+    public composeDemographicCode(council: string, age: string, ethnicity: string, gender: string): string {
+        let cc = this.normaliseCouncil(council);
+        let ag = this.normaliseAgeRange(age);
+        let et = this.normaliseEthnicityCode(ethnicity);
+        let gd = this.normaliseGender(gender);
+        return `council=${cc}:age=${ag}:ethnicity=${et}:gender=${gd}`;
+    }
+
+    public normaliseCouncil(council: string): string {
+        return council.includes(' ') ? this.tidyWords(council) : council;
     }
 
     public normaliseAgeRange(age: string): string {
@@ -88,16 +101,22 @@ export class SessionScanner {
     }
 
     public normaliseEthnicityCode(ethnicity: string): string {
-        return ethnicity
+        return ethnicity.includes(' ') ? this.tidyWords(ethnicity) : ethnicity;
+    }
+
+    public normaliseGender(gender: string): string {
+        return gender.toLowerCase().trim();
+    }
+
+    private tidyWords(words: string): string {
+        return words
+            .toLowerCase()
+            .trim()
             .replace(/\w+/g, function (word) {
                 return word.charAt(0).toUpperCase() + word.substring(1);
             })
             .replace(/\s/g, '')
             .replace(/-/g, '')
             .replace(/\"/g, '');
-    }
-
-    public normaliseGender(gender: string): string {
-        return gender.toLowerCase().trim();
     }
 }

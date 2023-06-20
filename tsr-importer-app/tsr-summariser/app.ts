@@ -81,11 +81,6 @@ export const lambdaHandler = async (event: DynamoDBStreamEvent): Promise<boolean
             throw 'Failed to write summary data to database.';
         }
 
-        // TODO: confirm summaries all ok
-        // this is a good demographic code to investigate:
-        // age=26-35:ethnicity="English:gender=female
-        // totals renders as [Object] - this may need looking at to ensure it's actually ok (strings vs. numbers as keys)
-
         console.log('Complete.');
         return true;
     } catch (err) {
