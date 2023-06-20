@@ -49,13 +49,13 @@ Notes
 
 Examples:
 
-- <endpoint>/Prod/summary?gender=male
-- <endpoint>/Prod//summary?ethnicity=Bangladeshi
-- <endpoint>/Prod/summary?age=18-25
+- `<endpoint>/Prod/summary?gender=male`
+- `<endpoint>/Prod//summary?ethnicity=Bangladeshi`
+- `<endpoint>/Prod/summary?age=18-25`
 
 Combine these filters as you'd expect:
 
-- <endpoint>/Prod/summary?age=18-25&gender=male
+- `<endpoint>/Prod/summary?age=18-25&gender=male`
 
 ### Successful output
 
