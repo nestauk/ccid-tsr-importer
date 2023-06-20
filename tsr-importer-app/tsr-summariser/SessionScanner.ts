@@ -78,10 +78,16 @@ export class SessionScanner {
     }
 
     public composeDemographicCode(age: string, ethnicity: string, gender: string): string {
-        return `age=${age}:ethnicity=${this.composeEthnicityCode(ethnicity)}:gender=${gender}`;
+        return `age=${this.normaliseAgeRange(age)}:ethnicity=${this.normaliseEthnicityCode(
+            ethnicity,
+        )}:gender=${this.normaliseGender(gender)}`;
     }
 
-    public composeEthnicityCode(ethnicity: string): string {
+    public normaliseAgeRange(age: string): string {
+        return age.toLowerCase().trim();
+    }
+
+    public normaliseEthnicityCode(ethnicity: string): string {
         return ethnicity
             .replace(/\w+/g, function (word) {
                 return word.charAt(0).toUpperCase() + word.substring(1);
@@ -89,5 +95,9 @@ export class SessionScanner {
             .replace(/\s/g, '')
             .replace(/-/g, '')
             .replace(/\"/g, '');
+    }
+
+    public normaliseGender(gender: string): string {
+        return gender.toLowerCase().trim();
     }
 }

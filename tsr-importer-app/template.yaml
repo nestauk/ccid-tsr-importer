@@ -28,13 +28,6 @@ Parameters:
     Default: tsr-summary
 
 Resources:
-  SummaryTable:
-    Type: AWS::Serverless::SimpleTable
-    TableName: !Ref SummaryTableName
-    PrimaryKey:
-      Name: demographic # ignored? partition key seems to be 'id'
-      Type: String
-
   SummariserFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -70,6 +63,37 @@ Resources:
         EntryPoints:
           - app.ts
 
+  SummaryEndpointFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: tsr-summary-endpoint/
+      Handler: app.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - arm64
+      Events:
+        SummaryRequest:
+          Type: Api
+          Properties:
+            Path: /summary
+            Method: get
+      Environment:
+        Variables:
+          TSR_QUESTIONS_TABLE_NAME: !Ref QuestionsTableName
+          TSR_SUMMARY_TABLE_NAME: !Ref SummaryTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref SummaryTable
+
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - app.ts
+
   ImporterFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -87,28 +111,12 @@ Resources:
         EntryPoints:
           - app.ts
 
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: hello-world/
-      Handler: app.lambdaHandler
-      Runtime: nodejs18.x
-      Architectures:
-        - arm64
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-    Metadata:
-      BuildMethod: esbuild
-      BuildProperties:
-        Minify: true
-        Target: es2020
-        Sourcemap: true
-        EntryPoints:
-          - app.ts
+  SummaryTable:
+    Type: AWS::Serverless::SimpleTable
+    TableName: !Ref SummaryTableName
+    PrimaryKey:
+      Name: demographic # ignored? partition key seems to be 'id'
+      Type: String
 
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
@@ -127,29 +135,29 @@ Resources:
 
 Outputs:
   SummariserFunctionARN:
-    Description: Hello World Lambda Function ARN
+    Description: Summariser function ARN
     Value: !GetAtt SummariserFunction.Arn
 
   SummariserFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
+    Description: Implicit IAM Role created for summariser function
     Value: !GetAtt SummariserFunctionRole.Arn
 
   ImporterFunctionARN:
-    Description: Hello World Lambda Function ARN
+    Description: Importer function ARN
     Value: !GetAtt ImporterFunction.Arn
 
   ImporterFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
+    Description: Implicit IAM Role created for importer function
     Value: !GetAtt ImporterFunctionRole.Arn
 
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  SummaryEndpointApi:
+    Description: API Gateway endpoint URL for the summary endpoint function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/summary"
 
-  HelloWorldFunctionARN:
-    Description: Hello World Lambda Function ARN
-    Value: !GetAtt HelloWorldFunction.Arn
+  SummaryEndpointFunctionARN:
+    Description: Summary endpoint lambda Function ARN
+    Value: !GetAtt SummaryEndpointFunction.Arn
 
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+  SummaryEndpointFunctionIamRole:
+    Description: Implicit IAM Role created for the summary endpoint function
+    Value: !GetAtt SummaryEndpointFunctionRole.Arn

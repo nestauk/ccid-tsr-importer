@@ -1,4 +1,3 @@
-import { APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { SessionScanner } from './SessionScanner';
 import { Summary } from './DataStructures';
@@ -44,15 +43,15 @@ export const lambdaHandler = async (event: DynamoDBStreamEvent): Promise<boolean
         // generate unique demographic codes, eg. "age=66-75:ethnicity=AnyOtherWhiteBackground:gender=male"
         // these demographic codes are exclusive: nobody should appear in more than one
         let codes = scanner.getUniqueDemographicCodes();
-        console.log('Unique demographic codes', codes);
+        console.log(`${codes.length} unique demographic codes`, JSON.stringify(codes));
 
         // derive demographic slices (participants per unique demographic)
         let participantSlices = Object.fromEntries(
             codes.map((code) => [code, scanner.getParticipantsForDemographic(code)]),
         );
         console.debug(
-            `${participantSlices.length} demographic participant slices`,
-            codes.map((code) => `${code}: ${participantSlices[code].length} participants`),
+            `Demographic participant slices created`,
+            JSON.stringify(codes.map((code) => `${code}: ${participantSlices[code].length} participants`)),
         );
 
         // confirm each participant is accounted for in a slice of some sort

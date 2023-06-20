@@ -11,7 +11,6 @@ export class DataWriter {
             const chunkSize = 25;
             for (let i: number = 0; i < summaries.length; i += chunkSize) {
                 const chunk = summaries.slice(i, i + chunkSize);
-                console.debug(`Writing chunk: ${i}-${i + chunk.length}...`);
 
                 // BackWriteItemCommand should replace existing items
                 // primary key is the demographic code
@@ -26,12 +25,11 @@ export class DataWriter {
                         }),
                     },
                 });
-                console.debug('request', request);
-                console.debug('first item', JSON.stringify(request.input.RequestItems![table][0]));
+                console.debug(`Writing chunk: ${i}-${i + chunk.length}...`);
                 let response = await this.dynamo.send(request);
-                console.debug('response', response);
+                console.debug(`Response code: ${response.$metadata.httpStatusCode}`);
             }
-            console.log('write complete');
+            console.log('Write complete');
             return true;
         } catch (err) {
             console.error(`error writing to: ${table}`);

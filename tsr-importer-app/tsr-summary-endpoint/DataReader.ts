@@ -1,10 +1,12 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { Summary } from './DataStructures';
 
 export class DataReader {
     public constructor(private dynamo: DynamoDBClient) {}
 
-    public async read(table: string): Promise<any[]> {
+    // TODO: type this properly
+    public async read(table: string): Promise<Summary[]> {
         console.log(`Reading all records from: ${table}...`);
         let results: any[] = [];
         let request = new ScanCommand({ TableName: table });
@@ -16,6 +18,6 @@ export class DataReader {
             finished = response.LastEvaluatedKey === undefined;
         } while (!finished);
         console.debug(`Found ${results.length} records in: ${table}`);
-        return results;
+        return <Summary[]>results;
     }
 }
