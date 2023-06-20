@@ -22,7 +22,6 @@ export class SessionScanner {
             .map((session) => session.participants)
             .flat()
             .filter((participant) => this.createDemographicCode(participant) === code);
-        console.log(`Found ${participants.length} participants for demographic: ${code}`);
         return participants;
     }
 
@@ -45,11 +44,14 @@ export class SessionScanner {
                     };
                 }
                 let counts = countsPerQuestion[response.vote_id];
+                let vote = response.vote as string;
                 counts.participants += 1;
                 if (!counts.totals.hasOwnProperty(response.vote)) {
-                    counts.totals[response.vote] = 0;
+                    counts.totals[vote] = 0;
                 }
-                counts.totals[response.vote] += 1;
+                counts.totals[vote] += 1;
+                // console.log(`counts for ${response.vote_id}`, counts);
+                // console.log(`countsPerQuestion[${response.vote_id}]`, countsPerQuestion[response.vote_id]);
             });
         });
         return countsPerQuestion;
@@ -57,7 +59,9 @@ export class SessionScanner {
 
     public createSummary(code: string, totals: { [key: string]: QuestionTotals }, participants: number) {
         let summary: Summary = {
+            id: code,
             created: new Date().toISOString(),
+            timestamp: Date.now(),
             participants: participants,
             demographic: code,
             questionTotals: totals,
@@ -73,7 +77,17 @@ export class SessionScanner {
         );
     }
 
-    private composeDemographicCode(age: string, ethnicity: string, gender: string): string {
-        return `age=${age}:ethnicity=${ethnicity}:gender=${gender}`;
+    public composeDemographicCode(age: string, ethnicity: string, gender: string): string {
+        return `age=${age}:ethnicity=${this.composeEthnicityCode(ethnicity)}:gender=${gender}`;
+    }
+
+    public composeEthnicityCode(ethnicity: string): string {
+        return ethnicity
+            .replace(/\w+/g, function (word) {
+                return word.charAt(0).toUpperCase() + word.substring(1);
+            })
+            .replace(/\s/g, '')
+            .replace(/-/g, '')
+            .replace(/\"/g, '');
     }
 }

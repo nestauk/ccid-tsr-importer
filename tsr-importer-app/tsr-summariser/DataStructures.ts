@@ -9,7 +9,9 @@ export interface QuestionTotals {
 }
 
 export interface Summary {
+    id: string;
     created: string;
+    timestamp: number;
     participants: number;
     demographic: string;
     questionTotals: { [key: string]: QuestionTotals };

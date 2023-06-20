@@ -7,13 +7,17 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 60
 
 Parameters:
   DataPlatformTableName:
     Type: String
     Description: The name of the DynamoDB table that holds all TSR data (1 record per session)
     Default: tsr-data-platform
+  DataPlatformTableStreamArn:
+    Type: String
+    Description: A stream from the data platform table that triggers the summariser function
+    Default: arn:aws:dynamodb:eu-west-2:251687087743:table/tsr-data-platform/stream/2023-06-19T14:34:04.519
   QuestionsTableName:
     Type: String
     Description: The name of the DynamoDB table that holds all question data
@@ -28,7 +32,7 @@ Resources:
     Type: AWS::Serverless::SimpleTable
     TableName: !Ref SummaryTableName
     PrimaryKey:
-      Name: DemographicCode
+      Name: demographic # ignored? partition key seems to be 'id'
       Type: String
 
   SummariserFunction:
@@ -38,16 +42,25 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
-        - x86_64
+        - arm64
+      MemorySize: 1024
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DataPlatformTableName
+        - DynamoDBWritePolicy:
+            TableName: !Ref SummaryTable
       Environment:
         Variables:
           TSR_QUESTIONS_TABLE_NAME: !Ref QuestionsTableName
           TSR_DATA_PLATFORM_TABLE_NAME: !Ref DataPlatformTableName
-          TSR_SUMMARY_TABLE_NAME: !Ref SummaryTableName
-
+          TSR_SUMMARY_TABLE_NAME: !Ref SummaryTable
+      Events:
+        Stream:
+          Type: DynamoDB
+          Properties:
+            Stream: !Ref DataPlatformTableStreamArn
+            BatchSize: 100
+            StartingPosition: TRIM_HORIZON
     Metadata:
       BuildMethod: esbuild
       BuildProperties:
@@ -64,7 +77,7 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
-        - x86_64
+        - arm64
     Metadata:
       BuildMethod: esbuild
       BuildProperties:
@@ -81,7 +94,7 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
-        - x86_64
+        - arm64
       Events:
         HelloWorld:
           Type: Api
