@@ -46,7 +46,9 @@ The summariser function is triggered by the data table's DynamoDb Stream. This m
 
 ## Summaries endpoint
 
-- Provide some or none of query string parameters `council`, `gender`, `ethnicity`, and `age` to search
+Provide some or none of query string parameters `council`, `gender`, `ethnicity`, and `age` to search.
+
+_NB. `council` is not really a demographic, but these are really values to filter by. During summarisation by the summariser function, each participant is attributed to the council for the session they participated in._
 
 Notes
 
