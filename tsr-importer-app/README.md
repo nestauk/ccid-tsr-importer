@@ -37,6 +37,13 @@ Generates summaries from the data table, and stores them in the summary table.
 
 Data is aggregated by demographic code. A demographic code looks like: `age=*:ethnicity=*:gender=*` (where `*` is a wildcard)
 
+Each participant from each session has demographic data associated with them. Each is assigned a demographic code, and then voting information is totalled for each unique demographic code found.
+
+- [DataStructures.ts](https://github.com/nestauk/ccid-tsr-importer/blob/main/tsr-importer-app/tsr-summariser/DataStructures.ts) - defines the `Summary` data structure
+- [SessionScanner.ts](https://github.com/nestauk/ccid-tsr-importer/blob/main/tsr-importer-app/tsr-summariser/SessionScanner.ts) - scans the session data, with functions to collate unique demographics and summaries per demographic
+
+The summariser function is triggered by the data table's DynamoDb Stream. This means that any changes to the data table will be automatically reflected in the summary table.
+
 ## Summaries endpoint
 
 - Provide query string parameters `gender`, `ethnicity`, and `age` to search - each of these should be a value you already know
