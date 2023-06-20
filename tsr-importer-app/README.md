@@ -73,7 +73,7 @@ Combine these filters as you'd expect:
   - `.timestamp` - timestamp of creation of these results
   - `.participants` - participants that fitted the demographic query (NB. not all participants responded to every vote - so there's also a participant count for each vote)
   - `.questionTotals` - a map of vote_id to an object containing details about the vote summed across all the demographically matched participants
-    - .[vote_id]
+    - `.[vote_id]`
       - `.demographic_code` - demographic code for which this question's results were filtered (same as `.summary.demographic`)
       - `.vote_id` - same as the `[vote_id]` key for this question
       - `.stage_id` - stage id for this question
