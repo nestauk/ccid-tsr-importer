@@ -110,11 +110,24 @@ export class SliceReader {
                 participants: foundTotalSetForVote.reduce((acc, foundTotals) => acc + foundTotals.participants, 0),
                 totals: {},
             };
-            for (let i = summedTotals.min_boundary; i <= summedTotals.max_boundary; i++) {
-                summedTotals.totals[i.toString()] = foundTotalSetForVote.reduce(
-                    (acc, foundTotals) => acc + (foundTotals.totals[i.toString()] ?? 0),
-                    0,
-                );
+
+            // sum across all totals in the foundTotalSet
+            if (summedTotals.min_boundary === undefined || summedTotals.max_boundary === undefined) {
+                foundTotalSetForVote.forEach((foundTotals) => {
+                    Object.keys(foundTotals.totals).forEach((key) => {
+                        if (summedTotals.totals[key] === undefined) {
+                            summedTotals.totals[key] = 0;
+                        }
+                        summedTotals.totals[key] += foundTotals.totals[key];
+                    });
+                });
+            } else {
+                for (let i = summedTotals.min_boundary; i <= summedTotals.max_boundary; i++) {
+                    summedTotals.totals[i.toString()] = foundTotalSetForVote.reduce(
+                        (acc, foundTotals) => acc + (foundTotals.totals[i.toString()] ?? 0),
+                        0,
+                    );
+                }
             }
             voteTotals[voteId] = summedTotals;
         }
@@ -170,7 +183,7 @@ export class SliceReader {
     }
 
     public normaliseCouncil(council: string): string {
-        return council.includes(' ') ? this.tidyWords(council) : council;
+        return council.includes(' ') || council.includes('"') ? this.tidyWords(council) : council;
     }
 
     public normaliseAgeRange(age: string): string {
@@ -178,7 +191,7 @@ export class SliceReader {
     }
 
     public normaliseEthnicityCode(ethnicity: string): string {
-        return ethnicity.includes(' ') ? this.tidyWords(ethnicity) : ethnicity;
+        return ethnicity.includes(' ') || ethnicity.includes('"') ? this.tidyWords(ethnicity) : ethnicity;
     }
 
     public normaliseGender(gender: string): string {

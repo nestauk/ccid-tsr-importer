@@ -4,8 +4,8 @@ export interface QuestionTotals {
     stage_id: string;
     totals: { [key: string]: number };
     participants: number;
-    max_boundary: number;
-    min_boundary: number;
+    max_boundary?: number;
+    min_boundary?: number;
 }
 
 export interface Summary {

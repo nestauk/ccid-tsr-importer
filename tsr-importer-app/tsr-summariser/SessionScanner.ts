@@ -37,6 +37,64 @@ export class SessionScanner {
     ): { [key: string]: QuestionTotals } {
         let countsPerQuestion: { [key: string]: QuestionTotals } = {};
         participants.forEach((participant: any) => {
+            // .checkbox is for multiple choice polls
+            // map it as if it's a vote where checkbox choices replace the numeric options
+            participant.checkbox.forEach((checkbox: any) => {
+                let participant_polls: string[] = [];
+                Object.keys(checkbox.result).forEach((key) => {
+                    let parts = key.split('_');
+                    let checkbox_vote_id = parts[0];
+                    let checkbox_vote_yes = `${parts[1]}-true`;
+                    let checkbox_vote_no = `${parts[1]}-false`;
+
+                    // special case for t14 - these checkboxes are named c1, c2
+                    if (/^c\d+/.test(checkbox_vote_id)) {
+                        // keep the checkbox value as the vote choice
+                        // set the vote id to t14 - it should always have been this
+                        checkbox_vote_yes = `${checkbox_vote_id}-true`;
+                        checkbox_vote_no = `${checkbox_vote_id}-false`;
+                        checkbox_vote_id = `t14`;
+                    }
+
+                    // track which polls a participant has participated in
+                    // this way we only increment the count once per poll
+                    if (!participant_polls.includes(checkbox_vote_id)) {
+                        participant_polls.push(checkbox_vote_id);
+                    }
+
+                    if (!countsPerQuestion.hasOwnProperty(checkbox_vote_id)) {
+                        countsPerQuestion[checkbox_vote_id] = {
+                            demographic_code: code,
+                            vote_id: checkbox_vote_id,
+                            stage_id: checkbox.stage_id,
+                            totals: {},
+                            participants: 0,
+                        };
+                    }
+                    let counts = countsPerQuestion[checkbox_vote_id];
+                    if (!counts.totals.hasOwnProperty(checkbox_vote_yes)) {
+                        counts.totals[checkbox_vote_yes] = 0;
+                    }
+                    if (!counts.totals.hasOwnProperty(checkbox_vote_no)) {
+                        counts.totals[checkbox_vote_no] = 0;
+                    }
+                    if (checkbox.result[key] === true) {
+                        counts.totals[checkbox_vote_yes] += 1;
+                    }
+                    if (checkbox.result[key] === false) {
+                        counts.totals[checkbox_vote_no] += 1;
+                    }
+                });
+
+                // now increment the participant count for the polls they took part in
+                console.debug(`Participant took part in ${participant_polls.length} polls`, participant_polls);
+                participant_polls.forEach((poll_vote_id) => {
+                    console.debug(`Incrementing participant count for ${poll_vote_id}`, countsPerQuestion);
+                    countsPerQuestion[poll_vote_id].participants += 1;
+                });
+            });
+
+            // .responses is for numeric polls
             participant.responses.forEach((response: any) => {
                 if (!countsPerQuestion.hasOwnProperty(response.vote_id)) {
                     countsPerQuestion[response.vote_id] = {
@@ -56,8 +114,6 @@ export class SessionScanner {
                     counts.totals[vote] = 0;
                 }
                 counts.totals[vote] += 1;
-                // console.log(`counts for ${response.vote_id}`, counts);
-                // console.log(`countsPerQuestion[${response.vote_id}]`, countsPerQuestion[response.vote_id]);
             });
         });
         return countsPerQuestion;
@@ -93,7 +149,7 @@ export class SessionScanner {
     }
 
     public normaliseCouncil(council: string): string {
-        return council.includes(' ') ? this.tidyWords(council) : council;
+        return council.includes(' ') || council.includes('"') ? this.tidyWords(council) : council;
     }
 
     public normaliseAgeRange(age: string): string {
@@ -101,7 +157,7 @@ export class SessionScanner {
     }
 
     public normaliseEthnicityCode(ethnicity: string): string {
-        return ethnicity.includes(' ') ? this.tidyWords(ethnicity) : ethnicity;
+        return ethnicity.includes(' ') || ethnicity.includes('"') ? this.tidyWords(ethnicity) : ethnicity;
     }
 
     public normaliseGender(gender: string): string {

@@ -18,7 +18,7 @@ const dynamo: DynamoDBClient = new DynamoDBClient({
 
 const dataReader = new DataReader(dynamo);
 
-console.log('Pre-fetching data...');
+console.log('Fetching data...');
 const preReadSlices = dataReader.read(config.summaryTableName).then((data) => {
     console.log(`${data.length} slices retrieved.`);
     return data;
@@ -37,7 +37,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
     console.log(`Query`, JSON.stringify(query));
 
     try {
-        console.debug('Raw data read begin...');
+        console.debug('Raw data read begin....');
         let slices = await preReadSlices;
         console.debug('read complete.');
         let sliceReader = new SliceReader(slices);
