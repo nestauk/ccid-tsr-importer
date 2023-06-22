@@ -1,6 +1,6 @@
 {
   "success": true,
-  "duration_ms": 18520,
+  "duration_ms": 18458,
   "message": "Retrieved totals across demographic: council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
   "query": {
     "council": "LondonBoroughOfLambeth",
@@ -652,8 +652,8 @@
   "summary": {
     "id": "council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
     "demographic": "council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
-    "created": "2023-06-22T15:43:57.412Z",
-    "timestamp": 1687448637412,
+    "created": "2023-06-22T15:58:52.220Z",
+    "timestamp": 1687449532220,
     "participants": 56,
     "questionTotals": {
       "h15-q3": {
@@ -864,7 +864,7 @@
         "demographic_code": "council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
         "vote_id": "h12",
         "stage_id": "h12-poll",
-        "participants": 54,
+        "participants": 18,
         "totals": {
           "a1-true": 4,
           "a2-false": 6,
@@ -962,7 +962,7 @@
         "demographic_code": "council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
         "vote_id": "h14",
         "stage_id": "h14-poll",
-        "participants": 90,
+        "participants": 18,
         "totals": {
           "a4-true": 0,
           "a1-true": 11,
@@ -1181,7 +1181,7 @@
         "demographic_code": "council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
         "vote_id": "t14",
         "stage_id": "t14-travel-habits",
-        "participants": 74,
+        "participants": 37,
         "totals": {
           "c1-true": 37,
           "c2-false": 23,
@@ -1319,7 +1319,7 @@
         "demographic_code": "council=LondonBoroughOfLambeth:age=*:ethnicity=*:gender=female",
         "vote_id": "h14-5",
         "stage_id": "h14-5-poll",
-        "participants": 36,
+        "participants": 18,
         "totals": { "a2-false": 0, "a1-true": 0, "a2-true": 18, "a1-false": 18 }
       },
       "t12-q1": {
