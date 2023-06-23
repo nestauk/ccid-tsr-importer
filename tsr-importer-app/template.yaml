@@ -8,6 +8,11 @@ Description: >
 Globals:
   Function:
     Timeout: 60
+  Api:
+    Cors:
+      AllowMethods: "'OPTIONS,GET'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
 
 Parameters:
   DataPlatformTableName:
@@ -28,6 +33,26 @@ Parameters:
     Default: tsr-summary
 
 Resources:
+  # SummariesApiGateway:
+  #   Type: AWS::Serverless::Api
+  #   Properties:
+  #     StageName: prod
+  #     GatewayResponses:
+  #       DEFAULT_4XX:
+  #         ResponseParameters:
+  #           Headers:
+  #             Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+  #             Access-Control-Allow-Origin: "'*'"
+  #             Access-Control-Allow-Methods: "'OPTIONS,GET,PUT'"
+  #             Access-Control-Allow-Credentials: "'true'"
+  #       DEFAULT_5XX:
+  #         ResponseParameters:
+  #           Headers:
+  #             Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+  #             Access-Control-Allow-Origin: "'https://localhost:5001'"
+  #             Access-Control-Allow-Methods: "'OPTIONS,GET,PUT'"
+  #             Access-Control-Allow-Credentials: "'true'"
+
   SummariserFunction:
     Type: AWS::Serverless::Function
     Properties:

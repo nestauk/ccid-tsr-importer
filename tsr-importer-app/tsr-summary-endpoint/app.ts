@@ -26,7 +26,24 @@ const preReadSlices = dataReader.read(config.summaryTableName).then((data) => {
 
 const queryCache: { [key: string]: SearchDetail } = {};
 
+const ALL_HEADERS = {
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS,GET',
+};
+
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+    // options is the special verb for pre-flight checks - don't get data, just return headers
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: ALL_HEADERS,
+            body: JSON.stringify({
+                success: true,
+            }),
+        };
+    }
+
     let start = Date.now();
     let query: DemographicQuery = {
         council: event.queryStringParameters?.council ?? '*',
@@ -60,6 +77,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         let searchDetail = queryCache[searchDescriptionCode];
         return {
             statusCode: 200,
+            headers: ALL_HEADERS,
             body: JSON.stringify({
                 success: true,
                 duration_ms: Date.now() - start,
@@ -78,6 +96,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         console.error(err);
         return {
             statusCode: 500,
+            headers: ALL_HEADERS,
             body: JSON.stringify({
                 duration_ms: Date.now() - start,
                 success: false,

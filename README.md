@@ -9,7 +9,7 @@ Data is stored in an S3 bucket and then manually imported into DynamoDb.
 - Bucket: [collective-simulation-tsr-data-uploads](https://s3.console.aws.amazon.com/s3/buckets/collective-simulation-tsr-data-uploads?region=eu-west-2&tab=properties)
 - ARN: `arn:aws:s3:::collective-simulation-tsr-data-uploads`
 
-## Parser
+## Parser
 
 The parser is code that can process data from The Strategy Room into a format suitable for storage in our DynamoDb instance.
 
