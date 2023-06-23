@@ -10,7 +10,7 @@ export class SliceReader {
             ethnicities: [],
             genders: [],
             councils: [],
-            codes: codes,
+            codes: [],
         };
         for (let code of codes) {
             let parts = code.trim().split(':');
@@ -21,6 +21,7 @@ export class SliceReader {
             let age = parts[1].split('=')[1];
             let ethnicity = this.normaliseEthnicityCode(parts[2].split('=')[1]);
             let gender = parts[3].split('=')[1];
+            let normalisedCode = this.composeDemographicCode(council, age, ethnicity, gender);
 
             if (!demographics.councils.includes(council)) {
                 demographics.councils.push(council);
@@ -33,6 +34,9 @@ export class SliceReader {
             }
             if (!demographics.genders.includes(gender)) {
                 demographics.genders.push(gender);
+            }
+            if (!demographics.codes.includes(normalisedCode)) {
+                demographics.codes.push(normalisedCode);
             }
         }
         return demographics;
