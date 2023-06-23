@@ -87,9 +87,7 @@ export class SessionScanner {
                 });
 
                 // now increment the participant count for the polls they took part in
-                console.debug(`Participant took part in ${participant_polls.length} polls`, participant_polls);
                 participant_polls.forEach((poll_vote_id) => {
-                    console.debug(`Incrementing participant count for ${poll_vote_id}`, countsPerQuestion);
                     countsPerQuestion[poll_vote_id].participants += 1;
                 });
             });
@@ -103,8 +101,8 @@ export class SessionScanner {
                         stage_id: response.stage_id,
                         totals: {},
                         participants: 0,
-                        max_boundary: response.max_boundary,
-                        min_boundary: response.min_boundary,
+                        max_boundary: parseInt(response.max_boundary),
+                        min_boundary: parseInt(response.min_boundary),
                     };
                 }
                 let counts = countsPerQuestion[response.vote_id];
@@ -115,6 +113,25 @@ export class SessionScanner {
                 }
                 counts.totals[vote] += 1;
             });
+        });
+
+        // generate some special case data
+        Object.keys(countsPerQuestion).forEach((vote_id) => {
+            let cpq = countsPerQuestion[vote_id];
+            if (cpq.max_boundary === 10 && cpq.min_boundary === 0) {
+                let notRecommended = [0, 1, 2, 3].reduce((acc, val) => {
+                    return acc + (cpq.totals[val.toString()] ?? 0);
+                }, 0);
+                let neutral = [4, 5].reduce((acc, val) => {
+                    return acc + (cpq.totals[val.toString()] ?? 0);
+                }, 0);
+                let recommended = [6, 7, 8, 9, 10].reduce((acc, val) => {
+                    return acc + (cpq.totals[val.toString()] ?? 0);
+                }, 0);
+                cpq.totals['not-recommended'] = notRecommended;
+                cpq.totals['recommended'] = recommended;
+                cpq.totals['neutral'] = neutral;
+            }
         });
         return countsPerQuestion;
     }

@@ -116,23 +116,42 @@ export class SliceReader {
             };
 
             // sum across all totals in the foundTotalSet
-            if (summedTotals.min_boundary === undefined || summedTotals.max_boundary === undefined) {
-                foundTotalSetForVote.forEach((foundTotals) => {
-                    Object.keys(foundTotals.totals).forEach((key) => {
-                        if (summedTotals.totals[key] === undefined) {
-                            summedTotals.totals[key] = 0;
-                        }
-                        summedTotals.totals[key] += foundTotals.totals[key];
-                    });
+            foundTotalSetForVote.forEach((foundTotals) => {
+                Object.keys(foundTotals.totals).forEach((key) => {
+                    if (summedTotals.totals[key] === undefined) {
+                        summedTotals.totals[key] = 0;
+                    }
+                    summedTotals.totals[key] += foundTotals.totals[key];
                 });
-            } else {
-                for (let i = summedTotals.min_boundary; i <= summedTotals.max_boundary; i++) {
-                    summedTotals.totals[i.toString()] = foundTotalSetForVote.reduce(
-                        (acc, foundTotals) => acc + (foundTotals.totals[i.toString()] ?? 0),
-                        0,
-                    );
-                }
-            }
+            });
+
+            // if (summedTotals.min_boundary === undefined || summedTotals.max_boundary === undefined) {
+            //     foundTotalSetForVote.forEach((foundTotals) => {
+            //         Object.keys(foundTotals.totals).forEach((key) => {
+            //             if (summedTotals.totals[key] === undefined) {
+            //                 summedTotals.totals[key] = 0;
+            //             }
+            //             summedTotals.totals[key] += foundTotals.totals[key];
+            //         });
+            //     });
+            // } else {
+            //     for (let i = summedTotals.min_boundary; i <= summedTotals.max_boundary; i++) {
+            //         summedTotals.totals[i.toString()] = foundTotalSetForVote.reduce(
+            //             (acc, foundTotals) => acc + (foundTotals.totals[i.toString()] ?? 0),
+            //             0,
+            //         );
+            //     }
+
+            //     // special case - the numeric votes may also have a recommended/not-recommended/neutral value we should get hold of, too
+            //     if (summedTotals.totals.hasOwnProperty('recommended')) {
+            //         ['not-recommended', 'recommended', 'neutral'].forEach((position) => {
+            //             summedTotals.totals[position] = foundTotalSetForVote.reduce(
+            //                 (acc, foundTotals) => acc + (foundTotals.totals[position] ?? 0),
+            //                 0,
+            //             );
+            //         });
+            //     }
+            // }
             voteTotals[voteId] = summedTotals;
         }
         return voteTotals;
