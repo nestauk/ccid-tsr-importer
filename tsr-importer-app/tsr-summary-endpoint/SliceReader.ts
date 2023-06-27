@@ -11,33 +11,42 @@ export class SliceReader {
             genders: [],
             councils: [],
             codes: [],
+            hr: {
+                ages: [],
+                ethnicities: [],
+                genders: [],
+                councils: [],
+            },
         };
         for (let code of codes) {
             let parts = code.trim().split(':');
             if (parts.length !== 4) {
                 throw `Invalid demographic code has ${parts.length} parts: ${code}`;
             }
+
             let council = this.normaliseCouncil(parts[0].split('=')[1]);
+            let hr_council = this.humanReadableCouncilOrEthnicity(council);
             let age = parts[1].split('=')[1];
+            let hr_age = age;
             let ethnicity = this.normaliseEthnicityCode(parts[2].split('=')[1]);
+            let hr_ethnicity = this.humanReadableCouncilOrEthnicity(ethnicity);
             let gender = parts[3].split('=')[1];
+            let hr_gender = gender;
             let normalisedCode = this.composeDemographicCode(council, age, ethnicity, gender);
 
-            if (!demographics.councils.includes(council)) {
-                demographics.councils.push(council);
-            }
-            if (!demographics.ages.includes(age)) {
-                demographics.ages.push(age);
-            }
-            if (!demographics.ethnicities.includes(ethnicity)) {
-                demographics.ethnicities.push(ethnicity);
-            }
-            if (!demographics.genders.includes(gender)) {
-                demographics.genders.push(gender);
-            }
-            if (!demographics.codes.includes(normalisedCode)) {
-                demographics.codes.push(normalisedCode);
-            }
+            if (!demographics.hr.councils.includes(hr_council)) demographics.hr.councils.push(hr_council);
+            if (!demographics.councils.includes(council)) demographics.councils.push(council);
+
+            if (!demographics.hr.ages.includes(hr_age)) demographics.hr.ages.push(hr_age);
+            if (!demographics.ages.includes(age)) demographics.ages.push(age);
+
+            if (!demographics.hr.ethnicities.includes(hr_ethnicity)) demographics.hr.ethnicities.push(hr_ethnicity);
+            if (!demographics.ethnicities.includes(ethnicity)) demographics.ethnicities.push(ethnicity);
+
+            if (!demographics.hr.genders.includes(hr_gender)) demographics.hr.genders.push(hr_gender);
+            if (!demographics.genders.includes(gender)) demographics.genders.push(gender);
+
+            if (!demographics.codes.includes(normalisedCode)) demographics.codes.push(normalisedCode);
         }
         return demographics;
     }
@@ -62,6 +71,8 @@ export class SliceReader {
         let summaries: Summary[] = [];
         let foundDemographics: string[] = [];
         let notFoundDemographics: string[] = [];
+
+        // iterate through each demographic combination
         for (let council of councils) {
             for (let age of ages) {
                 for (let ethnicity of ethnicities) {
@@ -105,6 +116,7 @@ export class SliceReader {
                 foundTotalSetForVote,
             );
 
+            // create the summation object for this vote_id
             let summedTotals: QuestionTotals = {
                 demographic_code: searchDescriptionCode,
                 vote_id: voteId,
@@ -125,33 +137,7 @@ export class SliceReader {
                 });
             });
 
-            // if (summedTotals.min_boundary === undefined || summedTotals.max_boundary === undefined) {
-            //     foundTotalSetForVote.forEach((foundTotals) => {
-            //         Object.keys(foundTotals.totals).forEach((key) => {
-            //             if (summedTotals.totals[key] === undefined) {
-            //                 summedTotals.totals[key] = 0;
-            //             }
-            //             summedTotals.totals[key] += foundTotals.totals[key];
-            //         });
-            //     });
-            // } else {
-            //     for (let i = summedTotals.min_boundary; i <= summedTotals.max_boundary; i++) {
-            //         summedTotals.totals[i.toString()] = foundTotalSetForVote.reduce(
-            //             (acc, foundTotals) => acc + (foundTotals.totals[i.toString()] ?? 0),
-            //             0,
-            //         );
-            //     }
-
-            //     // special case - the numeric votes may also have a recommended/not-recommended/neutral value we should get hold of, too
-            //     if (summedTotals.totals.hasOwnProperty('recommended')) {
-            //         ['not-recommended', 'recommended', 'neutral'].forEach((position) => {
-            //             summedTotals.totals[position] = foundTotalSetForVote.reduce(
-            //                 (acc, foundTotals) => acc + (foundTotals.totals[position] ?? 0),
-            //                 0,
-            //             );
-            //         });
-            //     }
-            // }
+            // push into voteTotals
             voteTotals[voteId] = summedTotals;
         }
         return voteTotals;
@@ -215,6 +201,22 @@ export class SliceReader {
 
     public normaliseEthnicityCode(ethnicity: string): string {
         return ethnicity.includes(' ') || ethnicity.includes('"') ? this.tidyWords(ethnicity) : ethnicity;
+    }
+
+    public humanReadableCouncilOrEthnicity(value: string): string {
+        let words = value.trim().split(/(?=\(?[A-Z])/);
+        if (words && words.length > 0) {
+            return words
+                .join(' ')
+                .replace('Of', 'of')
+                .replace('Or', 'or')
+                .replace('And', 'and')
+                .replace('Background', 'background')
+                .replace('Unitary', 'unitary')
+                .replace('( ', '(');
+        } else {
+            return value.trim();
+        }
     }
 
     public normaliseGender(gender: string): string {

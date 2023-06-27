@@ -21,7 +21,15 @@ export interface Demographics {
     ages: string[];
     ethnicities: string[];
     genders: string[];
+    councils: string[];
+    hr: HumanReadableDemographics;
     codes: string[];
+}
+
+export interface HumanReadableDemographics {
+    ages: string[];
+    ethnicities: string[];
+    genders: string[];
     councils: string[];
 }
 
