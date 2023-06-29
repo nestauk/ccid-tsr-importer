@@ -210,9 +210,11 @@ export class SliceReader {
                 .join(' ')
                 .replace('Of', 'of')
                 .replace('Or', 'or')
+                .replace('On', 'on')
                 .replace('And', 'and')
                 .replace('Background', 'background')
                 .replace('Unitary', 'unitary')
+                .replace('Other', 'other')
                 .replace('( ', '(');
         } else {
             return value.trim();

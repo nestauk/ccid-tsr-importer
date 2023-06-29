@@ -1,0 +1,58 @@
+{
+  "transport": {
+    "policies": [
+      {
+        "conversation": "pre",
+        "stage_id": "t15-taking-temperature",
+        "vote_id": "t15-q1",
+        "low_end": "would not recommend",
+        "high_end": "strongly recommend",
+        "dataviz_text": "More electric car infrastructure and vehicles"
+      },
+      {
+        // etc...
+      }
+    ],
+    "questions": [
+      {
+        "chart_index": "0",
+        "section": "co-benefits",
+        "stage_id": "o3-poll",
+        "vote_id": "o3-q1",
+        "type": "numeric",
+        "checkbox_total": null,
+        "low_end": "not at all important",
+        "high_end": "very important",
+        "dataviz_chart_title": "New goods, jobs or services for the local area",
+        "dataviz_checkbox_text": null
+      },
+      {
+        // etc...
+      }
+    ]
+  },
+  "heat": {
+    "policies": [
+      // ...
+    ],
+    "questions": [
+      // ...
+    ]
+  },
+  "food": {
+    "policies": [
+      // ...
+    ],
+    "questions": [
+      // ...
+    ]
+  },
+  "summary": {
+    "policies": [
+      // ...
+    ],
+    "questions": [
+      // ...
+    ]
+  }
+}
