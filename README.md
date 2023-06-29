@@ -20,3 +20,4 @@ See also: [nestauk/ccid-tsr-data-platform](https://github.com/nestauk/ccid-tsr-d
 | [samples/tsr-data-platform_dynamodb/](samples/tsr-data-platform_dynamodb/)                              | Sample dynamo db record for a session                                               |
 | [samples/summary-endpoint/](samples/summary-endpoint/)                                                  | Sample data from the summary endpoint                                               |
 | [tsr-parser-original/](tsr-parser-original/)                                                            | Original parser that prepapred data for import.                                     |
+| [static-question-map-generator/](static-question-map-generator/)                                        | Generates static dataset of questions for each of the dataviz tabs.                 |
