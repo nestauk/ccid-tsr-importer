@@ -2,6 +2,8 @@ public class QuestionCSV
 {
     public string? module { get; set; }
     public int chart_index { get; set; }
+    public string? chart_type { get; set; }
+    public string? chart_width { get; set; }
     public string? section { get; set; }
     public string? stage_id { get; set; }
     public string? vote_id { get; set; }

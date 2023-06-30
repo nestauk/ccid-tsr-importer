@@ -3,12 +3,15 @@ using Newtonsoft.Json;
 
 var POLICIES_CSV_URL = args[0];
 var QUESTIONS_CSV_URL = args[1];
+var SECTIONS_CSV_URL = args[2];
 
 Console.WriteLine($"Questions CSV: {QUESTIONS_CSV_URL}");
-Console.WriteLine($"Policies CSV: {POLICIES_CSV_URL}");
+Console.WriteLine($"Policies CSV:  {POLICIES_CSV_URL}");
+Console.WriteLine($"Sections CSV:  {SECTIONS_CSV_URL}");
 
 var questions = await DownloadHelper.DownloadCsvAsync<QuestionCSV>(QUESTIONS_CSV_URL);
 var policies = await DownloadHelper.DownloadCsvAsync<PolicyCSV>(POLICIES_CSV_URL);
+var sections = await DownloadHelper.DownloadCsvAsync<SectionCSV>(SECTIONS_CSV_URL);
 
 Console.WriteLine($"{questions.Count()} question records.");
 Console.WriteLine($"{policies.Count()} policy records.");
@@ -27,11 +30,24 @@ questionMap.food.policies.post.AddRange(policies.Where(p => p.module == "food" &
 
 foreach (var module in new[] { questionMap.summary, questionMap.transport, questionMap.heat, questionMap.food })
 {
-    var relevant_questions = questions.Where(q => q.module == module.name);
-    var chart_indices = relevant_questions.Select(q => q.chart_index).Distinct();
+    var module_questions = questions.Where(q => q.module == module.name);
+    var chart_indices = module_questions.Select(q => q.chart_index).Distinct();
+    var module_section_names = module_questions.Select(q => q.section).Distinct();
+    var module_sections = module_section_names.Select(section_name => new Section()
+    {
+        module = module.name,
+        section = section_name,
+        section_index = sections.Single(s => s.module == module.name && s.section == section_name).section_index,
+        title = sections.Single(s => s.module == module.name && s.section == section_name).title,
+        sub_title = sections.Single(s => s.module == module.name && s.section == section_name).sub_title,
+        background = sections.Single(s => s.module == module.name && s.section == section_name).background
+
+    }).ToList();
+    module.sections.AddRange(module_sections);
+
     foreach (var chart_index in chart_indices.OrderBy(i => i))
     {
-        var questionCsvSet = relevant_questions.Where(q => q.chart_index == chart_index);
+        var questionCsvSet = module_questions.Where(q => q.chart_index == chart_index);
         var record = new QuestionChart()
         {
             chart_index = chart_index,
@@ -40,9 +56,13 @@ foreach (var module in new[] { questionMap.summary, questionMap.transport, quest
             stage_id = questionCsvSet.First().stage_id,
             vote_id = questionCsvSet.First().vote_id,
             type = questionCsvSet.First().type,
+            chart_type = questionCsvSet.First().chart_type,
+            chart_width = questionCsvSet.First().chart_width,
+            module = questionCsvSet.First().module,
         };
-        module.questions.Add(record);
+        module.sections.Single(s => s.section == record.section && s.module == record.module).questions.Add(record);
     }
+
 }
 
 var json = JsonConvert.SerializeObject(questionMap, Formatting.Indented);
