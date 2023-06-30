@@ -96,6 +96,11 @@ Resources:
       Runtime: nodejs18.x
       Architectures:
         - arm64
+      # AutoPublishAlias: Live
+      # DeploymentPreference:
+      #   Type: AllAtOnce
+      # ProvisionedConcurrencyConfig:
+      #   ProvisionedConcurrentExecutions: 1
       Events:
         SummaryRequest:
           Type: Api
