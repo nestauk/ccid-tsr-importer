@@ -4,17 +4,22 @@ using Newtonsoft.Json;
 var POLICIES_CSV_URL = args[0];
 var QUESTIONS_CSV_URL = args[1];
 var SECTIONS_CSV_URL = args[2];
+var MODULES_CSV_URL = args[3];
 
 Console.WriteLine($"Questions CSV: {QUESTIONS_CSV_URL}");
 Console.WriteLine($"Policies CSV:  {POLICIES_CSV_URL}");
 Console.WriteLine($"Sections CSV:  {SECTIONS_CSV_URL}");
+Console.WriteLine($"Modules CSV:   {SECTIONS_CSV_URL}");
 
 var questions = await DownloadHelper.DownloadCsvAsync<QuestionCSV>(QUESTIONS_CSV_URL);
 var policies = await DownloadHelper.DownloadCsvAsync<PolicyCSV>(POLICIES_CSV_URL);
 var sections = await DownloadHelper.DownloadCsvAsync<SectionCSV>(SECTIONS_CSV_URL);
+var modules = await DownloadHelper.DownloadCsvAsync<ModuleCSV>(MODULES_CSV_URL);
 
 Console.WriteLine($"{questions.Count()} question records.");
 Console.WriteLine($"{policies.Count()} policy records.");
+Console.WriteLine($"{sections.Count()} section records.");
+Console.WriteLine($"{modules.Count()} module records.");
 
 var questionMap = new QuestionMap();
 
@@ -30,6 +35,9 @@ questionMap.food.policies.post.AddRange(policies.Where(p => p.module == "food" &
 
 foreach (var module in new[] { questionMap.summary, questionMap.transport, questionMap.heat, questionMap.food })
 {
+    module.policies_title = modules.Single(m => m.module == module.name).policies_title;
+    module.policies_sub_title = modules.Single(m => m.module == module.name).policies_sub_title;
+
     var module_questions = questions.Where(q => q.module == module.name);
     var chart_indices = module_questions.Select(q => q.chart_index).Distinct();
     var module_section_names = module_questions.Select(q => q.section).Distinct();
@@ -58,6 +66,7 @@ foreach (var module in new[] { questionMap.summary, questionMap.transport, quest
             type = questionCsvSet.First().type,
             chart_type = questionCsvSet.First().chart_type,
             chart_width = questionCsvSet.First().chart_width,
+            show_legend = questionCsvSet.First().show_legend,
             module = questionCsvSet.First().module,
         };
         module.sections.Single(s => s.section == record.section && s.module == record.module).questions.Add(record);

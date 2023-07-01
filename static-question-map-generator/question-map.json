@@ -1,6 +1,8 @@
 {
   "summary": {
     "name": "summary",
+    "policies_title": "Most Popular Policies",
+    "policies_sub_title": "All policies presented in The Strategy Room ranked from most recommended to least based on final recommendation from participants.",
     "policies": {
       "pre": [
         {
@@ -205,6 +207,7 @@
             "stage_id": "o3-poll",
             "vote_id": "o3-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "summary",
@@ -215,9 +218,11 @@
                 "stage_id": "o3-poll",
                 "vote_id": "o3-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "New goods, jobs or services for the local area",
                 "dataviz_checkbox_text": ""
               }
@@ -232,6 +237,7 @@
             "stage_id": "o3-poll",
             "vote_id": "o3-q2",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "summary",
@@ -242,9 +248,11 @@
                 "stage_id": "o3-poll",
                 "vote_id": "o3-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "People are healthier",
                 "dataviz_checkbox_text": ""
               }
@@ -259,6 +267,7 @@
             "stage_id": "o3-poll",
             "vote_id": "o3-q3",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "summary",
@@ -269,9 +278,11 @@
                 "stage_id": "o3-poll",
                 "vote_id": "o3-q3",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "There is less poverty",
                 "dataviz_checkbox_text": ""
               }
@@ -286,6 +297,7 @@
             "stage_id": "o3-poll",
             "vote_id": "o3-q4",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "summary",
@@ -296,9 +308,11 @@
                 "stage_id": "o3-poll",
                 "vote_id": "o3-q4",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "People will feel a stronger sense of community",
                 "dataviz_checkbox_text": ""
               }
@@ -323,6 +337,7 @@
             "stage_id": "o2-poll",
             "vote_id": "o2-q1",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "summary",
@@ -333,9 +348,11 @@
                 "stage_id": "o2-poll",
                 "vote_id": "o2-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all satisfied",
                 "high_end": "very satisfied",
+                "show_legend": true,
                 "dataviz_chart_title": "Satisfaction with the recommendations made by my group ",
                 "dataviz_checkbox_text": ""
               }
@@ -350,6 +367,7 @@
             "stage_id": "o4-poll",
             "vote_id": "o4-q1",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "summary",
@@ -360,9 +378,11 @@
                 "stage_id": "o4-poll",
                 "vote_id": "o4-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all enjoyable",
                 "high_end": "very enjoyable",
+                "show_legend": true,
                 "dataviz_chart_title": "Experience of taking part in The Strategy Room ",
                 "dataviz_checkbox_text": ""
               }
@@ -374,6 +394,8 @@
   },
   "transport": {
     "name": "transport",
+    "policies_title": "Most Popular Travel Policies",
+    "policies_sub_title": "Travel policies presented in The Strategy Room ranked from most recommend to least based on final recommendation from participants.",
     "policies": {
       "pre": [
         {
@@ -488,6 +510,7 @@
             "stage_id": "t3-poll",
             "vote_id": "t3-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "transport",
@@ -498,9 +521,11 @@
                 "stage_id": "t3-poll",
                 "vote_id": "t3-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I like the idea of electric vehicle investment",
                 "dataviz_checkbox_text": ""
               }
@@ -515,6 +540,7 @@
             "stage_id": "t3-poll",
             "vote_id": "t3-q2",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "transport",
@@ -525,9 +551,11 @@
                 "stage_id": "t3-poll",
                 "vote_id": "t3-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I can imagine a strategy of electric vehicle investment working here",
                 "dataviz_checkbox_text": ""
               }
@@ -542,6 +570,7 @@
             "stage_id": "t6-poll",
             "vote_id": "t6-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "transport",
@@ -552,9 +581,11 @@
                 "stage_id": "t6-poll",
                 "vote_id": "t6-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I like the idea of redeveloping town centres",
                 "dataviz_checkbox_text": ""
               }
@@ -567,8 +598,9 @@
             "chart_width": "pairs",
             "section": "feasibility",
             "stage_id": "t6-poll",
-            "vote_id": "t6-q2",
+            "vote_id": "q6-q2",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "transport",
@@ -577,11 +609,13 @@
                 "chart_width": "pairs",
                 "section": "feasibility",
                 "stage_id": "t6-poll",
-                "vote_id": "t6-q2",
+                "vote_id": "q6-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I can imagine a strategy like redeveloping town centres working here",
                 "dataviz_checkbox_text": ""
               }
@@ -596,6 +630,7 @@
             "stage_id": "t9-poll",
             "vote_id": "t9-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "transport",
@@ -606,9 +641,11 @@
                 "stage_id": "t9-poll",
                 "vote_id": "t9-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I like the idea of a subscription-based service for all local transport",
                 "dataviz_checkbox_text": ""
               }
@@ -623,6 +660,7 @@
             "stage_id": "t9-poll",
             "vote_id": "t9-q2",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "transport",
@@ -633,9 +671,11 @@
                 "stage_id": "t9-poll",
                 "vote_id": "t9-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": true,
                 "dataviz_chart_title": "I can imagine a strategy like a subscription-based service working here",
                 "dataviz_checkbox_text": ""
               }
@@ -660,6 +700,7 @@
             "stage_id": "t12-poll",
             "vote_id": "t12-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "transport",
@@ -670,9 +711,11 @@
                 "stage_id": "t12-poll",
                 "vote_id": "t12-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not fair at all",
                 "high_end": "very fair",
+                "show_legend": false,
                 "dataviz_chart_title": "Everyone's council tax will subsidise the electric car club, even if they rarely use it themselves",
                 "dataviz_checkbox_text": ""
               }
@@ -687,6 +730,7 @@
             "stage_id": "t12-poll",
             "vote_id": "t12-q2",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "transport",
@@ -697,9 +741,11 @@
                 "stage_id": "t12-poll",
                 "vote_id": "t12-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not fair at all",
                 "high_end": "very fair",
+                "show_legend": true,
                 "dataviz_chart_title": "Some people will receive a cash payment to get rid of their petrol/diesel car",
                 "dataviz_checkbox_text": ""
               }
@@ -711,6 +757,8 @@
   },
   "heat": {
     "name": "heat",
+    "policies_title": "Most Popular Energy and Heating Policies",
+    "policies_sub_title": "Travel policies presented in The Strategy Room ranked from most recommend to least based on final recommendation from participants.",
     "policies": {
       "pre": [
         {
@@ -789,6 +837,7 @@
             "stage_id": "h3-poll",
             "vote_id": "h3-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "heat",
@@ -799,9 +848,11 @@
                 "stage_id": "h3-poll",
                 "vote_id": "h3-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I would like to live in an area where rents included energy costs ",
                 "dataviz_checkbox_text": ""
               }
@@ -816,6 +867,7 @@
             "stage_id": "h6-poll",
             "vote_id": "h6-q1",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "heat",
@@ -826,9 +878,11 @@
                 "stage_id": "h6-poll",
                 "vote_id": "h6-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": true,
                 "dataviz_chart_title": "I would like to live in an area where the council invested in making social housing more energy efficient ",
                 "dataviz_checkbox_text": ""
               }
@@ -853,6 +907,7 @@
             "stage_id": "h8-poll",
             "vote_id": "h8-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "heat",
@@ -863,9 +918,11 @@
                 "stage_id": "h8-poll",
                 "vote_id": "h8-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all worried",
                 "high_end": "very worried",
+                "show_legend": false,
                 "dataviz_chart_title": "Private landlords will pass on the costs of renovations to tenants",
                 "dataviz_checkbox_text": ""
               }
@@ -878,8 +935,9 @@
             "chart_width": "pairs",
             "section": "concern",
             "stage_id": "h8-poll",
-            "vote_id": "h8-q1",
+            "vote_id": "h8-q2",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "heat",
@@ -888,11 +946,13 @@
                 "chart_width": "pairs",
                 "section": "concern",
                 "stage_id": "h8-poll",
-                "vote_id": "h8-q1",
+                "vote_id": "h8-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all worried",
                 "high_end": "very worried",
+                "show_legend": true,
                 "dataviz_chart_title": "The council will take on a high level of debt to fund investment in social housing",
                 "dataviz_checkbox_text": ""
               }
@@ -917,6 +977,7 @@
             "stage_id": "h11-poll",
             "vote_id": "h11-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "heat",
@@ -927,9 +988,11 @@
                 "stage_id": "h11-poll",
                 "vote_id": "h11-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "does not appeal at all",
                 "high_end": "very appealing",
+                "show_legend": false,
                 "dataviz_chart_title": "Ability to personally make money",
                 "dataviz_checkbox_text": ""
               }
@@ -944,6 +1007,7 @@
             "stage_id": "h11-poll",
             "vote_id": "h11-q2",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "heat",
@@ -954,9 +1018,11 @@
                 "stage_id": "h11-poll",
                 "vote_id": "h11-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "does not appeal at all",
                 "high_end": "very appealing",
+                "show_legend": false,
                 "dataviz_chart_title": "Creating new jobs in the area",
                 "dataviz_checkbox_text": ""
               }
@@ -971,6 +1037,7 @@
             "stage_id": "h11-poll",
             "vote_id": "h11-q3",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "heat",
@@ -981,9 +1048,11 @@
                 "stage_id": "h11-poll",
                 "vote_id": "h11-q3",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "does not appeal at all",
                 "high_end": "very appealing",
+                "show_legend": false,
                 "dataviz_chart_title": "Pride in knowing that energy is produced locally",
                 "dataviz_checkbox_text": ""
               }
@@ -998,6 +1067,7 @@
             "stage_id": "h11-poll",
             "vote_id": "h11-q4",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "heat",
@@ -1008,9 +1078,11 @@
                 "stage_id": "h11-poll",
                 "vote_id": "h11-q4",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "does not appeal at all",
                 "high_end": "very appealing",
+                "show_legend": false,
                 "dataviz_chart_title": "Protection from global energy security concerns",
                 "dataviz_checkbox_text": ""
               }
@@ -1035,6 +1107,7 @@
             "stage_id": "h12-poll",
             "vote_id": "h12",
             "type": "checkbox",
+            "show_legend": true,
             "votes": [
               {
                 "module": "heat",
@@ -1045,9 +1118,11 @@
                 "stage_id": "h12-poll",
                 "vote_id": "h12",
                 "type": "checkbox",
-                "checkbox_total": "a1-true",
+                "checkbox_total_field": "a1-true",
+                "checkbox_colour": "#97D9E3",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "Investing in Community energy",
                 "dataviz_checkbox_text": "I would invest in a community energy scheme with a good rate of return"
               },
@@ -1060,9 +1135,11 @@
                 "stage_id": "h12-poll",
                 "vote_id": "h12",
                 "type": "checkbox",
-                "checkbox_total": "a2-true",
+                "checkbox_total_field": "a2-true",
+                "checkbox_colour": "#CBC2B9",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "Investing in Community energy",
                 "dataviz_checkbox_text": "I'd like to invest but I'm not in that position right now."
               },
@@ -1075,9 +1152,11 @@
                 "stage_id": "h12-poll",
                 "vote_id": "h12",
                 "type": "checkbox",
-                "checkbox_total": "a3-true",
+                "checkbox_total_field": "a3-true",
+                "checkbox_colour": "#162848",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "Investing in Community energy",
                 "dataviz_checkbox_text": "I wouldn't invest in a community energy scheme."
               }
@@ -1102,6 +1181,7 @@
             "stage_id": "h14-poll",
             "vote_id": "h14",
             "type": "checkbox",
+            "show_legend": true,
             "votes": [
               {
                 "module": "heat",
@@ -1112,9 +1192,11 @@
                 "stage_id": "h14-poll",
                 "vote_id": "h14",
                 "type": "checkbox",
-                "checkbox_total": "a1-true",
+                "checkbox_total_field": "a1-true",
+                "checkbox_colour": "#F9B23D",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "My housing situation",
                 "dataviz_checkbox_text": "Private renting"
               },
@@ -1127,9 +1209,11 @@
                 "stage_id": "h14-poll",
                 "vote_id": "h14",
                 "type": "checkbox",
-                "checkbox_total": "a2-true",
+                "checkbox_total_field": "a2-true",
+                "checkbox_colour": "#97D9E3",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "My housing situation",
                 "dataviz_checkbox_text": "Social housing"
               },
@@ -1142,9 +1226,11 @@
                 "stage_id": "h14-poll",
                 "vote_id": "h14",
                 "type": "checkbox",
-                "checkbox_total": "a3-true",
+                "checkbox_total_field": "a3-true",
+                "checkbox_colour": "#CBC2B9",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "My housing situation",
                 "dataviz_checkbox_text": "Own property (with mortgage)"
               },
@@ -1157,9 +1243,11 @@
                 "stage_id": "h14-poll",
                 "vote_id": "h14",
                 "type": "checkbox",
-                "checkbox_total": "a4-true",
+                "checkbox_total_field": "a4-true",
+                "checkbox_colour": "#162848",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "My housing situation",
                 "dataviz_checkbox_text": "Own property (no mortgage)"
               },
@@ -1172,9 +1260,11 @@
                 "stage_id": "h14-poll",
                 "vote_id": "h14",
                 "type": "checkbox",
-                "checkbox_total": "a5-true",
+                "checkbox_total_field": "a5-true",
+                "checkbox_colour": "#652CB3",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "My housing situation",
                 "dataviz_checkbox_text": "Other"
               }
@@ -1189,6 +1279,7 @@
             "stage_id": "h14-5-poll",
             "vote_id": "h14-5",
             "type": "checkbox",
+            "show_legend": true,
             "votes": [
               {
                 "module": "heat",
@@ -1199,9 +1290,11 @@
                 "stage_id": "h14-5-poll",
                 "vote_id": "h14-5",
                 "type": "checkbox",
-                "checkbox_total": "a1-true",
+                "checkbox_total_field": "a1-true",
+                "checkbox_colour": "#97D9E3",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "I am a landlord",
                 "dataviz_checkbox_text": "Yes"
               },
@@ -1214,9 +1307,11 @@
                 "stage_id": "h14-5-poll",
                 "vote_id": "h14-5",
                 "type": "checkbox",
-                "checkbox_total": "a2-true",
+                "checkbox_total_field": "a2-true",
+                "checkbox_colour": "#162848",
                 "low_end": "",
                 "high_end": "",
+                "show_legend": true,
                 "dataviz_chart_title": "I am a landlord",
                 "dataviz_checkbox_text": "No"
               }
@@ -1228,6 +1323,8 @@
   },
   "food": {
     "name": "food",
+    "policies_title": "Most Popular Food Policies",
+    "policies_sub_title": "Food policies presented in The Strategy Room ranked from highest to lowest levels of support in the final recommendations.",
     "policies": {
       "pre": [
         {
@@ -1288,6 +1385,7 @@
             "stage_id": "f6-poll",
             "vote_id": "f6-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "food",
@@ -1298,9 +1396,11 @@
                 "stage_id": "f6-poll",
                 "vote_id": "f6-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "Benefit to the local economy",
                 "dataviz_checkbox_text": ""
               }
@@ -1315,6 +1415,7 @@
             "stage_id": "f6-poll",
             "vote_id": "f6-q2",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "food",
@@ -1325,9 +1426,11 @@
                 "stage_id": "f6-poll",
                 "vote_id": "f6-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "People eat healthier, tastier food",
                 "dataviz_checkbox_text": ""
               }
@@ -1342,6 +1445,7 @@
             "stage_id": "f6-poll",
             "vote_id": "f6-q3",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "food",
@@ -1352,9 +1456,11 @@
                 "stage_id": "f6-poll",
                 "vote_id": "f6-q3",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "not at all important",
                 "high_end": "very important",
+                "show_legend": false,
                 "dataviz_chart_title": "It’s part of the fight against climate change",
                 "dataviz_checkbox_text": ""
               }
@@ -1379,6 +1485,7 @@
             "stage_id": "f3-poll",
             "vote_id": "f3-q1",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "food",
@@ -1389,9 +1496,11 @@
                 "stage_id": "f3-poll",
                 "vote_id": "f3-q1",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I currently think about what is healthy when making food choices",
                 "dataviz_checkbox_text": ""
               }
@@ -1406,6 +1515,7 @@
             "stage_id": "f3-poll",
             "vote_id": "f3-q2",
             "type": "numeric",
+            "show_legend": false,
             "votes": [
               {
                 "module": "food",
@@ -1416,9 +1526,11 @@
                 "stage_id": "f3-poll",
                 "vote_id": "f3-q2",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": false,
                 "dataviz_chart_title": "I currently think about the environment when making food choices",
                 "dataviz_checkbox_text": ""
               }
@@ -1433,6 +1545,7 @@
             "stage_id": "f3-poll",
             "vote_id": "f3-q3",
             "type": "numeric",
+            "show_legend": true,
             "votes": [
               {
                 "module": "food",
@@ -1443,9 +1556,11 @@
                 "stage_id": "f3-poll",
                 "vote_id": "f3-q3",
                 "type": "numeric",
-                "checkbox_total": "",
+                "checkbox_total_field": "",
+                "checkbox_colour": "",
                 "low_end": "don't agree at all",
                 "high_end": "strongly agree",
+                "show_legend": true,
                 "dataviz_chart_title": "I would look at environmental ratings to help me choose where I shop",
                 "dataviz_checkbox_text": ""
               }

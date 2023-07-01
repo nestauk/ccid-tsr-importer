@@ -9,7 +9,9 @@ public class QuestionMap
 public class ModuleMap
 {
     public ModuleMap(string name) { this.name = name; }
-    public string name { get; set; }
+    public string? name { get; set; }
+    public string? policies_title { get; set; }
+    public string? policies_sub_title { get; set; }
 
     public PoliciesDiff policies { get; set; } = new PoliciesDiff();
     public List<Section> sections { get; set; } = new List<Section>();
@@ -42,5 +44,6 @@ public class QuestionChart
     public string? stage_id { get; set; }
     public string? vote_id { get; set; }
     public string? type { get; set; }
+    public bool? show_legend { get; set; }
     public List<QuestionCSV> votes { get; set; } = new List<QuestionCSV>();
 }
