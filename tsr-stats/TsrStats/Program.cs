@@ -7,6 +7,9 @@ using Amazon.DynamoDBv2.DocumentModel;
 using System.Linq;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System.IO.Compression;
+using CsvHelper;
+using System.Globalization;
 
 internal class Program
 
@@ -89,7 +92,7 @@ internal class Program
         return items;
     }
 
-    private static async Task<IEnumerable<S3Session>?> ScanS3Async(AmazonS3Client client, string bucket, string prefix)
+    private static async Task<IEnumerable<S3Session>> ScanS3Async(AmazonS3Client client, string bucket, string prefix)
     {
         var paginator = client.Paginators.ListObjectsV2(new ListObjectsV2Request
         {
@@ -114,20 +117,48 @@ internal class Program
         var sessions = new List<S3Session>();
         foreach (var path_key in path_keys)
         {
-            var largest = entries.Where(e => e.Item1.Contains($"/{path_key}/")).OrderByDescending(e => e.Item2).First();
-            sessions.Add(new S3Session
+            var largest_file_path = entries.Where(e => e.Item1.Contains($"/{path_key}/")).OrderByDescending(e => e.Item2).First();
+            using (var stream = await GetS3StreamAsync(client, bucket, largest_file_path.Item1))
             {
-                path_key = path_key,
-            });
+                using var zip = new ZipArchive(stream);
+                var entry = zip.Entries.First(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
+                using var entryStream = entry.Open();
+                using var streamReader = new StreamReader(entryStream);
+                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+                {
+                    var records = csvReader.GetRecords<StageSliderVoteVotes>().ToList();
+                    var participants = records.Select(r => r.cast_uuid).Distinct();
+                    sessions.Add(new S3Session
+                    {
+                        path_key = path_key,
+                        participants = participants.Count(),
+                    });
+                    Console.Write('.');
+                } // csv reader
+            } // memory stream
         }
-
+        Console.WriteLine();
         return sessions;
+    }
+
+    private static async Task<Stream> GetS3StreamAsync(AmazonS3Client client, string bucket, string key)
+    {
+        var request = new GetObjectRequest
+        {
+            BucketName = bucket,
+            Key = key,
+        };
+        var memoryStream = new MemoryStream();
+        using var response = await client.GetObjectAsync(request);
+        await response.ResponseStream.CopyToAsync(memoryStream);
+        return memoryStream;
     }
 
     private static Dictionary<string, object> AnalyseS3Sessions(IEnumerable<S3Session> sessions)
     {
         var data = new Dictionary<string, object>();
         data.Add("S3 sessions", sessions.Count());
+        data.Add("Total participants", sessions.Sum(s => s.participants));
         return data;
     }
 
