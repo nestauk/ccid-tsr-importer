@@ -1,4 +1,4 @@
-# static-question-map-generator
+# tsr-question-map-generator
 
 This tool builds `question-map.json` - a file describing the various questions and policies to display on each section of the data visualisation site.
 
