@@ -115,30 +115,60 @@ internal class Program
             .Select(e => e.Item1[prefix.Length..].Split('/')[0]).Distinct();
 
         var sessions = new List<S3Session>();
+        var errors = new Dictionary<string, List<string>>();
         foreach (var path_key in path_keys)
         {
             var largest_file_path = entries.Where(e => e.Item1.Contains($"/{path_key}/")).OrderByDescending(e => e.Item2).First();
             using (var stream = await GetS3StreamAsync(client, bucket, largest_file_path.Item1))
             {
-                using var zip = new ZipArchive(stream);
-                var entry = zip.Entries.First(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
-                using var entryStream = entry.Open();
-                using var streamReader = new StreamReader(entryStream);
-                using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+                try
                 {
-                    var records = csvReader.GetRecords<StageSliderVoteVotes>().ToList();
-                    var participants = records.Select(r => r.cast_uuid).Distinct();
+                    using var zip = new ZipArchive(stream);
+                    var votes_entry = zip.Entries.First(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
+                    var text_inputs_entry = zip.Entries.First(e => e.Name.EndsWith("stage_text_input_votes.csv"));
+                    var timings_entry = zip.Entries.First(e => e.Name.EndsWith("stage_timings.csv"));
+                    var slider_vote_votes = ReadCSV<StageSliderVoteVotes>(votes_entry.Open());
+                    var text_inputs = ReadCSV<StageTextInputVotes>(text_inputs_entry.Open());
+                    var timings = ReadCSV<StageTimings>(timings_entry.Open());
+
+                    var council = text_inputs.First(ti => ti.stage_id == "local-authority").vote;
+                    var any_timestamp = timings.First().end_time;
+                    var date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timings.First().end_time).ToLocalTime().Date;
+                    var participants = slider_vote_votes.Select(r => r.cast_uuid).Distinct();
+
                     sessions.Add(new S3Session
                     {
                         path_key = path_key,
                         participants = participants.Count(),
+                        council = council,
+                        date = date
                     });
                     Console.Write('.');
-                } // csv reader
+                }
+                catch (Exception e)
+                {
+                    if (!errors.ContainsKey(path_key)) errors.Add(path_key, new List<string>());
+                    errors[path_key].Add($"{e.GetType().Name}: {e.Message}");
+                }
             } // memory stream
         }
+        Console.WriteLine($"{errors.Count} errors");
+        foreach (var error in errors)
+        {
+            Console.WriteLine($"- {error.Key}: {string.Join(", ", error.Value)}");
+        }
+
         Console.WriteLine();
         return sessions;
+    }
+
+    private static IEnumerable<T> ReadCSV<T>(Stream stream)
+    {
+        using var streamReader = new StreamReader(stream);
+        using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+        {
+            return csvReader.GetRecords<T>().ToList();
+        }
     }
 
     private static async Task<Stream> GetS3StreamAsync(AmazonS3Client client, string bucket, string key)
@@ -159,6 +189,14 @@ internal class Program
         var data = new Dictionary<string, object>();
         data.Add("S3 sessions", sessions.Count());
         data.Add("Total participants", sessions.Sum(s => s.participants));
+        data.Add("Unique councils", sessions.Select(s => s.council).Distinct().Count());
+        // data.Add("Councils", string.Join(", ", sessions.Select(s => s.council).Distinct()));
+        foreach (var council in sessions.Select(s => s.council).Distinct())
+        {
+            var council_sessions = sessions.Where(s => s.council == council);
+            var council_dates = council_sessions.Select(cs => cs.date!.Value.ToString("yyyy-MM-dd"));
+            data.Add($"{council} sessions", string.Join(", ", council_dates));
+        }
         return data;
     }
 
