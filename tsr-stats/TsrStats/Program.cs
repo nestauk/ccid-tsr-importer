@@ -152,9 +152,14 @@ internal class Program
                 try
                 {
                     using var zip = new ZipArchive(stream);
-                    var votes_entry = zip.Entries.First(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
-                    var text_inputs_entry = zip.Entries.First(e => e.Name.EndsWith("stage_text_input_votes.csv"));
-                    var timings_entry = zip.Entries.First(e => e.Name.EndsWith("stage_timings.csv"));
+                    var votes_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
+                    var text_inputs_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_text_input_votes.csv"));
+                    var timings_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_timings.csv"));
+
+                    if (votes_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_slider_vote_votes.csv");
+                    if (timings_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_timings.csv");
+                    if (text_inputs_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_text_input_votes.csv");
+
                     var slider_vote_votes = ReadCSV<StageSliderVoteVotes>(votes_entry.Open());
                     var text_inputs = ReadCSV<StageTextInputVotes>(text_inputs_entry.Open());
                     var timings = ReadCSV<StageTimings>(timings_entry.Open());
@@ -221,14 +226,13 @@ internal class Program
         data.Add("S3 sessions", sessions.Count());
         data.Add("Total participants", sessions.Sum(s => s.participants));
         data.Add("Unique councils", sessions.Select(s => s.council).Distinct().Count());
-        // data.Add("Councils", string.Join(", ", sessions.Select(s => s.council).Distinct()));
         foreach (var council in sessions.Select(s => s.council).Distinct())
         {
             var council_sessions = sessions.Where(s => s.council == council);
             var council_dates = council_sessions.Select(cs => cs.date!.Value.ToString("yyyy-MM-dd"));
             var council_path_keys = council_sessions.Select(cs => cs.path_key!);
-            data.Add($"{council} session dates", string.Join(", ", council_dates));
-            data.Add($"{council} session keys", string.Join(", ", council_path_keys));
+            // data.Add($"{council} session dates", string.Join(", ", council_dates));
+            // data.Add($"{council} session keys", string.Join(", ", council_path_keys));
         }
 
         return data;
