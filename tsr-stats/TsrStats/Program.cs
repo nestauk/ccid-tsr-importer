@@ -50,13 +50,14 @@ internal class Program
         var summaryInsights = AnalyseSummaries(summaries);
         PrintInsights(summaryInsights);
 
-        Console.WriteLine("Analysing summaries...");
+        Console.WriteLine("Storing analysis...");
         SaveCSV(s3sessions, "output/s3sessions.csv");
         SaveDictCSV(s3sessionInsights, "output/s3session_insights.csv");
         SaveCSV(sessions, "output/sessions.csv");
         SaveDictCSV(sessionInsights, "output/session_insights.csv");
         SaveCSV(summaries, "output/summaries.csv");
         SaveDictCSV(summaryInsights, "output/summary_insights.csv");
+        Console.WriteLine("Done.");
         Console.WriteLine();
     }
 
