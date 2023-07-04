@@ -19,13 +19,12 @@ Session table: tsr-data-platform
 Summary table: tsr-importer-app-SummaryTable-6TXVBV7ENKKK
 
 Analysing sessions in S3...
-................................................................
-1 errors
-- 380103: FileNotFoundException: (syndicateos-data/nesta/380103/380103-1680526138435.zip, 11373) does not contain stage_text_input_votes.csv
+..................................................................
+0 errors
 
-S3 sessions: 64
-Total participants: 622
-Unique councils: 13
+S3 sessions: 66
+Total participants: 638
+Unique councils: 12
 
 Analysing imported sessions...
 Sessions: 56
