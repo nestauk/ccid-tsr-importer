@@ -1,8 +1,10 @@
+using CsvHelper.Configuration.Attributes;
+
 public class Summary
 {
-    public string? id { get; set; }
-    public DateTime? created { get; set; }
-    public string? demographic { get; set; }
-    public int? participants { get; set; }
-    public long? timestamp { get; set; }
+    [Index(0)] public string? id { get; set; }
+    [Index(1)] public DateTime? created { get; set; }
+    [Index(2)] public string? demographic { get; set; }
+    [Index(3)] public int? participants { get; set; }
+    [Index(4)] public long? timestamp { get; set; }
 }

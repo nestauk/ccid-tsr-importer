@@ -49,6 +49,33 @@ internal class Program
         var summaries = await ScanAllAsync<Summary>(context, SUMMARY_TABLE_NAME);
         var summaryInsights = AnalyseSummaries(summaries);
         PrintInsights(summaryInsights);
+
+        Console.WriteLine("Analysing summaries...");
+        SaveCSV(s3sessions, "output/s3sessions.csv");
+        SaveDictCSV(s3sessionInsights, "output/s3session_insights.csv");
+        SaveCSV(sessions, "output/sessions.csv");
+        SaveDictCSV(sessionInsights, "output/session_insights.csv");
+        SaveCSV(summaries, "output/summaries.csv");
+        SaveDictCSV(summaryInsights, "output/summary_insights.csv");
+        Console.WriteLine();
+    }
+
+    private static void SaveDictCSV(IDictionary<string, object> data, string path)
+    {
+        using (var writer = new StreamWriter(path))
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        {
+            csv.WriteRecords(data.ToList().Select(kvp => new { insight = kvp.Key, value = kvp.Value.ToString() }));
+        }
+    }
+
+    private static void SaveCSV<T>(IEnumerable<T> data, string path)
+    {
+        using (var writer = new StreamWriter(path))
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        {
+            csv.WriteRecords<T>(data);
+        }
     }
 
     private static void PrintInsights(Dictionary<string, object> insights)
@@ -132,6 +159,7 @@ internal class Program
                     var timings = ReadCSV<StageTimings>(timings_entry.Open());
 
                     var council = text_inputs.First(ti => ti.stage_id == "local-authority").vote;
+                    var session_id = text_inputs.First(ti => ti.stage_id == "local-authority").session_id;
                     var any_timestamp = timings.First().end_time;
                     var date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timings.First().end_time).ToLocalTime().Date;
                     var participants = slider_vote_votes.Select(r => r.cast_uuid).Distinct();
@@ -141,7 +169,8 @@ internal class Program
                         path_key = path_key,
                         participants = participants.Count(),
                         council = council,
-                        date = date
+                        date = date,
+                        session_id = session_id!
                     });
                     Console.Write('.');
                 }
@@ -152,6 +181,7 @@ internal class Program
                 }
             } // memory stream
         }
+        Console.WriteLine();
         Console.WriteLine($"{errors.Count} errors");
         foreach (var error in errors)
         {
@@ -195,8 +225,11 @@ internal class Program
         {
             var council_sessions = sessions.Where(s => s.council == council);
             var council_dates = council_sessions.Select(cs => cs.date!.Value.ToString("yyyy-MM-dd"));
-            data.Add($"{council} sessions", string.Join(", ", council_dates));
+            var council_path_keys = council_sessions.Select(cs => cs.path_key!);
+            data.Add($"{council} session dates", string.Join(", ", council_dates));
+            data.Add($"{council} session keys", string.Join(", ", council_path_keys));
         }
+
         return data;
     }
 
