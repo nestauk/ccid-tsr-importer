@@ -89,6 +89,10 @@ internal class Program
     {
         var data = new Dictionary<string, object>();
         var participants = sessions.Sum(s => s.participants!.Count);
+        foreach (var session in sessions)
+        {
+            session.date = UnixTimeStampToDate(session.datetime!.Value);
+        }
         data.Add("Sessions", sessions.Count());
         data.Add("Total participants", participants);
         return data;
@@ -167,16 +171,16 @@ internal class Program
                     var council = text_inputs.First(ti => ti.stage_id == "local-authority").vote;
                     var session_id = text_inputs.First(ti => ti.stage_id == "local-authority").session_id;
                     var any_timestamp = timings.First().end_time;
-                    var date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timings.First().end_time).ToLocalTime().Date;
+                    var date = UnixTimeStampToDate(any_timestamp);
                     var participants = slider_vote_votes.Select(r => r.cast_uuid).Distinct();
 
                     sessions.Add(new S3Session
                     {
-                        path_key = path_key,
+                        path_key = path_key.Trim(),
                         participants = participants.Count(),
-                        council = council,
-                        date = date,
-                        session_id = session_id!
+                        council = council!.Trim(),
+                        date = date.Trim(),
+                        session_id = session_id!.Trim()
                     });
                     Console.Write('.');
                 }
@@ -197,6 +201,8 @@ internal class Program
         Console.WriteLine();
         return sessions;
     }
+
+    private static string UnixTimeStampToDate(long timestamp) => new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp).ToLocalTime().Date.ToString("yyyy-MM-dd");
 
     private static IEnumerable<T> ReadCSV<T>(Stream stream)
     {
@@ -229,7 +235,7 @@ internal class Program
         foreach (var council in sessions.Select(s => s.council).Distinct())
         {
             var council_sessions = sessions.Where(s => s.council == council);
-            var council_dates = council_sessions.Select(cs => cs.date!.Value.ToString("yyyy-MM-dd"));
+            var council_dates = council_sessions.Select(cs => cs.date);
             var council_path_keys = council_sessions.Select(cs => cs.path_key!);
             // data.Add($"{council} session dates", string.Join(", ", council_dates));
             // data.Add($"{council} session keys", string.Join(", ", council_path_keys));
