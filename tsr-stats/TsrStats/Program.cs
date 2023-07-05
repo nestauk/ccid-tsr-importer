@@ -21,7 +21,7 @@ internal class Program
 
     private static async Task Main(string[] args)
     {
-        if (args.Length < 3) { Console.WriteLine("Arguments: <session-table-name> <summary-table-name>"); return; }
+        if (args.Length < 3) { Console.WriteLine("Arguments: <s3-bucket-name> <session-table-name> <summary-table-name>"); return; }
 
         S3_BUCKET_NAME = args[0];
         SESSION_TABLE_NAME = args[1];
@@ -271,9 +271,9 @@ internal class Program
             { "S3 sessions", sessions.Count() },
             { "Total participants", sessions.Sum(s => s.participants ?? 0) },
             { "Unique councils", sessions.Select(s => s.council).Distinct().Count() },
-            { "Unique age ranges", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct() )},
-            { "Unique ethnicities", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct() )},
-            { "Unique genders", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct() )}
+            { "Unique age ranges", string.Join(" :: ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct() )},
+            { "Unique ethnicities", string.Join(" :: ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct() )},
+            { "Unique genders", string.Join(" :: ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct() )}
         };
 
         // foreach (var council in sessions.Select(s => s.council).Distinct())
