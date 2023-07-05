@@ -1,8 +1,17 @@
 let fs = require('fs');
 let fsPromise = require('fs/promises');
 
-const folderName = '/Users/tomfeltwell/Code/tsr-parser/bucket-parsed/966990/1680526138699/';
-
+// get the folder from parameter, not hard coded
+// const folderName = '/Users/tomfeltwell/Code/tsr-parser/bucket-parsed/966990/1680526138699/';
+var args = process.argv.slice(2);
+let folderName = args[0];
+if (!folderName.endsWith('/')) { folderName += '/'; }
+if (folderName) {
+    console.log(`Parsing directory: ${folderName}`);
+} else {
+    console.err('No folder name provided');
+    process.exit(1);
+}
 
 const inputVotes = `${folderName}stage_text_input_votes.json`
 const userDemog = `${folderName}user_demographics.json`;
@@ -94,7 +103,7 @@ function extractCheckboxResults(checkboxFile) {
       // console.log('record:', record);
       checkboxData.push(record);
     } else {
-      console.log('no entires on this line');
+      // console.log('no entries on this line');
     }
   }
   return checkboxData;
@@ -179,7 +188,7 @@ readFiles(
   for(let i = 0; i < participants.length; i++) {
     // Find all the checkbox data for this participant
     const checkbox_data = all_checkbox_data.filter(e => e.cast_uuid === participants[i].uuid);
-    console.log('found this checkbox data for participant', participants[i].uuid, checkbox_data);
+    // console.log('found this checkbox data for participant', participants[i].uuid, checkbox_data);
     // Add to the participant object in 'checkbox' field
     participants[i].checkbox = checkbox_data;
   }

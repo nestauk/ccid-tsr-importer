@@ -1,6 +1,16 @@
 let csvToJson = require('convert-csv-to-json');
 
-const folderName = '/Users/tomfeltwell/Code/tsr-parser/bucket-parsed/966990/1680526138699/';
+// get the folder from parameter, not hard coded
+// const folderName = '/Users/tomfeltwell/Code/tsr-parser/bucket-parsed/966990/1680526138699/';
+var args = process.argv.slice(2);
+let folderName = args[0];
+if (!folderName.endsWith('/')) { folderName += '/'; }
+if (folderName) {
+    console.log(`Parsing directory: ${folderName}`);
+} else {
+    console.err('No folder name provided');
+    process.exit(1);
+}
 
 // One template per file to be parsed
 const inputName = `${folderName}stage_text_input_votes`

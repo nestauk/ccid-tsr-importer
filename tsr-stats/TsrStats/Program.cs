@@ -156,6 +156,17 @@ internal class Program
                 try
                 {
                     using var zip = new ZipArchive(stream);
+
+                    var has_files = new
+                    {
+                        stage_slider_vote_votes = zip.Entries.Any(e => e.Name.EndsWith("stage_slider_vote_votes.csv")),
+                        stage_text_input_votes = zip.Entries.Any(e => e.Name.EndsWith("stage_text_input_votes.csv")),
+                        stage_timings = zip.Entries.Any(e => e.Name.EndsWith("stage_timings.csv")),
+                        user_demographics = zip.Entries.Any(e => e.Name.EndsWith("user_demographics.csv")),
+                        stage_slider_vote_results = zip.Entries.Any(e => e.Name.EndsWith("stage_slider_vote_results.csv")),
+                        stage_checkbox_votes = zip.Entries.Any(e => e.Name.EndsWith("stage_checkbox_votes.csv"))
+                    };
+
                     var votes_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
                     var text_inputs_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_text_input_votes.csv"));
                     var timings_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_timings.csv"));
@@ -164,23 +175,30 @@ internal class Program
                     if (timings_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_timings.csv");
                     if (text_inputs_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_text_input_votes.csv");
 
-                    var slider_vote_votes = ReadCSV<StageSliderVoteVotes>(votes_entry.Open());
-                    var text_inputs = ReadCSV<StageTextInputVotes>(text_inputs_entry.Open());
-                    var timings = ReadCSV<StageTimings>(timings_entry.Open());
+                    var slider_vote_votes = votes_entry != null ? ReadCSV<StageSliderVoteVotes>(votes_entry.Open()) : null;
+                    var text_inputs = text_inputs_entry != null ? ReadCSV<StageTextInputVotes>(text_inputs_entry.Open()) : null;
+                    var timings = timings_entry != null ? ReadCSV<StageTimings>(timings_entry.Open()) : null;
 
-                    var council = text_inputs.First(ti => ti.stage_id == "local-authority").vote;
-                    var session_id = text_inputs.First(ti => ti.stage_id == "local-authority").session_id;
-                    var any_timestamp = timings.First().end_time;
-                    var date = UnixTimeStampToDate(any_timestamp);
-                    var participants = slider_vote_votes.Select(r => r.cast_uuid).Distinct();
+                    var council = text_inputs?.First(ti => ti.stage_id == "local-authority").vote;
+                    var session_id = text_inputs?.First(ti => ti.stage_id == "local-authority").session_id;
+                    var any_timestamp = timings?.First().end_time;
+                    var date = any_timestamp != null ? UnixTimeStampToDate(any_timestamp!.Value) : null;
+                    var participants = slider_vote_votes?.Select(r => r.cast_uuid).Distinct();
 
                     sessions.Add(new S3Session
                     {
                         path_key = path_key.Trim(),
-                        participants = participants.Count(),
-                        council = council!.Trim(),
-                        date = date.Trim(),
-                        session_id = session_id!.Trim()
+                        filename = largest_file_path.Item1,
+                        participants = participants?.Count(),
+                        council = council?.Trim(),
+                        date = date?.Trim(),
+                        session_id = session_id?.Trim(),
+                        stage_slider_vote_votes = has_files.stage_slider_vote_votes,
+                        stage_text_input_votes = has_files.stage_text_input_votes,
+                        stage_timings = has_files.stage_timings,
+                        user_demographics = has_files.user_demographics,
+                        stage_slider_vote_results = has_files.stage_slider_vote_results,
+                        stage_checkbox_votes = has_files.stage_checkbox_votes
                     });
                     Console.Write('.');
                 }
@@ -230,7 +248,7 @@ internal class Program
     {
         var data = new Dictionary<string, object>();
         data.Add("S3 sessions", sessions.Count());
-        data.Add("Total participants", sessions.Sum(s => s.participants));
+        data.Add("Total participants", sessions.Sum(s => s.participants ?? 0));
         data.Add("Unique councils", sessions.Select(s => s.council).Distinct().Count());
         foreach (var council in sessions.Select(s => s.council).Distinct())
         {

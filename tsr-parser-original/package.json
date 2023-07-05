@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "convert-csv-to-json": "^2.0.0",
+    "fs": "^0.0.1-security"
+  }
+}
