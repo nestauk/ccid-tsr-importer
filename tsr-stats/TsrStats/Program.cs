@@ -10,6 +10,7 @@ using Amazon.S3.Model;
 using System.IO.Compression;
 using CsvHelper;
 using System.Globalization;
+using System.Text.Json;
 
 internal class Program
 
@@ -167,23 +168,24 @@ internal class Program
                         stage_checkbox_votes = zip.Entries.Any(e => e.Name.EndsWith("stage_checkbox_votes.csv"))
                     };
 
-                    var votes_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_slider_vote_votes.csv"));
-                    var text_inputs_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_text_input_votes.csv"));
-                    var timings_entry = zip.Entries.FirstOrDefault(e => e.Name.EndsWith("stage_timings.csv"));
+                    var votes_entry = FindBestFileInZip(zip, "stage_slider_vote_votes.csv");
+                    var text_inputs_entry = FindBestFileInZip(zip, "stage_text_input_votes.csv");
+                    var timings_entry = FindBestFileInZip(zip, "stage_timings.csv");
+                    var user_demographics_entry = FindBestFileInZip(zip, "user_demographics.csv");
 
-                    if (votes_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_slider_vote_votes.csv");
-                    if (timings_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_timings.csv");
-                    if (text_inputs_entry == null) throw new FileNotFoundException($"{largest_file_path} does not contain stage_text_input_votes.csv");
-
-                    var slider_vote_votes = votes_entry != null ? ReadCSV<StageSliderVoteVotes>(votes_entry.Open()) : null;
-                    var text_inputs = text_inputs_entry != null ? ReadCSV<StageTextInputVotes>(text_inputs_entry.Open()) : null;
-                    var timings = timings_entry != null ? ReadCSV<StageTimings>(timings_entry.Open()) : null;
+                    var slider_vote_votes = votes_entry != null ? ReadCSV<StageSliderVoteVotes>(votes_entry.Open(), votes_entry.Name) : null;
+                    var text_inputs = text_inputs_entry != null ? ReadCSV<StageTextInputVotes>(text_inputs_entry.Open(), text_inputs_entry.Name) : null;
+                    var timings = timings_entry != null ? ReadCSV<StageTimings>(timings_entry.Open(), timings_entry.Name) : null;
+                    var demographics = user_demographics_entry != null ? ReadCSV<UserDemographics>(user_demographics_entry.Open(), user_demographics_entry.Name) : null;
 
                     var council = text_inputs?.First(ti => ti.stage_id == "local-authority").vote;
                     var session_id = text_inputs?.First(ti => ti.stage_id == "local-authority").session_id;
                     var any_timestamp = timings?.First().end_time;
                     var date = any_timestamp != null ? UnixTimeStampToDate(any_timestamp!.Value) : null;
                     var participants = slider_vote_votes?.Select(r => r.cast_uuid).Distinct();
+                    var unique_age_ranges = demographics?.Select(d => d.age_range).Where(ar => !string.IsNullOrWhiteSpace(ar)).Distinct();
+                    var unique_ethnicities = demographics?.Select(d => d.ethnicity).Where(e => !string.IsNullOrWhiteSpace(e)).Distinct();
+                    var unique_genders = demographics?.Select(d => d.gender).Where(g => !string.IsNullOrWhiteSpace(g)).Distinct();
 
                     sessions.Add(new S3Session
                     {
@@ -193,6 +195,9 @@ internal class Program
                         council = council?.Trim(),
                         date = date?.Trim(),
                         session_id = session_id?.Trim(),
+                        unique_age_ranges = JsonSerializer.Serialize(unique_age_ranges ?? Array.Empty<string>()),
+                        unique_ethnicities = JsonSerializer.Serialize(unique_ethnicities ?? Array.Empty<string>()),
+                        unique_genders = JsonSerializer.Serialize(unique_genders ?? Array.Empty<string>()),
                         stage_slider_vote_votes = has_files.stage_slider_vote_votes,
                         stage_text_input_votes = has_files.stage_text_input_votes,
                         stage_timings = has_files.stage_timings,
@@ -205,7 +210,7 @@ internal class Program
                 catch (Exception e)
                 {
                     if (!errors.ContainsKey(path_key)) errors.Add(path_key, new List<string>());
-                    errors[path_key].Add($"{e.GetType().Name}: {e.Message}");
+                    errors[path_key].Add($"{e.GetType().Name}: {e.Message}:\n{e}");
                 }
             } // memory stream
         }
@@ -220,14 +225,29 @@ internal class Program
         return sessions;
     }
 
+    private static ZipArchiveEntry? FindBestFileInZip(ZipArchive zip, string filename)
+    {
+        return zip.Entries
+            .Where(e => e.Name.EndsWith(filename) && !e.Name.StartsWith(".") && !e.Name.StartsWith("._") && !e.FullName.Contains("MACOSX"))
+            .OrderByDescending(e => e.Length)
+            .FirstOrDefault();
+    }
+
     private static string UnixTimeStampToDate(long timestamp) => new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp).ToLocalTime().Date.ToString("yyyy-MM-dd");
 
-    private static IEnumerable<T> ReadCSV<T>(Stream stream)
+    private static IEnumerable<T> ReadCSV<T>(Stream stream, string name)
     {
-        using var streamReader = new StreamReader(stream);
-        using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+        try
         {
-            return csvReader.GetRecords<T>().ToList();
+            using var streamReader = new StreamReader(stream);
+            using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+            {
+                return csvReader.GetRecords<T>().ToList();
+            }
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"Error reading CSV: {name}, {e.GetType().Name}: {e.Message}", e);
         }
     }
 
@@ -246,18 +266,24 @@ internal class Program
 
     private static Dictionary<string, object> AnalyseS3Sessions(IEnumerable<S3Session> sessions)
     {
-        var data = new Dictionary<string, object>();
-        data.Add("S3 sessions", sessions.Count());
-        data.Add("Total participants", sessions.Sum(s => s.participants ?? 0));
-        data.Add("Unique councils", sessions.Select(s => s.council).Distinct().Count());
-        foreach (var council in sessions.Select(s => s.council).Distinct())
+        var data = new Dictionary<string, object>
         {
-            var council_sessions = sessions.Where(s => s.council == council);
-            var council_dates = council_sessions.Select(cs => cs.date);
-            var council_path_keys = council_sessions.Select(cs => cs.path_key!);
-            // data.Add($"{council} session dates", string.Join(", ", council_dates));
-            // data.Add($"{council} session keys", string.Join(", ", council_path_keys));
-        }
+            { "S3 sessions", sessions.Count() },
+            { "Total participants", sessions.Sum(s => s.participants ?? 0) },
+            { "Unique councils", sessions.Select(s => s.council).Distinct().Count() },
+            { "Unique age ranges", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct() )},
+            { "Unique ethnicities", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct() )},
+            { "Unique genders", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct() )}
+        };
+
+        // foreach (var council in sessions.Select(s => s.council).Distinct())
+        // {
+        //     var council_sessions = sessions.Where(s => s.council == council);
+        //     var council_dates = council_sessions.Select(cs => cs.date);
+        //     var council_path_keys = council_sessions.Select(cs => cs.path_key!);
+        //     data.Add($"{council} session dates", string.Join(", ", council_dates));
+        //     data.Add($"{council} session keys", string.Join(", ", council_path_keys));
+        // }
 
         return data;
     }

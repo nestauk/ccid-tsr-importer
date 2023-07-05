@@ -15,4 +15,7 @@ public class S3Session
     [Index(9)] public bool stage_timings { get; set; }
     [Index(10)] public bool stage_slider_vote_results { get; set; }
     [Index(11)] public bool stage_checkbox_votes { get; set; }
+    [Index(12)] public string? unique_age_ranges { get; set; }
+    [Index(13)] public string? unique_ethnicities { get; set; }
+    [Index(14)] public string? unique_genders { get; set; }
 }
