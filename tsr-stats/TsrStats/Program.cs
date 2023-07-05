@@ -151,8 +151,30 @@ internal class Program
         var errors = new Dictionary<string, List<string>>();
         foreach (var path_key in path_keys)
         {
-            var largest_file_path = entries.Where(e => e.Item1.Contains($"/{path_key}/")).OrderByDescending(e => e.Item2).First();
-            using (var stream = await GetS3StreamAsync(client, bucket, largest_file_path.Item1))
+            var file_with_repaired = entries
+                .Where(e => e.Item1.Contains($"/{path_key}/"))
+                .Where(e => e.Item1.EndsWith(".zip"))
+                .OrderByDescending(e => e.Item1).FirstOrDefault();
+
+            var file_with_prefix = entries
+                .Where(e => e.Item1.Contains($"/{path_key}/"))
+                .Where(e => e.Item1.EndsWith(".zip"))
+                .Where(e => e.Item1.Contains($"/{path_key}/{path_key}-"))
+                .OrderByDescending(e => e.Item1).FirstOrDefault();
+
+            var latest_timestamp_file = entries
+                .Where(e => e.Item1.Contains($"/{path_key}/"))
+                .Where(e => e.Item1.EndsWith(".zip"))
+                .OrderByDescending(e => e.Item1).FirstOrDefault();
+
+            var largest_file_path = entries
+                .Where(e => e.Item1.Contains($"/{path_key}/"))
+                .Where(e => e.Item1.EndsWith(".zip"))
+                .OrderByDescending(e => e.Item2).FirstOrDefault();
+
+            var selected_file_path = file_with_repaired ?? file_with_prefix ?? latest_timestamp_file ?? largest_file_path;
+
+            using (var stream = await GetS3StreamAsync(client, bucket, selected_file_path!.Item1))
             {
                 try
                 {
@@ -190,7 +212,7 @@ internal class Program
                     sessions.Add(new S3Session
                     {
                         path_key = path_key.Trim(),
-                        filename = largest_file_path.Item1,
+                        filename = selected_file_path.Item1,
                         participants = participants?.Count(),
                         council = council?.Trim(),
                         date = date?.Trim(),
@@ -271,9 +293,9 @@ internal class Program
             { "S3 sessions", sessions.Count() },
             { "Total participants", sessions.Sum(s => s.participants ?? 0) },
             { "Unique councils", sessions.Select(s => s.council).Distinct().Count() },
-            { "Unique age ranges", string.Join(" :: ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct() )},
-            { "Unique ethnicities", string.Join(" :: ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct() )},
-            { "Unique genders", string.Join(" :: ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct() )}
+            { "Unique age ranges", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct().Select(s => $"\"{s}\"") )},
+            { "Unique ethnicities", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct().Select(s => $"\"{s}\"") )},
+            { "Unique genders", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct().Select(s => $"\"{s}\"") )}
         };
 
         // foreach (var council in sessions.Select(s => s.council).Distinct())
