@@ -119,10 +119,10 @@ export class SessionScanner {
         Object.keys(countsPerQuestion).forEach((vote_id) => {
             let cpq = countsPerQuestion[vote_id];
             if (cpq.max_boundary === 10 && cpq.min_boundary === 0) {
-                let notRecommended = [0, 1, 2, 3].reduce((acc, val) => {
+                let notRecommended = [0, 1, 2, 3, 4].reduce((acc, val) => {
                     return acc + (cpq.totals[val.toString()] ?? 0);
                 }, 0);
-                let neutral = [4, 5].reduce((acc, val) => {
+                let neutral = [5].reduce((acc, val) => {
                     return acc + (cpq.totals[val.toString()] ?? 0);
                 }, 0);
                 let recommended = [6, 7, 8, 9, 10].reduce((acc, val) => {
