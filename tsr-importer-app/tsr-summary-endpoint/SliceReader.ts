@@ -192,15 +192,24 @@ export class SliceReader {
     }
 
     public normaliseCouncil(council: string): string {
-        return council.includes(' ') || council.includes('"') ? this.tidyWords(council) : council;
+        if (council) return council.includes(' ') || council.includes('"') ? this.tidyWords(council) : council;
+        else return 'unknown';
     }
 
     public normaliseAgeRange(age: string): string {
-        return age.toLowerCase().trim();
+        if (age) return age.toLowerCase().trim();
+        else return 'not-disclosed';
     }
 
     public normaliseEthnicityCode(ethnicity: string): string {
-        return ethnicity.includes(' ') || ethnicity.includes('"') ? this.tidyWords(ethnicity) : ethnicity;
+        if (ethnicity)
+            return ethnicity.includes(' ') || ethnicity.includes('"') ? this.tidyWords(ethnicity) : ethnicity;
+        else return 'not-disclosed';
+    }
+
+    public normaliseGender(gender: string): string {
+        if (gender) return gender.toLowerCase().trim();
+        else return 'not-disclosed';
     }
 
     public humanReadableCouncilOrEthnicity(value: string): string {
@@ -219,10 +228,6 @@ export class SliceReader {
         } else {
             return value.trim();
         }
-    }
-
-    public normaliseGender(gender: string): string {
-        return gender.toLowerCase().trim();
     }
 
     private tidyWords(words: string): string {

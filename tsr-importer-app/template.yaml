@@ -68,13 +68,13 @@ Resources:
       MemorySize: 1024
       Policies:
         - DynamoDBReadPolicy:
-            TableName: !Ref DataPlatformTableName
+            TableName: !Ref SessionTable
         - DynamoDBWritePolicy:
             TableName: !Ref SummaryTable
       Environment:
         Variables:
           TSR_QUESTIONS_TABLE_NAME: !Ref QuestionsTableName
-          TSR_DATA_PLATFORM_TABLE_NAME: !Ref DataPlatformTableName
+          TSR_DATA_PLATFORM_TABLE_NAME: !Ref SessionTable
           TSR_SUMMARY_TABLE_NAME: !Ref SummaryTable
       Events:
         Stream:
