@@ -15,4 +15,7 @@ public class Session
     [Ignore][Index(4)] public Document? modules { get; set; }
     [Ignore][Index(5)] public List<Document>? participants { get; set; }
     [Ignore][Index(6)] public List<Document>? unfilterable_polls { get; set; }
+    [Index(7)] public string? unique_age_ranges { get; set; }
+    [Index(8)] public string? unique_ethnicities { get; set; }
+    [Index(9)] public string? unique_genders { get; set; }
 }
