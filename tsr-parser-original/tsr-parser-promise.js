@@ -164,24 +164,48 @@ readFiles(
   
   // console.log(session);
 
-  // Build list of participants
+  // build list of unique cast_uuids
+  let cast_uuids = [];
+  data.vote.forEach(vote => {
+    let uuid = vote.cast_uuid;
+    if(!cast_uuids.includes(uuid)) { cast_uuids.push(uuid); }
+  });
+
+  // create participants from unique cast_uuids
   let participants = [];
-  for(let i = 0; i < data.demog.length; i++) {
-    // Map the data to new object format
-    let result = (({ 
-      uuid,
-      gender,
-      age_range,
-      ethnicity,
-      first_half_postcode
-    }) => ({ 
-      uuid,
-      "demographics": {gender, age_range, ethnicity, first_half_postcode},
-      "responses": []
-    }))(data.demog[i]);
-    // console.log(result);
-    participants.push(result);
-  }
+  cast_uuids.forEach(uuid => {
+    let participant = { 
+      "uuid": uuid, 
+      "demographics": { "gender": null, "age_range": null, "ethnicity": null, "first_half_postcode": null }, 
+      "responses": [] 
+    };
+    let participant_demographic = data.demog.find(d => d.uuid === uuid);
+    if (participant_demographic) {
+      participant.demographics = {
+        "gender": participant_demographic.gender,
+        "age_range": participant_demographic.age_range,
+        "ethnicity": participant_demographic.ethnicity,
+        "first_half_postcode": participant_demographic.first_half_postcode
+      };
+    }
+    participants.push(participant);
+  });
+
+  // for(let i = 0; i < data.demog.length; i++) {
+  //   let result = (({ 
+  //     uuid,
+  //     gender,
+  //     age_range,
+  //     ethnicity,
+  //     first_half_postcode
+  //   }) => ({ 
+  //     uuid,
+  //     "demographics": {gender, age_range, ethnicity, first_half_postcode},
+  //     "responses": []
+  //   }))(data.demog[i]);
+  //   // console.log(result);
+  //   participants.push(result);
+  // }
   // console.log(participants);
 
   // Iterate all participants and add their checkbox data
@@ -198,12 +222,14 @@ readFiles(
     let result = (({ stage_id, vote, min_boundary, max_boundary, vote_id }) => ({ stage_id, vote, min_boundary, max_boundary, vote_id }))(data.vote[j]);
 
     // Search by cast_uuid, their uuid should be in there
-    let idx = participants.findIndex(e => e.uuid === data.vote[j].cast_uuid);
+    let idx = participants.findIndex(p => p.uuid === data.vote[j].cast_uuid);
     // If not found, something weird is going on (e.g. a vote without a demog record)
     // DEV NOTE: Demographics are mandatory so all records should have a demog record
     if(idx === -1) {
       console.error('Error: vote without demog record');
-      console.log(data.vote[j]);
+      console.warn(`${participants.length} participants`);
+      console.warn(`${cast_uuids.length} cast_uuids`);
+      console.warn(data.vote[j]);
       continue;
     }
 
