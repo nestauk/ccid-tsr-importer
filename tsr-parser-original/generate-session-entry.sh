@@ -6,7 +6,6 @@ set -o pipefail
 
 # defaults
 SYNC_DATA=false
-S3_BUCKET=collective-simulation-tsr-data-uploads
 
 usage() {
   cat << EOF
@@ -19,7 +18,6 @@ Options:
     -h               --help                  Prints this help message and exits
 
 Defaults:
-    bucket: $S3_BUCKET
     update: $SYNC_DATA
 
 EOF
@@ -73,7 +71,7 @@ mkdir -p output
 # sync all data
 if [ "$SYNC_DATA" = "true" ]; then
     echo "Syncing data from S3..."
-    aws s3 sync s3://$S3_BUCKET s3/$S3_BUCKET --exclude "*" --include "*.zip"
+    ./sync-s3.sh -b $S3_BUCKET
 fi
 
 # find the best candidate zip file to work from
@@ -127,9 +125,6 @@ cp $SOURCE_FILE_PATH working/$SOURCE_FILE
 echo "Unzipping $SOURCE_FILE..."
 unzip -q -j working/$SOURCE_FILE -d working/files
 echo
-
-# install all node packages
-npm install --silent
 
 # generate parsed data for dynamodb
 echo "Parsing CSV to JSON..."

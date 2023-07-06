@@ -6,7 +6,7 @@ set -o pipefail
 
 usage() {
   cat << EOF
-Synchronises all local data in the s3 folder with the given bucket.
+Counts all directories in the bucket, and all files in the output directory.
 
 Options:
     -b <bucket>      --bucket <bucket>       Work from the named bucket (optional)
@@ -42,6 +42,10 @@ if [ -z "$S3_BUCKET" ]; then
   exit 1
 fi
 
-# sync all data
-echo "Syncing data from S3 bucket: $S3_BUCKET..."
-aws s3 sync s3://$S3_BUCKET s3/$S3_BUCKET --exclude "*" --include "*.zip"
+SESSIONS_PATH=s3/$S3_BUCKET/syndicateos-data/nesta/
+
+BUCKET_SESSIONS=$(find $SESSIONS_PATH -type d | wc -l)
+OUTPUTS=$(find output/ -type f | wc -l)
+
+echo "$BUCKET_SESSIONS session dirs in: $SESSIONS_PATH"
+echo "$OUTPUTS output files in: output/"

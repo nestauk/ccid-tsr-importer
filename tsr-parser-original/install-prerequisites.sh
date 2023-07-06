@@ -8,3 +8,6 @@ brew install awscli
 
 # npm for node
 brew install npm node
+
+# install all node packages
+npm install --silent
