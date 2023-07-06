@@ -22,6 +22,7 @@ const stageName = `${folderName}stage_timings`;
 try {
     csvToJson
     .fieldDelimiter(',')
+    .supportQuotedField(true)
     .generateJsonFileFromCsv(`${inputName}.csv`, `${inputName}.json`);
 } catch (error) {
     console.log('LA details:', error);
@@ -30,9 +31,11 @@ try {
 
 // userDemographics
 // DEV NOTE: Demographics are mandatory, so they shouldn't be missing
+// DEV NOTE (LGW): Not true, I'm afraid - in several sessions it wasn't included
 try {
     csvToJson
     .fieldDelimiter(',')
+    .supportQuotedField(true)
     .generateJsonFileFromCsv(`${demogName}.csv`, `${demogName}.json`);
 } catch (error) {
     console.log('Demographics details:', error);
@@ -43,6 +46,7 @@ try {
 try {
     csvToJson
         .fieldDelimiter(',')
+        .supportQuotedField(true)
         .generateJsonFileFromCsv(`${votesName}.csv`, `${votesName}.json`);
 } catch (error) {
     console.log('Vote Votes:', error);
@@ -52,6 +56,7 @@ try {
 try {
     csvToJson
     .fieldDelimiter(',')
+    .supportQuotedField(true)
     .generateJsonFileFromCsv(`${stageName}.csv`, `${stageName}.json`);
 } catch (error) {
     console.log('Stage timings:', error);
