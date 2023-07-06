@@ -18,9 +18,6 @@ rm -r working/*
 mkdir -p working/files
 mkdir -p output
 
-# prerequisites
-brew install --quiet findutils
-
 # sync all data
 echo "Syncing data from S3..."
 aws s3 sync s3://$S3_BUCKET s3/$S3_BUCKET --exclude "*" --include "*.zip"
