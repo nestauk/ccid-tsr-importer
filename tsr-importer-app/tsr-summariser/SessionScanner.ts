@@ -18,7 +18,7 @@ export class SessionScanner {
             )
             .flat()
             .map((participant) => this.createDemographicCode(participant))
-            .filter((value, index, self) => self.indexOf(value) === index);
+            .filter((value, index, array) => array.indexOf(value) === index);
         console.log(`Found ${codes.length} unique demographic codes.`);
         return codes;
     }
@@ -28,6 +28,7 @@ export class SessionScanner {
             .map((session) => session.participants)
             .flat()
             .filter((participant) => this.createDemographicCode(participant) === code);
+        //console.log(`Found ${participants.length} participants for demographic code: ${code}`);
         return participants;
     }
 

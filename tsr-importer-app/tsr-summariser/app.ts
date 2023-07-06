@@ -40,7 +40,7 @@ export const lambdaHandler = async (event: DynamoDBStreamEvent): Promise<boolean
         let totalParticipantCount = sessions.map((session) => session.participants).flat().length;
         console.log(`${sessions.length} sessions contain ${totalParticipantCount} participants`);
 
-        // generate unique demographic codes, eg. "age=66-75:ethnicity=AnyOtherWhiteBackground:gender=male"
+        // generate unique demographic codes, eg. "council=something:age=66-75:ethnicity=AnyOtherWhiteBackground:gender=male"
         // these demographic codes are exclusive: nobody should appear in more than one
         let codes = scanner.getUniqueDemographicCodes();
         console.log(`${codes.length} unique demographic codes`, JSON.stringify(codes));
@@ -49,8 +49,18 @@ export const lambdaHandler = async (event: DynamoDBStreamEvent): Promise<boolean
         let participantSlices = Object.fromEntries(
             codes.map((code) => [code, scanner.getParticipantsForDemographic(code)]),
         );
+
         console.debug(
-            `Demographic participant slices created`,
+            `${Object.entries(participantSlices).length} demographic participant slices created`,
+            JSON.stringify(codes.map((code) => `${code}: ${participantSlices[code].length} participants`)),
+        );
+
+        // sum across the slices
+        let sumAcrossSlices = codes.reduce((acc: number, code: string) => participantSlices[code].length + acc, 0);
+        console.debug(`Sum of participants across slices: ${sumAcrossSlices}`);
+
+        console.debug(
+            `${Object.entries(participantSlices).length} demographic participant slices created`,
             JSON.stringify(codes.map((code) => `${code}: ${participantSlices[code].length} participants`)),
         );
 
