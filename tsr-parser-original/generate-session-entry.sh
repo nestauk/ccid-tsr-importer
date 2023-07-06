@@ -91,32 +91,49 @@ if [ -z "${SOURCE_FILE}" ]; then
     echo "Finding the file that ends with: -repaired.zip"
     CANDIDATE_FILES=$(ls -1 $SOURCE_PATH | (grep "\-repaired.zip$" || true) | sort -nr)
     BEST_FILE_DETAILS=$(echo "$CANDIDATE_FILES" | head -n 1)
-    echo "$BEST_FILE_DETAILS"
-    SOURCE_FILE=$BEST_FILE_DETAILS
-    SOURCE_FILE_PATH=$SOURCE_PATH/$SOURCE_FILE
+    if [ -z "${BEST_FILE_DETAILS}" ]; then 
+        echo "No candidate file found."
+    else
+        echo "$BEST_FILE_DETAILS"
+        SOURCE_FILE=$BEST_FILE_DETAILS
+        SOURCE_FILE_PATH=$SOURCE_PATH/$SOURCE_FILE
+    fi
 fi
 
 if [ -z "${SOURCE_FILE}" ]; then
     echo "Finding the file that starts with: $PATH_KEY"
-    CANDIDATE_FILES=$(ls -1 $SOURCE_PATH | (grep "^$PATH_KEY" || true) | sort -nr)
+    CANDIDATE_FILES=$(ls -1 $SOURCE_PATH | (grep "^$PATH_KEY\-" || true) | sort -nr)
     BEST_FILE_DETAILS=$(echo "$CANDIDATE_FILES" | head -n 1)
-    echo "$BEST_FILE_DETAILS"
-    SOURCE_FILE=$BEST_FILE_DETAILS
-    SOURCE_FILE_PATH=$SOURCE_PATH/$SOURCE_FILE
+    if [ -z "${BEST_FILE_DETAILS}" ]; then 
+        echo "No candidate file found."
+    else
+        echo "$BEST_FILE_DETAILS"
+        SOURCE_FILE=$BEST_FILE_DETAILS
+        SOURCE_FILE_PATH=$SOURCE_PATH/$SOURCE_FILE
+    fi
 fi
 
 if [ -z "${SOURCE_FILE}" ]; then
     echo "Finding the file with the most recent timestamp..."
-    CANDIDATE_FILES=$(ls -1 $SOURCE_PATH | (grep "csv" || true) | sort -nr)
+    CANDIDATE_FILES=$(ls -1 $SOURCE_PATH | (grep ".zip$" || true) | sort -nr)
     BEST_FILE_DETAILS=$(echo "$CANDIDATE_FILES" | head -n 1)
-    echo "$BEST_FILE_DETAILS"
-    SOURCE_FILE=$BEST_FILE_DETAILS
-    SOURCE_FILE_PATH=$SOURCE_PATH/$SOURCE_FILE
+    if [ -z "${BEST_FILE_DETAILS}" ]; then 
+        echo "No candidate file found."
+    else
+        echo "$BEST_FILE_DETAILS"
+        SOURCE_FILE=$BEST_FILE_DETAILS
+        SOURCE_FILE_PATH=$SOURCE_PATH/$SOURCE_FILE
+    fi
 fi
 echo
 
 echo "Selected file: $SOURCE_FILE_PATH"
 echo
+
+if [ -z "${SOURCE_FILE}" ]; then
+    echo "No candidate file found for session: $PATH_KEY"
+    exit 1
+fi
 
 # transfer a working copy
 cp $SOURCE_FILE_PATH working/$SOURCE_FILE

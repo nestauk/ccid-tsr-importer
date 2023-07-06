@@ -42,9 +42,9 @@ if [ -z "$S3_BUCKET" ]; then
   exit 1
 fi
 
-SESSIONS_PATH=s3/$S3_BUCKET/syndicateos-data/nesta/
+SESSIONS_PATH=s3/$S3_BUCKET/syndicateos-data/nesta
 
-BUCKET_SESSIONS=$(find $SESSIONS_PATH -type d | wc -l)
+BUCKET_SESSIONS=$(find $SESSIONS_PATH -mindepth 1 -type d | wc -l)
 OUTPUTS=$(find output/ -type f | wc -l)
 
 echo "$BUCKET_SESSIONS session dirs in: $SESSIONS_PATH"

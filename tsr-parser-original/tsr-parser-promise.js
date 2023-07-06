@@ -1,5 +1,6 @@
 let fs = require('fs');
 let fsPromise = require('fs/promises');
+let AWS = require('aws-sdk');
 
 // get the folder from parameter, not hard coded
 // const folderName = '/Users/tomfeltwell/Code/tsr-parser/bucket-parsed/966990/1680526138699/';
@@ -240,10 +241,16 @@ readFiles(
   // console.log(participants[0].responses);
 
   session.participants = participants;
+  session.id = session["session-id"]; // this is the dynamodb index
 
-  fs.writeFile(`${folderName}parsed.json`, JSON.stringify(session), err => {
+  // convert to DynamoDB format
+  var marshalled = AWS.DynamoDB.Converter.marshall(session);
+
+  // save
+  fs.writeFile(`${folderName}parsed.json`, JSON.stringify(marshalled), err => {
     if (err) {
       console.error(err);
+      exit(1);
     }
   });
 });

@@ -27,6 +27,10 @@ Parameters:
     Type: String
     Description: The name of the DynamoDB table that holds all question data
     Default: tsr-questions
+  SessionTableName:
+    Type: String
+    Description: The name of the DynamoDB table that holds all session data
+    Default: tsr-session
   SummaryTableName:
     Type: String
     Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by demographic)
@@ -141,6 +145,13 @@ Resources:
         EntryPoints:
           - app.ts
 
+  SessionTable:
+    Type: AWS::Serverless::SimpleTable
+    TableName: !Ref SessionTableName
+    PrimaryKey:
+      Name: "session-id" # ignored?
+      Type: String
+
   SummaryTable:
     Type: AWS::Serverless::SimpleTable
     TableName: !Ref SummaryTableName
@@ -191,3 +202,19 @@ Outputs:
   SummaryEndpointFunctionIamRole:
     Description: Implicit IAM Role created for the summary endpoint function
     Value: !GetAtt SummaryEndpointFunctionRole.Arn
+
+  DataPlatformTableName:
+    Description: The name of the DynamoDB table that holds all data platform data
+    Value: !Ref DataPlatformTableName
+
+  QuestionsTableName:
+    Description: The name of the DynamoDB table that holds all question data
+    Value: !Ref QuestionsTableName
+
+  SessionTableName:
+    Description: The name of the DynamoDB table that holds all session data
+    Value: !Ref SessionTable
+
+  SummaryTableName:
+    Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by demographic)
+    Value: !Ref SummaryTable
