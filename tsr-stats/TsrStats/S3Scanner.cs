@@ -86,7 +86,7 @@ public class S3Scanner
                     var council = text_inputs?.First(ti => ti.stage_id == "local-authority").vote;
                     var session_id = text_inputs?.First(ti => ti.stage_id == "local-authority").session_id;
                     var any_timestamp = timings?.First().end_time;
-                    var date = any_timestamp != null ? UnixTimeStampToDate(any_timestamp!.Value) : null;
+                    var date = any_timestamp != null ? Utilities.UnixTimeStampToDate(any_timestamp!.Value) : null;
                     var participants = slider_vote_votes?.Select(r => r.cast_uuid).Distinct();
                     var unique_age_ranges = demographics?.Select(d => d.age_range).Where(ar => !string.IsNullOrWhiteSpace(ar)).Distinct();
                     var unique_ethnicities = demographics?.Select(d => d.ethnicity).Where(e => !string.IsNullOrWhiteSpace(e)).Distinct();
