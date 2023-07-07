@@ -71,12 +71,19 @@ The parser is code that can process data from The Strategy Room into a format su
 
 Data is stored in the bucket following this scheme:
 
+- `/syndicateos-data/nesta/<6-digit-id>/<6-digit-id>-repaired.zip`
 - `/syndicateos-data/nesta/<6-digit-id>/<13-digit-timestamp>.zip`
 - `/syndicateos-data/nesta/<6-digit-id>/<13-digit-timestamp>.zip`
-- `/syndicateos-data/nesta/<6-digit-id>/<13-digit-timestamp>.zip`
-- `/syndicateos-data/nesta/<6-digit-id>/<6-digit-timestamp>-<13-digit-id>.zip`
+- `/syndicateos-data/nesta/<6-digit-id>/<13-digit-timestamp>.zip` ...
+- `/syndicateos-data/nesta/<6-digit-id>/<6-digit-id>-<13-digit-timestamp>.zip`
 
-**Use the file that's prefixed with `<6-digit-id>`.** It should also be the most recent and largest. The others are snapshots taken during a session.
+### Selection
+
+One file from the directory contains the most up to date information. Select as follows:
+
+- Search for a file that ends with `-repaired.zip` - rule of thumb, name files with `-repaired.zip` when you've made amendments.
+- If that's not found, search for a file that starts with the `<6-digit-id>` - that's often generated when a session is complete.
+- If that's also not found, use the file with the latest (highest) `<13-digit-timestamp>` - it's the last one created.
 
 ### CSV files in the zips
 
@@ -87,7 +94,7 @@ Data is stored in the bucket following this scheme:
 
 ## Summariser
 
-Generates summaries from the data table, and stores them in the summary table.
+Generates summaries from the sessions table, and stores them in the summary table.
 
 Data is aggregated by demographic code. A demographic code looks like: `council=*:age=*:ethnicity=*:gender=*` (where `*` is a wildcard)
 
