@@ -85,11 +85,11 @@ _If you encounter a discrepancy in the data, vs what you'd expect, this may help
 - Use the `dev-sync.sh` script to enable continuous sync with a dev stack of your choice
 
   ```
-  ./dev-sync.sh tsr-importer-app-dev
+  ./dev-sync.sh dev-tsr-importer-app
   ```
 
-- Modify the functions, or `template.yaml`, your changes will be automatically synchronised
-- When ready, use the `prod-deploy.sh` script to sync your changes with the full stack
+- Modify the functions or `template.yaml` - your changes will be automatically synchronised
+- When ready, use the `prod-deploy.sh` script to sync your changes with the production stack
 
   ```
   ./prod-deploy.sh
