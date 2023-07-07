@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "Syncing the application stack on AWS..."
-sam sync --stack-name tsr-importer-app --watch --region eu-west-2
+echo "Syncing with stack: $1"
+sam sync --stack-name $1 --watch --region eu-west-2

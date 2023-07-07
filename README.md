@@ -25,19 +25,10 @@ See also: [nestauk/ccid-tsr-data-platform](https://github.com/nestauk/ccid-tsr-d
 
 ## Resources
 
-| Resource             | Title                                                                                                                                                                                                                                                                                                                              | ARN                                                                                                         |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| S3 bucket            | [collective-simulation-tsr-data-uploads](https://s3.console.aws.amazon.com/s3/buckets/collective-simulation-tsr-data-uploads?region=eu-west-2&tab=properties)                                                                                                                                                                      | `arn:aws:s3:::collective-simulation-tsr-data-uploads`                                                       |
-| CloudFormation stack | [tsr-importer-app](https://eu-west-2.console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/stackinfo?filteringText=&filteringStatus=active&viewNested=true&stackId=arn%3Aaws%3Acloudformation%3Aeu-west-2%3A251687087743%3Astack%2Ftsr-importer-app%2Ff20d84a0-0ab3-11ee-a92a-0ae36c4f8bfe) (in `eu-west-2`, London) | `arn:aws:cloudformation:eu-west-2:251687087743:stack/tsr-importer-app/f20d84a0-0ab3-11ee-a92a-0ae36c4f8bfe` |
+Key resources are:
 
-The stack itself contains a number of resources, including:
-
-| Resource                    | id                                                                                                                                                                                             |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sessions table              | [tsr-importer-app-SessionTable-O89MWVA1W5BQ](https://eu-west-2.console.aws.amazon.com/dynamodb/home?region=eu-west-2#tables:selected=tsr-importer-app-SessionTable-O89MWVA1W5BQ)               |
-| Summaries table             | [tsr-importer-app-SummaryTable-6TXVBV7ENKKK](https://eu-west-2.console.aws.amazon.com/dynamodb/home?region=eu-west-2#tables:selected=tsr-importer-app-SummaryTable-6TXVBV7ENKKK)               |
-| Summariser lambda function  | [tsr-importer-app-SummariserFunction-giC9VA6PguGg](https://eu-west-2.console.aws.amazon.com/lambda/home?region=eu-west-2#functions/tsr-importer-app-SummariserFunction-giC9VA6PguGg)           |
-| Summaries endpoint function | [tsr-importer-app-SummaryEndpointFunction-r3b029xddnZo](https://eu-west-2.console.aws.amazon.com/lambda/home?region=eu-west-2#functions/tsr-importer-app-SummaryEndpointFunction-r3b029xddnZo) |
+- s3 bucket: [collective-simulation-tsr-data-uploads](https://s3.console.aws.amazon.com/s3/buckets/collective-simulation-tsr-data-uploads?region=eu-west-2&tab=properties)
+- [tsr-importer-app](tsr-importer-app/) tables, functions, and API gateway
 
 ## Processes
 
@@ -88,13 +79,23 @@ Statistics include
 
 _If you encounter a discrepancy in the data, vs what you'd expect, this may help to determine which stage of the import process has introduced an error._
 
-### Modify and redeploy the application
+### Modify and redeploy the backend
 
 - Work in the `tsr-import-app` directory
-- Modify any of the functions there
-- Use the `dev-sync.sh` script to continuously sync your changes with the functions
+- Use the `dev-sync.sh` script to enable continuous sync with a dev stack of your choice
 
-NB. The summariser function will only run if triggered
+  ```
+  ./dev-sync.sh tsr-importer-app-dev
+  ```
+
+- Modify the functions, or `template.yaml`, your changes will be automatically synchronised
+- When ready, use the `prod-deploy.sh` script to sync your changes with the full stack
+
+  ```
+  ./prod-deploy.sh
+  ```
+
+NB. The summariser function will only run if triggered, ie.
 
 - Any changes to the sessions table will trigger the summariser function
 - You can also trigger it by [running a test](https://eu-west-2.console.aws.amazon.com/lambda/home?region=eu-west-2#/functions/tsr-importer-app-SummariserFunction-giC9VA6PguGg?tab=testing) in the console, with a blank input

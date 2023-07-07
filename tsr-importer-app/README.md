@@ -6,16 +6,39 @@ It is managed as a [SAM](https://aws.amazon.com/serverless/sam/) application, ho
 
 The stack runs in the AWS account for the CCID, in `eu-west-2`, and is named: `tsr-importer-app`
 
+## Scripts
+
+| Script                | Description                                                   |
+| --------------------- | ------------------------------------------------------------- |
+| `dev-sync.sh <stack>` | Synchronise the application with any dev CloudFormation stack |
+| `prod-deploy.sh`      | Deploy to the prod `tsr-importer-app` CloudFormation stack    |
+
+## Resources
+
+| Resource             | Title                                                                                                                                                                                                                                                                                                                              | ARN                                                                                                         |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| S3 bucket            | [collective-simulation-tsr-data-uploads](https://s3.console.aws.amazon.com/s3/buckets/collective-simulation-tsr-data-uploads?region=eu-west-2&tab=properties)                                                                                                                                                                      | `arn:aws:s3:::collective-simulation-tsr-data-uploads`                                                       |
+| CloudFormation stack | [tsr-importer-app](https://eu-west-2.console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/stackinfo?filteringText=&filteringStatus=active&viewNested=true&stackId=arn%3Aaws%3Acloudformation%3Aeu-west-2%3A251687087743%3Astack%2Ftsr-importer-app%2Ff20d84a0-0ab3-11ee-a92a-0ae36c4f8bfe) (in `eu-west-2`, London) | `arn:aws:cloudformation:eu-west-2:251687087743:stack/tsr-importer-app/f20d84a0-0ab3-11ee-a92a-0ae36c4f8bfe` |
+
+The stack itself contains a number of resources, including:
+
+| Resource                    | id                                                                                                                                                                                             |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sessions table              | [tsr-importer-app-SessionTable-O89MWVA1W5BQ](https://eu-west-2.console.aws.amazon.com/dynamodb/home?region=eu-west-2#tables:selected=tsr-importer-app-SessionTable-O89MWVA1W5BQ)               |
+| Summaries table             | [tsr-importer-app-SummaryTable-6TXVBV7ENKKK](https://eu-west-2.console.aws.amazon.com/dynamodb/home?region=eu-west-2#tables:selected=tsr-importer-app-SummaryTable-6TXVBV7ENKKK)               |
+| Summariser lambda function  | [tsr-importer-app-SummariserFunction-giC9VA6PguGg](https://eu-west-2.console.aws.amazon.com/lambda/home?region=eu-west-2#functions/tsr-importer-app-SummariserFunction-giC9VA6PguGg)           |
+| Summaries endpoint function | [tsr-importer-app-SummaryEndpointFunction-r3b029xddnZo](https://eu-west-2.console.aws.amazon.com/lambda/home?region=eu-west-2#functions/tsr-importer-app-SummaryEndpointFunction-r3b029xddnZo) |
+
 ## Functions
 
 The application features 3 functions:
 
-- Application lambda functions and API are defined in: `template.yaml`
+- Application lambda functions, tables, and API are defined in: `template.yaml`
 - Each function is written in [TypeScript](https://www.typescriptlang.org/), and has its own directory.
 
 | Function                  | Directory               | Description                                                                          |
 | ------------------------- | ----------------------- | ------------------------------------------------------------------------------------ |
-| `ImporterFunction`        | `tsr-importer/`         | Under construction. Imports data from a known S3 bucket into the data table.         |
+| `ImporterFunction`        | `tsr-importer/`         | **Under construction.** Imports data from a known S3 bucket into the data table.     |
 | `SummariserFunction`      | `tsr-summariser/`       | Summarises data found in the data table into a summaries table for easy consumption. |
 | `SummaryEndpointFunction` | `tsr-summary-endpoint/` | Retrieves data per demographic query from the summaries table.                       |
 
@@ -29,7 +52,9 @@ There are a number of data tables. Their names are provided as parameters to `te
 
 ## Importer
 
-`// Under construction`
+❗️ `Under construction`
+
+For now, there are scripts and supporting documentation in the [tsr-parser-original](../tsr-parser-original/) directory and root [README](../README.md) explaining how to manually import session data.
 
 ### Data bucket
 
