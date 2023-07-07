@@ -1,31 +1,34 @@
-# The Strategy Room Data Parser
+# tsr-parser-original
 
-Parsing tools written to process the data created by The Strategy Room so they can be stored in the database. Currently written locally for initial testing, but needs to be implemented on a Lambda or similar.
+## Scripts
 
-The tools in this repo perform 2 functions.
+These scripts assume that `bash` and `brew` are available. ([Homebrew](https://brew.sh/) is a Mac OS package manager.)
 
-1. Convert the relevant files in to JSON (for easy processing)
-2. Parse the relevant data into the document format used in the database, and save as a formatted .JSON
+| Script                            | purpose                                                               |
+| --------------------------------- | --------------------------------------------------------------------- |
+| `install-prerequisites.sh`        | Some basic prerequisites.                                             |
+| `sync-s3.sh`                      | Synchronises an s3 bucket into the `s3` directory                     |
+| `generate-session-entry.sh`       | Prepare an import for a specific session in a specific bucket         |
+| `generate-all-session-entries.sh` | Prepare all session entries for everything in the TSR s3 bucket       |
+| `upload-session.sh`               | Upload a specific session file to a specific dynamodb table           |
+| `upload-all-sessions.sh`          | Upload all session files found in `output/` to the TSR sessions table |
 
-### Converting to JSON
+These are supported by some original javascript scripts that can manipulate the data itself:
 
-Use `parse-csv-to-json.js` to do this. In the code set `folderName` to the name of the folder you want to parse. Make sure the folder only contains the csvs for a single session.
+| Script                  | purpose                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------- |
+| `parse-csv-to-json.js`  | Javascript code to generate JSON from CSV files for a specific session                   |
+| `tsr-parser-promise.js` | Generate DynamoDB-marshalled session data from JSON and CSV files for a specific session |
 
-Run: `node parse-csv-to-json.js`
+## Resources
 
-This will produce json files for the relevant files
+| Resource                                     | description        |
+| -------------------------------------------- | ------------------ |
+| `collective-simulation-tsr-data-uploads`     | TSR s3 bucket      |
+| `tsr-importer-app-SessionTable-O89MWVA1W5BQ` | TSR sessions table |
 
-### Parsing JSON files into an object for the databse
+## Processes
 
-Use `tsr-parser-promise.js` to produce a single JSON object that represents the whole session (meta data, users + demographics and their responses)
+Use these scripts to sync s3 files, prepare session data and upload it to our DynamoDB sessions table.
 
-To use, set `folderName` to the folder you have just converted to JSON files. Run the code and it will output `parsed.json` which is a single JSON object that represents the entire session. This can be inserted into DynamoDB.
-
-Run: `node tsr-parser.promise.js`
-
-### Potential improvements
-
-- Producing JSON files and make a single object for the database could be done in a single file
-- Spend a bit more time looking at the data for edge cases and inconsistencies - e.g. what do we do when there is no demographics file, do we just omit that data?
-- Have it read an entire folder (e.g. a folder that has been synced from S3) and produce JSON objects
-- The next extension from that is to automate putting these objects into the database, and hosting this code on AWS to run automatically.
+Steps are documented in the root [README](../README.md).

@@ -1,6 +1,6 @@
 # tsr-question-map-generator
 
-This tool builds `question-map.json` - a file describing the various questions and policies to display on each section of the data visualisation site.
+This tool builds `question-map.json` - a metadata file describing the various questions and policies to display on each section of the data visualisation site.
 
 ## Data
 
@@ -12,10 +12,8 @@ This tool builds `question-map.json` - a file describing the various questions a
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | policies  | https://docs.google.com/spreadsheets/d/e/2PACX-1vT2EEl9ReSBsQp7gErWp7Mfq-Xc41qolOAFjBw6DevQKoLrTh7J2GiB2-OPVGhWG9a80XMGezmncfbU/pub?gid=216103307&single=true&output=csv |
 | questions | https://docs.google.com/spreadsheets/d/e/2PACX-1vT2EEl9ReSBsQp7gErWp7Mfq-Xc41qolOAFjBw6DevQKoLrTh7J2GiB2-OPVGhWG9a80XMGezmncfbU/pub?gid=0&single=true&output=csv         |
-
-## Output
-
-The output is: `question-map.json`
+| sections  | https://docs.google.com/spreadsheets/d/e/2PACX-1vT2EEl9ReSBsQp7gErWp7Mfq-Xc41qolOAFjBw6DevQKoLrTh7J2GiB2-OPVGhWG9a80XMGezmncfbU/pub?gid=893394364&single=true&output=csv |
+| modules   | https://docs.google.com/spreadsheets/d/e/2PACX-1vT2EEl9ReSBsQp7gErWp7Mfq-Xc41qolOAFjBw6DevQKoLrTh7J2GiB2-OPVGhWG9a80XMGezmncfbU/pub?gid=452999906&single=true&output=csv |
 
 ## Prerequisites
 
