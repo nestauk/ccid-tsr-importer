@@ -22,6 +22,7 @@ See also: [nestauk/ccid-tsr-data-platform](https://github.com/nestauk/ccid-tsr-d
 | [tsr-parser-original/](tsr-parser-original/)                                                            | Parser and scripts to prepapre data and import it into our sessions DynamoDB table. |
 | [tsr-question-map-generator/](tsr-question-map-generator/)                                              | Generates static dataset of questions for each of the dataviz tabs.                 |
 | [tsr-stats/](tsr-stats/)                                                                                | Command-line analysis tool to see what's in our DynamoDB tables and S3 bucket.      |
+| [tsr-selenium-tests/](tsr-selenium-tests/)                                                              | Selenium tests for the TSR site (including a demo script)                           |
 
 ## Resources
 
