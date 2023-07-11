@@ -18,7 +18,7 @@ const dynamo: DynamoDBClient = new DynamoDBClient({
 
 const dataReader = new DataReader(dynamo);
 
-console.log('Fetching data...');
+console.log('Fetching data..');
 const preReadSlices = dataReader.read(config.summaryTableName).then((data) => {
     console.log(`${data.length} slices retrieved.`);
     return data;
