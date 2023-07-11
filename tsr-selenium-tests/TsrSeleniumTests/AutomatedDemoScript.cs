@@ -12,20 +12,23 @@ public class AutomatedDemoScript : AbstractSeleniumTest
     {
         driver.Manage().Window.Position = new System.Drawing.Point(50, 50);
         driver.Manage().Window.Size = new System.Drawing.Size(1229, 970);
-        driver.Navigate().GoToUrl("http://strategyroom.uk/");
+
+        // driver.Navigate().GoToUrl("http://strategyroom.uk/");
+        // Thread.Sleep(10000);  // pause to start video recording
+        // // scroll through page
+        // ScrollToBottom();
+        // Thread.Sleep(PAUSE * 2);
+
+        // // visit explore data page
+        // ScrollToTop();
+        // Thread.Sleep(PAUSE);
+        // var exploreButton = driver.FindElement(By.XPath("//button[contains(text(),'Explore data')]"));
+        // exploreButton.Click();
+        // wait.Until(d => d.FindElement(By.XPath("//h2[contains(text(),'Most popular policies')]")));
+        // Thread.Sleep(PAUSE);
+
+        driver.Navigate().GoToUrl("http://strategyroom.uk/explore");
         Thread.Sleep(10000);  // pause to start video recording
-
-        // scroll through page
-        ScrollToBottom();
-        Thread.Sleep(PAUSE * 2);
-
-        // visit explore data page
-        ScrollToTop();
-        Thread.Sleep(PAUSE);
-        var exploreButton = driver.FindElement(By.XPath("//button[contains(text(),'Explore data')]"));
-        exploreButton.Click();
-        wait.Until(d => d.FindElement(By.XPath("//h2[contains(text(),'Most popular policies')]")));
-        Thread.Sleep(PAUSE);
 
         // scroll through page
         ScrollThroughAllPolicies();
@@ -119,8 +122,8 @@ public class AutomatedDemoScript : AbstractSeleniumTest
         Thread.Sleep(PAUSE);
 
         // finish on sign up page
-        var signUpButton = driver.FindElement(By.XPath("//button[contains(text(),'Sign up')]"));
-        signUpButton.Click();
+        // var signUpButton = driver.FindElement(By.XPath("//button[contains(text(),'Sign up')]"));
+        // signUpButton.Click();
         Thread.Sleep(PAUSE * 5);
     }
 
