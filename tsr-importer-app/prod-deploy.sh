@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# init script
+set -e 
+set -o pipefail
+
 PROD_STACK_NAME="tsr-importer-app"
 
 echo "Building application..."

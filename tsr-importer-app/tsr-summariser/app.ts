@@ -6,7 +6,7 @@ import { DataWriter } from './DataWriter';
 import { DynamoDBStreamEvent } from 'aws-lambda';
 
 interface Config {
-    dataTableName: string;
+    sessionTableName: string;
     summaryTableName: string;
 }
 
@@ -15,7 +15,7 @@ const dynamo: DynamoDBClient = new DynamoDBClient({
 });
 
 const config: Config = {
-    dataTableName: process.env.TSR_DATA_PLATFORM_TABLE_NAME!,
+    sessionTableName: process.env.TSR_SESSION_TABLE_NAME!,
     summaryTableName: process.env.TSR_SUMMARY_TABLE_NAME!,
 };
 
@@ -23,7 +23,7 @@ const reader = new DataReader(dynamo);
 const writer = new DataWriter(dynamo);
 
 /**
- * Summarises the content of TSR_DATA_PLATFORM_TABLE_NAME into TSR_SUMMARY_TABLE_NAME
+ * Summarises the content of TSR_SESSION_TABLE_NAME into TSR_SUMMARY_TABLE_NAME
  * @param event the DynamoDBStreamEvent that triggered this summarisation
  * @returns
  */
@@ -34,8 +34,12 @@ export const lambdaHandler = async (event: DynamoDBStreamEvent): Promise<boolean
     try {
         // read all sessions - this could get pretty intense, it's all read into memory in one go
         // NB. size of lambda increased from default 129Mb to 1024Mb
-        let sessions = await reader.read(config.dataTableName);
+        let sessions = await reader.read(config.sessionTableName);
         let scanner = new SessionScanner(sessions);
+        if (sessions.length === 0) {
+            console.log('No sessions found - not continuing with summarisation.');
+            return false;
+        }
 
         let totalParticipantCount = sessions.map((session) => session.participants).flat().length;
         console.log(`${sessions.length} sessions contain ${totalParticipantCount} participants`);
