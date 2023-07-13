@@ -1,7 +1,8 @@
 using System.Globalization;
+using System.Text.Json;
 using CsvHelper;
 
-public class CsvUtilities
+public class FileUtilities
 {
     public static void SaveDictCSV(IDictionary<string, object> data, string path)
     {
@@ -19,6 +20,20 @@ public class CsvUtilities
         {
             csv.WriteRecords<T>(data);
         }
+    }
+
+    public static void SaveJson(JsonDocument document, string path)
+    {
+        var writerOptions = new JsonWriterOptions { Indented = true };
+        using FileStream fs = File.Create(path);
+        using var writer = new Utf8JsonWriter(fs, options: writerOptions);
+        writer.WriteStartObject();
+        foreach (JsonProperty property in document.RootElement.EnumerateObject())
+        {
+            property.WriteTo(writer);
+        }
+        writer.WriteEndObject();
+        writer.Flush();
     }
 
 }

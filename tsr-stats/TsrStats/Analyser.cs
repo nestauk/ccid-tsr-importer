@@ -3,6 +3,7 @@ using System.Text.Json;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.S3.Model.Internal.MarshallTransformations;
 using Document = Amazon.DynamoDBv2.DocumentModel.Document;
+using System.Linq;
 
 public class Analyser
 {
@@ -97,6 +98,12 @@ public class Analyser
 
         // data.Add("Unique demographics", string.Join(", ", summaryPopulations.Keys.Select(s => $"\"{s}\"")));
 
+        var unique_councils = summaryPopulations.Keys
+            .SelectMany(d => d.Split(':'))
+            .Where(dd => dd.Split('=')[0] == "council")
+            .Select(dd => dd.Split('=')[1])
+            .Distinct();
+
         var unique_ages = summaryPopulations.Keys
             .SelectMany(d => d.Split(':'))
             .Where(dd => dd.Split('=')[0] == "age")
@@ -115,6 +122,7 @@ public class Analyser
             .Select(dd => dd.Split('=')[1])
             .Distinct();
 
+        data.Add("Unique councils", string.Join(", ", unique_councils.Select(s => $"\"{s}\"").Order()));
         data.Add("Unique age ranges", string.Join(", ", unique_ages.Select(s => $"\"{s}\"").Order()));
         data.Add("Unique ethnicities", string.Join(", ", unique_ethnicities.Select(s => $"\"{s}\"").Order()));
         data.Add("Unique genders", string.Join(", ", unique_genders.Select(s => $"\"{s}\"").Order()));
@@ -122,5 +130,23 @@ public class Analyser
         return data;
     }
 
+    public static Dictionary<string, object> AnalyseEndpointData(JsonDocument data)
+    {
+        var insights = new Dictionary<string, object>();
+
+        insights.Add("Participants", data.RootElement.GetProperty("summary").GetProperty("participants").GetInt32());
+
+        var councils = data.RootElement.GetProperty("all_demographics").GetProperty("councils").EnumerateArray().Select(council => council.GetString());
+        var ages = data.RootElement.GetProperty("all_demographics").GetProperty("ages").EnumerateArray().Select(age => age.GetString());
+        var ethnicities = data.RootElement.GetProperty("all_demographics").GetProperty("ethnicities").EnumerateArray().Select(ethnicity => ethnicity.GetString());
+        var genders = data.RootElement.GetProperty("all_demographics").GetProperty("genders").EnumerateArray().Select(gender => gender.GetString());
+
+        insights.Add("Councils", string.Join(", ", councils.Select(s => $"\"{s}\"").Order()));
+        insights.Add("Age ranges", string.Join(", ", ages.Select(s => $"\"{s}\"").Order()));
+        insights.Add("Ethnicities", string.Join(", ", ethnicities.Select(s => $"\"{s}\"").Order()));
+        insights.Add("Genders", string.Join(", ", genders.Select(s => $"\"{s}\"").Order()));
+
+        return insights;
+    }
 
 }
