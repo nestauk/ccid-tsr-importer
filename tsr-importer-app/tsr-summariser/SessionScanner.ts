@@ -49,6 +49,7 @@ export class SessionScanner {
                     let checkbox_vote_no = `${parts[1]}-false`;
 
                     // special case for t14 - these checkboxes are named c1, c2
+                    // TODO: document this special case
                     if (/^c\d+/.test(checkbox_vote_id)) {
                         // keep the checkbox value as the vote choice
                         // set the vote id to t14 - it should always have been this
@@ -116,7 +117,7 @@ export class SessionScanner {
             });
         });
 
-        // generate some special case data
+        // generate positive/neutral/negative counts for 0-10 polls only
         Object.keys(countsPerQuestion).forEach((vote_id) => {
             let cpq = countsPerQuestion[vote_id];
             if (cpq.max_boundary === 10 && cpq.min_boundary === 0) {
