@@ -14,9 +14,9 @@ public class Analyser
             { "S3 sessions", sessions.Count() },
             { "Total participants", sessions.Sum(s => s.participants ?? 0) },
             { "Unique councils", sessions.Select(s => s.council).Distinct().Count() },
-            { "Unique age ranges", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct().Select(s => $"\"{s}\"").Order())},
-            { "Unique ethnicities", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct().Select(s => $"\"{s}\"").Order())},
-            { "Unique genders", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct().Select(s => $"\"{s}\"").Order())}
+            { "Unique age ranges", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_age_ranges!)!).Distinct().Select(s => $"\"{s}\"").OrderBy(s => s))},
+            { "Unique ethnicities", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_ethnicities!)!).Distinct().Select(s => $"\"{s}\"").OrderBy(s => s))},
+            { "Unique genders", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct().Select(s => $"\"{s}\"").OrderBy(s => s))}
         };
 
         // foreach (var council in sessions.Select(s => s.council).Distinct())
@@ -70,9 +70,9 @@ public class Analyser
                 }
             }
         }
-        data.Add("Unique age ranges", string.Join(", ", unique_age_ranges.Select(s => $"\"{s}\"").Order()));
-        data.Add("Unique ethnicities", string.Join(", ", unique_ethnicities.Select(s => $"\"{s}\"").Order()));
-        data.Add("Unique genders", string.Join(", ", unique_genders.Select(s => $"\"{s}\"").Order()));
+        data.Add("Unique age ranges", string.Join(", ", unique_age_ranges.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique ethnicities", string.Join(", ", unique_ethnicities.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique genders", string.Join(", ", unique_genders.Select(s => $"\"{s}\"").OrderBy(s => s)));
 
         return data;
     }
@@ -122,10 +122,10 @@ public class Analyser
             .Select(dd => dd.Split('=')[1])
             .Distinct();
 
-        data.Add("Unique councils", string.Join(", ", unique_councils.Select(s => $"\"{s}\"").Order()));
-        data.Add("Unique age ranges", string.Join(", ", unique_ages.Select(s => $"\"{s}\"").Order()));
-        data.Add("Unique ethnicities", string.Join(", ", unique_ethnicities.Select(s => $"\"{s}\"").Order()));
-        data.Add("Unique genders", string.Join(", ", unique_genders.Select(s => $"\"{s}\"").Order()));
+        data.Add("Unique councils", string.Join(", ", unique_councils.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique age ranges", string.Join(", ", unique_ages.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique ethnicities", string.Join(", ", unique_ethnicities.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique genders", string.Join(", ", unique_genders.Select(s => $"\"{s}\"").OrderBy(s => s)));
 
         return data;
     }
@@ -141,10 +141,10 @@ public class Analyser
         var ethnicities = data.RootElement.GetProperty("all_demographics").GetProperty("ethnicities").EnumerateArray().Select(ethnicity => ethnicity.GetString());
         var genders = data.RootElement.GetProperty("all_demographics").GetProperty("genders").EnumerateArray().Select(gender => gender.GetString());
 
-        insights.Add("Councils", string.Join(", ", councils.Select(s => $"\"{s}\"").Order()));
-        insights.Add("Age ranges", string.Join(", ", ages.Select(s => $"\"{s}\"").Order()));
-        insights.Add("Ethnicities", string.Join(", ", ethnicities.Select(s => $"\"{s}\"").Order()));
-        insights.Add("Genders", string.Join(", ", genders.Select(s => $"\"{s}\"").Order()));
+        insights.Add("Councils", string.Join(", ", councils.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        insights.Add("Age ranges", string.Join(", ", ages.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        insights.Add("Ethnicities", string.Join(", ", ethnicities.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        insights.Add("Genders", string.Join(", ", genders.Select(s => $"\"{s}\"").OrderBy(s => s)));
 
         return insights;
     }
