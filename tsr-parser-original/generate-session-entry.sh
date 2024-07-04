@@ -64,7 +64,7 @@ echo "Sync:      $SYNC_DATA"
 # init directories
 mkdir -p s3/$S3_BUCKET
 mkdir -p working
-rm -r working/*
+rm -r working/* || true
 mkdir -p working/files
 mkdir -p output
 

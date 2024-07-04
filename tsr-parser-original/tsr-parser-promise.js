@@ -22,13 +22,22 @@ const pollVotes = `${folderName}stage_slider_vote_results.csv`;  // This is pars
 const checkboxVotes = `${folderName}stage_checkbox_votes.csv`;  // This is parsed manually, CSV only
 
 async function readFiles(inputFile, demogFile, voteFile, timingFile, pollFile, checkboxFile) {
+  let missing = [];
+  for (let file of [inputFile, demogFile, voteFile, timingFile, pollFile, checkboxFile]) {
+    if (!fs.existsSync(file)) missing.push(file);
+  }
+  if (missing.length > 0) {
+    console.error('Missing files:', JSON.stringify(missing));
+    throw new Error('Missing files');
+  }
+
   try {
     const inputData = await fsPromise.readFile(inputFile, { encoding: 'ascii'});
     const demogData = await fsPromise.readFile(demogFile, { encoding: 'ascii' });
     const voteData = await fsPromise.readFile(voteFile, { encoding: 'ascii' });
     const timingData = await fsPromise.readFile(timingFile, { encoding: 'ascii' });
     const pollData = await fsPromise.readFile(pollFile, { encoding: 'ascii' });
-    const checkboxData = await fsPromise.readFile(checkboxFile, { encoding: 'ascii' });
+    const checkboxData = await fsPromise.readFile(checkboxFile, { encoding: 'ascii' }); 
 
     // pollData is not parsed to JSON as this needs to be done manually
     return { 
@@ -41,6 +50,7 @@ async function readFiles(inputFile, demogFile, voteFile, timingFile, pollFile, c
     };
   } catch (err) {
     console.error(err);
+    throw err;
   }
 }
 
@@ -78,6 +88,8 @@ function extractPollResults(pollFile) {
 function extractCheckboxResults(checkboxFile) {
   console.log('Parsing checkbox results');
   const checkboxData = [];
+  if (!checkboxFile) { return checkboxData; }
+  
   // This is really hacky, as the embedded JSON object messes up CSV parsing because of the use of commas!
   const lines = checkboxFile.split('\n');
 
