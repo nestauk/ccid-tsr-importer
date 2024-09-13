@@ -1,4 +1,4 @@
-import { QuestionTotals, Summary } from './DataStructures';
+import { CountsPerQuestion, DemographicSummary } from './DataStructures';
 
 export class SessionScanner {
     private sessions: any[];
@@ -24,19 +24,20 @@ export class SessionScanner {
     }
 
     public getParticipantsForDemographic(code: string) {
-        let participants = this.sessions
-            .map((session) => session.participants)
-            .flat()
-            .filter((participant) => this.createDemographicCode(participant) === code);
-        //console.log(`Found ${participants.length} participants for demographic code: ${code}`);
-        return participants;
+        if (code === '*') {
+            return this.sessions
+                .map((session) => session.participants)
+                .flat();
+        } else {
+            return this.sessions
+                .map((session) => session.participants)
+                .flat()
+                .filter((participant) => this.createDemographicCode(participant) === code);
+        }
     }
 
-    public generateQuestionCountsForDemographicSlice(
-        code: string,
-        participants: any[],
-    ): { [key: string]: QuestionTotals } {
-        let countsPerQuestion: { [key: string]: QuestionTotals } = {};
+    public generateQuestionCountsForDemographicSlice(code: string, participants: any[]): CountsPerQuestion {
+        let countsPerQuestion: CountsPerQuestion = {};
         participants.forEach((participant: any) => {
             // .checkbox is for multiple choice polls
             // map it as if it's a vote where checkbox choices replace the numeric options
@@ -135,11 +136,12 @@ export class SessionScanner {
                 cpq.totals['neutral'] = neutral;
             }
         });
+
         return countsPerQuestion;
     }
 
-    public createSummary(code: string, totals: { [key: string]: QuestionTotals }, participants: number) {
-        let summary: Summary = {
+    public createDemographicSummary(code: string, totals: CountsPerQuestion, participants: number): DemographicSummary {
+        return {
             id: code,
             created: new Date().toISOString(),
             timestamp: Date.now(),
@@ -147,7 +149,6 @@ export class SessionScanner {
             demographic: code,
             questionTotals: totals,
         };
-        return summary;
     }
 
     private createDemographicCode(participant: any): string {

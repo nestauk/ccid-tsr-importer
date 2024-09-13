@@ -8,11 +8,35 @@ export interface QuestionTotals {
     min_boundary?: number;
 }
 
-export interface Summary {
+export interface CountsPerQuestion {
+    [key: string]: QuestionTotals;
+}
+
+export interface DemographicSummary {
     id: string;
     created: string;
     timestamp: number;
     participants: number;
     demographic: string;
+    questionTotals: CountsPerQuestion;
+}
+
+export interface WorkshopSummary {
+    id: string;
+    sessionId: string;
+    demographic: string;
+    created: string;
+    timestamp: number;
+    participants: number;
+    council: string;
+    questionTotals: CountsPerQuestion;
+}
+
+export interface SessionSummary {
+    id: string;
+    timestamp: number;
+    participants: number;
+    sessionId: string;
+    localAuthority: string;
     questionTotals: { [key: string]: QuestionTotals };
 }

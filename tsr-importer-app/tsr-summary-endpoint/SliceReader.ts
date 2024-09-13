@@ -1,7 +1,7 @@
-import { Summary, QuestionTotals, DemographicQuery, Demographics, SearchDetail } from './DataStructures';
+import { DemographicQuery, Demographics, DemographicSummary, QuestionTotals, SearchDetail } from './DataStructures';
 
 export class SliceReader {
-    public constructor(private slices: Summary[]) {}
+    public constructor(private slices: DemographicSummary[]) {}
 
     public getDemographics(): Demographics {
         let codes = this.slices.map((slice) => slice.demographic);
@@ -62,13 +62,13 @@ export class SliceReader {
     }
 
     public getSummariesForDemographics(
-        slices: Summary[],
+        slices: DemographicSummary[],
         councils: string[],
         ages: string[],
         ethnicities: string[],
         genders: string[],
-    ): { summaries: Summary[]; foundDemographics: string[]; notFoundDemographics: string[] } {
-        let summaries: Summary[] = [];
+    ): { summaries: DemographicSummary[]; foundDemographics: string[]; notFoundDemographics: string[] } {
+        let summaries: DemographicSummary[] = [];
         let foundDemographics: string[] = [];
         let notFoundDemographics: string[] = [];
 
@@ -93,7 +93,7 @@ export class SliceReader {
         return { summaries, foundDemographics, notFoundDemographics };
     }
 
-    public getUniqueVoteIds(summaries: Summary[]): string[] {
+    public getUniqueVoteIds(summaries: DemographicSummary[]): string[] {
         return summaries
             .map((summary) => Object.keys(summary.questionTotals))
             .flat()
@@ -102,7 +102,7 @@ export class SliceReader {
 
     public computeVoteTotals(
         uniqueVoteIds: string[],
-        summaries: Summary[],
+        summaries: DemographicSummary[],
         searchDescriptionCode: string,
     ): { [key: string]: QuestionTotals } {
         let voteTotals: { [key: string]: QuestionTotals } = {};
@@ -171,7 +171,7 @@ export class SliceReader {
         let voteTotals = this.computeVoteTotals(uniqueVoteIds, summaries, searchDescriptionCode);
 
         // compose summary
-        let summary: Summary = {
+        let summary: DemographicSummary = {
             id: searchDescriptionCode,
             demographic: searchDescriptionCode,
             created: new Date().toISOString(),

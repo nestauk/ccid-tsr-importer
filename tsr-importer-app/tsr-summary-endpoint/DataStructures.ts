@@ -8,7 +8,7 @@ export interface QuestionTotals {
     min_boundary: number;
 }
 
-export interface Summary {
+export interface DemographicSummary {
     id: string;
     created: string;
     timestamp: number;
@@ -41,7 +41,7 @@ export interface DemographicQuery {
 }
 
 export interface SearchDetail {
-    summary: Summary;
+    summary: DemographicSummary;
     demographics: Demographics;
     foundDemographics: string[];
     notFoundDemographics: string[];

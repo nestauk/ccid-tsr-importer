@@ -4,7 +4,7 @@ import { ScanCommand } from '@aws-sdk/lib-dynamodb';
 export class DataReader {
     public constructor(private dynamo: DynamoDBClient) {}
 
-    public async read(table: string): Promise<any[]> {
+    public async readSessionTable(table: string): Promise<any[]> {
         console.log(`Reading all records from: ${table}...`);
         let results: any[] = [];
         let request = new ScanCommand({ TableName: table });

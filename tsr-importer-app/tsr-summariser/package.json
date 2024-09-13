@@ -1,7 +1,7 @@
 {
-  "name": "hello_world",
+  "name": "tsr-summariser",
   "version": "1.0.0",
-  "description": "hello world sample for NodeJS",
+  "description": "Generates summaries from the Sessions table, places them in the Summaries table",
   "main": "app.js",
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
   "author": "SAM CLI",
@@ -9,12 +9,14 @@
   "scripts": {
     "unit": "jest",
     "lint": "eslint '*.ts' --quiet --fix",
+    "build": "tsc",
     "compile": "tsc",
     "test": "npm run compile && npm run unit"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.352.0",
-    "@aws-sdk/lib-dynamodb": "^3.352.0",
+    "@aws-sdk/client-dynamodb": "^3.650.0",
+    "@aws-sdk/lib-dynamodb": "^3.650.0",
+    "@aws-sdk/types": "^3.649.0",
     "aws-sdk": "^2.1397.0",
     "esbuild": "^0.14.14",
     "uuid": "^9.0.0"
@@ -22,7 +24,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.118",
     "@types/jest": "^29.2.0",
-    "@types/node": "^18.11.4",
+    "@types/node": "^18.19.50",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",

@@ -1,8 +1,8 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DataReader } from './DataReader';
+import { DemographicQuery, SearchDetail } from './DataStructures';
 import { SliceReader } from './SliceReader';
-import { DemographicQuery, QuestionTotals, Summary, SearchDetail, Demographics } from './DataStructures';
 
 interface Config {
     summaryTableName: string;
@@ -19,7 +19,7 @@ const dynamo: DynamoDBClient = new DynamoDBClient({
 const dataReader = new DataReader(dynamo);
 
 console.log('Fetching data...');
-const preReadSlices = dataReader.read(config.summaryTableName).then((data) => {
+const preReadSlices = dataReader.readSummaryTable(config.summaryTableName).then((data) => {
     console.log(`${data.length} slices retrieved.`);
     return data;
 });

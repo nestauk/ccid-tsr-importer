@@ -7,22 +7,26 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 60
+    Timeout: 300
   Api:
     Cors:
       AllowMethods: "'OPTIONS,GET'"
       AllowHeaders: "'Content-Type'"
       AllowOrigin: "'*'"
 
-Parameters:
-  SessionTableName:
-    Type: String
-    Description: The name of the DynamoDB table that holds all session data
-    Default: tsr-session
-  SummaryTableName:
-    Type: String
-    Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by demographic)
-    Default: tsr-summary
+# Parameters:
+  # SessionTableName:
+  #   Type: String
+  #   Description: The name of the DynamoDB table that holds all session data
+  #   Default: tsr-importer-app-SessionTable-O89MWVA1W5BQ
+  # SummaryTableName:
+  #   Type: String
+  #   Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by demographic)
+  #   Default: tsr-importer-app-SummaryTable-6TXVBV7ENKKK
+  # IndividualWorkshopSummaryTableName:
+  #   Type: String
+  #   Description: The name of the DynamoDB table that holds all question summary data (totals, per session)
+  #   Default: tsr-individual-session-summary
 
 Resources:
   SummariserFunction:
@@ -38,12 +42,15 @@ Resources:
         - AWSLambdaDynamoDBExecutionRole
         - DynamoDBReadPolicy:
             TableName: !Ref SessionTable
-        - DynamoDBWritePolicy:
+        - DynamoDBCrudPolicy:
             TableName: !Ref SummaryTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref IndividualWorkshopSummaryTable
       Environment:
         Variables:
           TSR_SESSION_TABLE_NAME: !Ref SessionTable
           TSR_SUMMARY_TABLE_NAME: !Ref SummaryTable
+          TSR_INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME: !Ref IndividualWorkshopSummaryTable
       Events:
         Stream:
           Type: DynamoDB
@@ -115,6 +122,7 @@ Resources:
   SessionTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
+      # Implicit table name
       StreamSpecification:
         StreamViewType: NEW_IMAGE
       BillingMode: PAY_PER_REQUEST
@@ -128,9 +136,17 @@ Resources:
   SummaryTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
-      TableName: !Ref SummaryTableName
+      # Implicit table name
       PrimaryKey:
-        Name: demographic # ignored? partition key seems to be 'id'
+        Name: id # same as demographic
+        Type: String
+
+  IndividualWorkshopSummaryTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      # Implicit table name
+      PrimaryKey:
+        Name: id # `${sessionId}/${demographic}`
         Type: String
 
   ApplicationResourceGroup:
@@ -182,3 +198,7 @@ Outputs:
   SummaryTableName:
     Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by demographic)
     Value: !Ref SummaryTable
+
+  IndividualWorkshopSummaryTableName:
+    Description: The name of the DynamoDB table that holds all question summary data (totals, broken down by workshop)
+    Value: !Ref IndividualWorkshopSummaryTable
