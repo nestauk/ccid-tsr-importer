@@ -25,26 +25,6 @@ Parameters:
     Default: tsr-summary
 
 Resources:
-  # SummariesApiGateway:
-  #   Type: AWS::Serverless::Api
-  #   Properties:
-  #     StageName: prod
-  #     GatewayResponses:
-  #       DEFAULT_4XX:
-  #         ResponseParameters:
-  #           Headers:
-  #             Access-Control-Allow-Headers: "'Content-Type,Authorization'"
-  #             Access-Control-Allow-Origin: "'*'"
-  #             Access-Control-Allow-Methods: "'OPTIONS,GET,PUT'"
-  #             Access-Control-Allow-Credentials: "'true'"
-  #       DEFAULT_5XX:
-  #         ResponseParameters:
-  #           Headers:
-  #             Access-Control-Allow-Headers: "'Content-Type,Authorization'"
-  #             Access-Control-Allow-Origin: "'https://localhost:5001'"
-  #             Access-Control-Allow-Methods: "'OPTIONS,GET,PUT'"
-  #             Access-Control-Allow-Credentials: "'true'"
-
   SummariserFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -147,25 +127,24 @@ Resources:
 
   SummaryTable:
     Type: AWS::Serverless::SimpleTable
-    TableName: !Ref SummaryTableName
-    PrimaryKey:
-      Name: demographic # ignored? partition key seems to be 'id'
-      Type: String
+    Properties:
+      TableName: !Ref SummaryTableName
+      PrimaryKey:
+        Name: demographic # ignored? partition key seems to be 'id'
+        Type: String
 
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
     Properties:
-      Name:
-        Fn::Sub: ApplicationInsights-SAM-${AWS::StackName}
+      Name: !Sub "ApplicationInsights-SAM-${AWS::StackName}"
       ResourceQuery:
         Type: CLOUDFORMATION_STACK_1_0
 
   ApplicationInsightsMonitoring:
     Type: AWS::ApplicationInsights::Application
     Properties:
-      ResourceGroupName:
-        Ref: ApplicationResourceGroup
-      AutoConfigurationEnabled: "true"
+      ResourceGroupName: !Ref ApplicationResourceGroup
+      AutoConfigurationEnabled: true
 
 Outputs:
   SummariserFunctionARN:
