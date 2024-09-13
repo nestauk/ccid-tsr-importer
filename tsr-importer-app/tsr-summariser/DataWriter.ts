@@ -1,4 +1,4 @@
-import { DynamoDBClient, BatchWriteItemCommand } from '@aws-sdk/client-dynamodb';
+import { BatchWriteItemCommand, DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { marshall } from '@aws-sdk/util-dynamodb';
 import { Summary } from './DataStructures';
 
@@ -12,7 +12,7 @@ export class DataWriter {
             for (let i: number = 0; i < summaries.length; i += chunkSize) {
                 const chunk = summaries.slice(i, i + chunkSize);
 
-                // BackWriteItemCommand should replace existing items
+                // BatchWriteItemCommand should replace existing items
                 // primary key is the demographic code
                 let request = new BatchWriteItemCommand({
                     RequestItems: {
