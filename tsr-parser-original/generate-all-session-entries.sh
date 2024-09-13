@@ -4,6 +4,11 @@
 set -e 
 set -o pipefail
 
+echo "Are you sure you want to do this?"
+echo "The full set of sessions includes testing data that should not be included."
+echo "To proceed, remove the exit command from this script."
+exit 1
+
 S3_BUCKET=collective-simulation-tsr-data-uploads
 SESSIONS_PATH=s3/$S3_BUCKET/syndicateos-data/nesta/*/
 
