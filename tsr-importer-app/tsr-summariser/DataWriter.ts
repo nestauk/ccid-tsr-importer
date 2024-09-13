@@ -21,18 +21,6 @@ export class DataWriter {
         console.log(`Writing ${summaries.length} records to: ${table}`);
         try {
             const chunkSize = 10;
-
-            // for (const summary of summaries) {
-            //     const command = new PutCommand({
-            //         TableName: table,
-            //         Item: JSON.stringify(summary),
-            //     });
-            //     console.debug(`Put: ${summary.id}`);
-            //     this.dynamoDoc.send(command)
-            //         .then((response) => console.debug(response))
-            //         .catch((err: any) => console.error(err));
-            // }
-
             for (let i = 0; i < summaries.length; i += chunkSize) {
                 const chunk = summaries.slice(i, i + chunkSize);
 
