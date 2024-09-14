@@ -26,7 +26,7 @@ export interface WorkshopSummary {
     sessionId: string;
     demographic: string;
     created: string;
-    timestamp: number;
+    datetime: number;
     participants: number;
     council: string;
     questionTotals: CountsPerQuestion;

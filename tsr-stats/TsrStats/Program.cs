@@ -11,27 +11,31 @@ using System.IO.Compression;
 using CsvHelper;
 using System.Globalization;
 using System.Text.Json;
+using TsrStats.Entities.WorkshopSummary;
 
 internal class Program
 
 {
     private static string? SESSION_TABLE_NAME;
     private static string? SUMMARY_TABLE_NAME;
+    private static string? INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME;
     private static string? S3_BUCKET_NAME;
     private static string? DATA_ENDPOINT_URL;
 
     private static async Task Main(string[] args)
     {
-        if (args.Length < 3) { Console.WriteLine("Arguments: <s3-bucket-name> <session-table-name> <summary-table-name>"); return; }
+        if (args.Length < 5) { Console.WriteLine("Arguments: <s3-bucket-name> <session-table-name> <summary-table-name> <data-endpoint-url> <individual-workshop-summary-table>"); return; }
 
         S3_BUCKET_NAME = args[0];
         SESSION_TABLE_NAME = args[1];
         SUMMARY_TABLE_NAME = args[2];
         DATA_ENDPOINT_URL = args[3];
-        Console.WriteLine($"S3 bucket:     {S3_BUCKET_NAME}");
-        Console.WriteLine($"Session table: {SESSION_TABLE_NAME}");
-        Console.WriteLine($"Summary table: {SUMMARY_TABLE_NAME}");
-        Console.WriteLine($"Data endpoint: {DATA_ENDPOINT_URL}");
+        INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME = args[4];
+        Console.WriteLine($"S3 bucket:                          {S3_BUCKET_NAME}");
+        Console.WriteLine($"Session table:                      {SESSION_TABLE_NAME}");
+        Console.WriteLine($"Summary table:                      {SUMMARY_TABLE_NAME}");
+        Console.WriteLine($"Data endpoint:                      {DATA_ENDPOINT_URL}");
+        Console.WriteLine($"Individual workshops summary table: {INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME}");
         Console.WriteLine();
 
         var client = new AmazonDynamoDBClient(RegionEndpoint.EUWest2);
@@ -59,15 +63,19 @@ internal class Program
         var endpointDataInsights = Analyser.AnalyseEndpointData(endpointData);
         PrintInsights(endpointDataInsights);
 
+        Console.WriteLine("Analysing individual workshop summaries...");
+        var individualWorkshopData = await DynamoScanner.ScanAllAsync<WorkshopSummary>(context, INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME);
+        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops");
+
         Console.WriteLine("Storing analysis...");
         FileUtilities.SaveCSV(s3sessions, "output/s3sessions.csv");
-        FileUtilities.SaveDictCSV(s3sessionInsights, "output/s3session_insights.csv");
+        FileUtilities.SaveDictAsInsightValueCSV(s3sessionInsights, "output/s3session_insights.csv");
         FileUtilities.SaveCSV(sessions, "output/sessions.csv");
-        FileUtilities.SaveDictCSV(sessionInsights, "output/session_insights.csv");
+        FileUtilities.SaveDictAsInsightValueCSV(sessionInsights, "output/session_insights.csv");
         FileUtilities.SaveCSV(summaries, "output/summaries.csv");
-        FileUtilities.SaveDictCSV(summaryInsights, "output/summary_insights.csv");
+        FileUtilities.SaveDictAsInsightValueCSV(summaryInsights, "output/summary_insights.csv");
         FileUtilities.SaveJson(endpointData, "output/endpoint_data.json");
-        FileUtilities.SaveDictCSV(endpointDataInsights, "output/endpoint_data_insights.csv");
+        FileUtilities.SaveDictAsInsightValueCSV(endpointDataInsights, "output/endpoint_data_insights.csv");
 
         Console.WriteLine("Done.");
         Console.WriteLine();

@@ -62,11 +62,12 @@ const getIndividualWorkshopSummaries = (sessions: any[]): WorkshopSummary[] => {
             return {
                 id: session['session-id'],
                 council: session['council'],
+                datetime: session['datetime'],
                 summaries: getDemographicSummaries([session], scanner, true),
             };
         })
         .map((perSession) =>
-            perSession.summaries.map((summary) => toWorkshopSummary(perSession.id, perSession.council, summary)),
+            perSession.summaries.map((summary) => toWorkshopSummary(perSession.id, perSession.council, summary, perSession.datetime)),
         )
         .flat();
 };
@@ -75,13 +76,14 @@ const toWorkshopSummary = (
     sessionId: string,
     council: string,
     demographicSummary: DemographicSummary,
+    datetime: number
 ): WorkshopSummary => {
     return {
         id: `${sessionId}/${demographicSummary.demographic}`,
         sessionId: sessionId,
         demographic: demographicSummary.demographic,
         created: demographicSummary.created,
-        timestamp: demographicSummary.timestamp,
+        datetime: datetime,
         participants: demographicSummary.participants,
         council: council,
         questionTotals: demographicSummary.questionTotals,

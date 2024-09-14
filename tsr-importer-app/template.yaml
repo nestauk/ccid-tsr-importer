@@ -26,7 +26,7 @@ Globals:
   # IndividualWorkshopSummaryTableName:
   #   Type: String
   #   Description: The name of the DynamoDB table that holds all question summary data (totals, per session)
-  #   Default: tsr-individual-session-summary
+  #   Default: tsr-importer-app-IndividualWorkshopSummaryTable-RLLSZJ05LT3X
 
 Resources:
   SummariserFunction:
