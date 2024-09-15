@@ -16,3 +16,4 @@ dotnet run --project TsrStats/TsrStats.csproj -- \
   $DATA_ENDPOINT \
   $INDIVIDUAL_WORKSHOPS_SUMMARY_TABLE_NAME
 
+./workshop-output-to-csv.sh

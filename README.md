@@ -7,6 +7,36 @@ This repository contains tools for import and summarisation of data collected du
 - [The Strategy Room](https://www.nesta.org.uk/project/strategyroom) (Nesta)
 - [The Strategy Room](https://fastfamiliar.com/research/the-strategy-room/) (case study, FastFamiliar)
 
+## Prerequisites
+
+* [AWS Vault](https://github.com/99designs/aws-vault/blob/master/USAGE.md)
+
+  ```bash
+  brew install --cask aws-vault
+  aws-vault add ccid
+  ```
+
+* AWS Vault usage
+
+  ```bash
+  aws-vault login ccid --region eu-west-2
+  ```
+
+  or
+
+  ```bash
+  aws-vault exec ccid <command>
+  ```
+
+* [.NET SDK versions](https://github.com/isen-ng/homebrew-dotnet-sdk-versions)
+
+  ```bash
+  brew tap isen-ng/dotnet-sdk-versions
+  brew install --cask dotnet-sdk6
+  brew install --cask dotnet-sdk7
+  brew install --cask dotnet-sdk8
+  ```
+
 ## Repository contents
 
 The [tsr-importer-app](tsr-importer-app/) directory contains a CloudFormation application with functions to import data uploaded to s3 from TSR sessions, summarise and store that data by demographic, and then present that data for consumption by [The Strategy Room data visualisation platform](https://strategyroom.uk).
