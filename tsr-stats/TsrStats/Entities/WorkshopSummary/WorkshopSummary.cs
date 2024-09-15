@@ -11,7 +11,6 @@ public class WorkshopSummary
     public string council { get; set; } = null!;
     public DateTime created { get; set; }
     public long datetime { get; set; }
-    public string workshopDate { get; set; }
     public string demographic { get; set; } = null!;
     public int participants { get; set; }
 
@@ -24,6 +23,8 @@ public class WorkshopSummary
     // public DateTime workshopDate => DateTime.UnixEpoch.AddMilliseconds(timestamp);
     
     public object questionTotalsObject => JsonSerializer.Deserialize<object>(questionTotals.ToJson());
+
+    public string workshopDate => DateTime.UnixEpoch.AddSeconds(datetime).ToString("yyyy-MM-dd");
 }
 
 // Custom property converter for the Document objects

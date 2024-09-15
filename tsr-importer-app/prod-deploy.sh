@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# init script
 set -e 
 set -o pipefail
 
