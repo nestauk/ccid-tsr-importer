@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-PATH=output/workshops/suffolk_county_council
+PATH=output/workshops/cheshire_west_and_chester_council
 RULES=export/workshop-to-csv.json
 TOOL=export/JsonToSmartCsv
 

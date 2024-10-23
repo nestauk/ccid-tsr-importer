@@ -1,176 +1,176 @@
 {
-    "root": "$", // topmost object to process, default: "$"
-    "rules": // array of rules defining columns
+    "root": "$",
+    "rules":
     [
         {
             "path": "sessionId",
             "target": "search_session",
-            "interpretation": "AsValue"
+            "interpretation": "AsString"
         },
         {
             "path": "council",
             "target": "search_council",
-            "interpretation": "AsValue"
+            "interpretation": "AsString"
         },
         {
             "path": "demographic",
             "target": "search_demographic",
-            "interpretation": "AsValue"
+            "interpretation": "AsString"
         },
         {
             "path": "datetime",
             "target": "datetime",
-            "interpretation": "AsValue"
+            "interpretation": "AsString"
         },
         {
             "path": "participants",
             "target": "participants",
-            "interpretation": "AsValue"
+            "interpretation": "AsNumber"
         },
         {
-            "path": "questionTotalsObject", // relative path to the field in the current object
-            "target": "unused", // name of the column in the target CSV file
-            "interpretation": "IteratePropertiesAsList", // how to interpret the value of the field (see below)
+            "path": "questionTotalsObject",
+            "target": "unused",
+            "interpretation": "IteratePropertiesAsList",
             "children": [
                 {
-                    "path": "$", // path not actually used
+                    "path": "$",
                     "target": "vote_id",
                     "interpretation": "AsIndex"
                 },
                 {
                     "path": "stage_id",
                     "target": "stage_id",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsString"
                 },
                 {
                     "path": "min_boundary",
                     "target": "vote_min_boundary",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "max_boundary",
                     "target": "vote_max_boundary",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.0",
                     "target": "votes_0",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.1",
                     "target": "votes_1",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.2",
                     "target": "votes_2",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.3",
                     "target": "votes_3",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.4",
                     "target": "votes_4",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.5",
                     "target": "votes_5",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.6",
                     "target": "votes_6",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.7",
                     "target": "votes_7",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.8",
                     "target": "votes_8",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.9",
                     "target": "votes_9",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.10",
                     "target": "votes_10",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.not-recommended",
                     "target": "negative",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.neutral",
                     "target": "neutral",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.recommended",
                     "target": "positive",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a1-false",
                     "target": "a1_false",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a1-true",
                     "target": "a1_true",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a2-false",
                     "target": "a2_false",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a2-true",
                     "target": "a2_true",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a3-false",
                     "target": "a3_false",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a3-true",
                     "target": "a3_true",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a4-false",
                     "target": "a4_false",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a4-true",
                     "target": "a4_true",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a5-false",
                     "target": "a5_false",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 },
                 {
                     "path": "totals.a5-true",
                     "target": "a5_true",
-                    "interpretation": "AsValue"
+                    "interpretation": "AsNumber"
                 }
             ]
         }
