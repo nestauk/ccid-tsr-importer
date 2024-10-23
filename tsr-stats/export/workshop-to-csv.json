@@ -20,7 +20,7 @@
         {
             "path": "datetime",
             "target": "datetime",
-            "interpretation": "AsString"
+            "interpretation": "AsNumber"
         },
         {
             "path": "participants",
