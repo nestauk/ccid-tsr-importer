@@ -77,14 +77,14 @@ Key resources are:
 - Prepare an import file for the session
 
   ```shell
-  ./generate-session-entry.sh --session <session-id> --bucket collective-simulation-tsr-data-uploads --update
+  ./generate-session-entry.sh --bucket collective-simulation-tsr-data-uploads --update --session <session-id>
   ```
 
 - Ensure that `output/<session-id>.parsed.json` was created
 - Upload the session to DynamoDB
 
   ```shell
-  ./upload-session.sh --file output/<session-id>.parsed.json --table tsr-importer-app-SessionTable-O89MWVA1W5BQ
+  ./upload-session.sh --table tsr-importer-app-SessionTable-O89MWVA1W5BQ --file output/<session-id>.parsed.json
   ```
 
 - Once the table has been updated, the summariser function will automatically run, and regenerate summaries of all the demographics in the summaries table.
