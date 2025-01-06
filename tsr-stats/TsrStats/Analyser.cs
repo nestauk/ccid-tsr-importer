@@ -19,29 +19,11 @@ public class Analyser
             { "Unique genders", string.Join(", ", sessions.SelectMany(s => JsonSerializer.Deserialize<string[]>(s.unique_genders!)!).Distinct().Select(s => $"\"{s}\"").OrderBy(s => s))}
         };
 
-        // foreach (var council in sessions.Select(s => s.council).Distinct())
-        // {
-        //     var council_sessions = sessions.Where(s => s.council == council);
-        //     var council_dates = council_sessions.Select(cs => cs.date);
-        //     var council_path_keys = council_sessions.Select(cs => cs.path_key!);
-        //     data.Add($"{council} session dates", string.Join(", ", council_dates));
-        //     data.Add($"{council} session keys", string.Join(", ", council_path_keys));
-        // }
-
         return data;
     }
 
-    public static Dictionary<string, object> AnalyseSessions(IEnumerable<Session> sessions)
+    public static Tuple<HashSet<string>, HashSet<string>, HashSet<string>> GetUniqueDemographics_Age_Ethnicity_Gender(IEnumerable<Session> sessions)
     {
-        var data = new Dictionary<string, object>();
-        var participants = sessions.Sum(s => s.participants!.Count);
-        foreach (var session in sessions)
-        {
-            session.date = Utilities.UnixTimeStampToDate(session.datetime!.Value);
-        }
-        data.Add("Sessions", sessions.Count());
-        data.Add("Total participants", participants);
-
         var unique_age_ranges = new HashSet<string>();
         var unique_ethnicities = new HashSet<string>();
         var unique_genders = new HashSet<string>();
@@ -55,7 +37,6 @@ public class Analyser
                     var demographics = participant["demographics"].AsDocument();
                     if (demographics != null)
                     {
-                        var ar = demographics["age_range"];
                         var age_range = demographics["age_range"] is DynamoDBNull ? null : demographics["age_range"].AsString();
                         var ethnicity = demographics["ethnicity"] is DynamoDBNull ? null : demographics["ethnicity"].AsString();
                         var gender = demographics["gender"] is DynamoDBNull ? null : demographics["gender"].AsString();
@@ -66,15 +47,193 @@ public class Analyser
                 }
                 else
                 {
-                    throw new JsonException(session.modules!.ToJson());
+                    throw new JsonException($"Participant found without demographics in:\n{session.modules!.ToJson()}");
                 }
             }
         }
-        data.Add("Unique age ranges", string.Join(", ", unique_age_ranges.Select(s => $"\"{s}\"").OrderBy(s => s)));
-        data.Add("Unique ethnicities", string.Join(", ", unique_ethnicities.Select(s => $"\"{s}\"").OrderBy(s => s)));
-        data.Add("Unique genders", string.Join(", ", unique_genders.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        return new Tuple<HashSet<string>, HashSet<string>, HashSet<string>>(unique_age_ranges, unique_ethnicities, unique_genders);
+
+    }
+    public static Dictionary<string, object> AnalyseSessions(IEnumerable<Session> sessions)
+    {
+        var data = new Dictionary<string, object>();
+        var participants = sessions.Sum(s => s.participants!.Count);
+        foreach (var session in sessions)
+        {
+            session.date = Utilities.UnixTimeStampToDate(session.datetime!.Value);
+        }
+        data.Add("Sessions", sessions.Count());
+        data.Add("Total participants", participants);
+
+        var unique_demographics = GetUniqueDemographics_Age_Ethnicity_Gender(sessions);
+
+        data.Add("Unique age ranges", string.Join(", ", unique_demographics.Item1.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique ethnicities", string.Join(", ", unique_demographics.Item2.Select(s => $"\"{s}\"").OrderBy(s => s)));
+        data.Add("Unique genders", string.Join(", ", unique_demographics.Item3.Select(s => $"\"{s}\"").OrderBy(s => s)));
 
         return data;
+    }
+
+    public static string NormaliseDemographic(string? council = null, string? age_range = null, string? ethnicity = null, string? gender = null)
+    {
+        var council_norm = Utilities.NormaliseDemographic(council);
+        var age_range_norm = Utilities.NormaliseDemographic(age_range);
+        var ethnicity_norm = Utilities.NormaliseDemographic(ethnicity);
+        var gender_norm = Utilities.NormaliseDemographic(gender);
+        if (string.IsNullOrWhiteSpace(council_norm))
+        {
+            return $"age_range={age_range_norm ?? "*"}:ethnicity={ethnicity_norm ?? "*"}:gender={gender_norm ?? "*"}";
+        }
+        else
+        {
+            return $"council={council_norm ?? "*"}:age_range={age_range_norm ?? "*"}:ethnicity={ethnicity_norm ?? "*"}:gender={gender_norm ?? "*"}";
+        }
+    }
+
+    private static void IncrementDemographic(Dictionary<string, int> counts, string demographic)
+    {
+        if (!counts.ContainsKey(demographic)) { throw new Exception("Demographic not found: " + demographic); }
+        counts[demographic] += 1;
+    }
+
+    public static HashSet<string> CalculateUniqueDemographicCombinations(HashSet<string> all_age_ranges, HashSet<string> all_ethnicities, HashSet<string> all_genders)
+    {
+        var uniques = new HashSet<string>();
+
+        foreach (var gender in all_genders)
+        {
+            uniques.Add(NormaliseDemographic(null, null, null, gender));
+        }
+        foreach (var age_range in all_age_ranges)
+        {
+            uniques.Add(NormaliseDemographic(null, age_range, null, null));
+        }
+        foreach (var ethnicity in all_ethnicities)
+        {
+            uniques.Add(NormaliseDemographic(null, null, ethnicity, null));
+        }
+
+        foreach (var gender in all_genders)
+        {
+            foreach (var age_range in all_age_ranges)
+            {
+                foreach (var ethnicity in all_ethnicities)
+                {
+                    uniques.Add(NormaliseDemographic(null, age_range, ethnicity, null));
+                    uniques.Add(NormaliseDemographic(null, age_range, null, gender));
+                    uniques.Add(NormaliseDemographic(null, null, ethnicity, gender));
+                } // all_ethnicities
+            } // all_age_ranges
+        } // all_genders
+
+        // the very specific triple combos
+        foreach (var gender in all_genders)
+        {
+            foreach (var age_range in all_age_ranges)
+            {
+                foreach (var ethnicity in all_ethnicities)
+                {
+                    uniques.Add(NormaliseDemographic(null, age_range, ethnicity, gender));
+                } // all_ethnicities
+            } // all_age_ranges
+        } // all_genders
+
+        return uniques;
+    }
+
+    public static IEnumerable<IEnumerable<object>> AnalyseSessionDemographics(IEnumerable<Session> sessions, Dictionary<string, object> sessionsAnalysis)
+    {
+        var unique_demographics = GetUniqueDemographics_Age_Ethnicity_Gender(sessions);
+        var all_age_ranges = unique_demographics.Item1;
+        var all_ethnicities = unique_demographics.Item2;
+        var all_genders = unique_demographics.Item3;
+        var unique_demographic_strings = CalculateUniqueDemographicCombinations(all_age_ranges, all_ethnicities, all_genders);
+
+        var data = new List<Dictionary<string, object>>();
+
+        foreach (var session in sessions)
+        {
+            var session_id = session.sessionId;
+            var session_council_text = session.council;
+            var session_council = NormaliseDemographic(session_council_text);
+            var session_datestamp = session.datetime!.Value;
+            var session_date = Utilities.UnixTimeStampToDate(session.datetime!.Value);
+
+            var demographic_counts = unique_demographic_strings.ToDictionary(d => d, d => 0);
+
+            foreach (var participant in session.participants ?? new List<Document>())
+            {
+                if (participant.ContainsKey("demographics"))
+                {
+                    var demographics = participant["demographics"].AsDocument();
+                    if (demographics != null)
+                    {
+                        var age_range = demographics["age_range"] is DynamoDBNull ? null : demographics["age_range"].AsString();
+                        var ethnicity = demographics["ethnicity"] is DynamoDBNull ? null : demographics["ethnicity"].AsString();
+                        var gender = demographics["gender"] is DynamoDBNull ? null : demographics["gender"].AsString();
+
+                        if (AllNotEmpty(age_range)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, age_range, null, null)); }
+                        if (AllNotEmpty(ethnicity)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, null, ethnicity, null)); }
+                        if (AllNotEmpty(gender)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, null, null, gender)); }
+                        if (AllNotEmpty(age_range, ethnicity)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, age_range, ethnicity, null)); }
+                        if (AllNotEmpty(age_range, gender)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, age_range, null, gender)); }
+                        if (AllNotEmpty(ethnicity, gender)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, null, ethnicity, gender)); }
+                        if (AllNotEmpty(age_range, ethnicity, gender)) { IncrementDemographic(demographic_counts, NormaliseDemographic(null, age_range, ethnicity, gender)); }
+                    }
+                }
+                else
+                {
+                    throw new JsonException($"Participant found without demographics in:\n{session.modules!.ToJson()}");
+                }
+            } // session.participants
+
+            var session_summary = new Dictionary<string, object>
+            {
+                { "session_id", "session: " + session_id },
+                { "session_council", session_council_text },
+                { "session_datestamp", session_datestamp },
+                { "session_date", session_date }
+            };
+
+            foreach (var demographic_kvp in demographic_counts)
+            {
+                session_summary.Add(demographic_kvp.Key, demographic_kvp.Value);
+            }
+
+            data.Add(session_summary);
+        } // sessions
+
+        var output_headers = new List<object>();
+        output_headers.Add("statistic");
+        output_headers.AddRange(data.OrderBy(d => d["session_datestamp"]).Select(d => d["session_id"]));
+
+        var output_rows = new List<List<object>>();
+        var council_row = new List<object> { "council" };
+        council_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)["session_council"]));
+        var datestamp_row = new List<object> { "datestamp" };
+        datestamp_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)["session_datestamp"]));
+        var date_row = new List<object> { "date" };
+        date_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)["session_date"]));
+
+        output_rows.Add(output_headers);
+        output_rows.Add(council_row);
+        output_rows.Add(datestamp_row);
+        output_rows.Add(date_row);
+
+        foreach (var demo in unique_demographic_strings)
+        {
+            var demo_row = new List<object>() { demo };
+            demo_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)[demo]));
+            output_rows.Add(demo_row);
+        }
+
+        // data.OrderBy(d => d["session_datestamp"]);
+        return output_rows;
+    }
+
+    public static bool AllNotEmpty(params string?[] strings)
+    {
+        return strings.All(s => !string.IsNullOrWhiteSpace(s));
     }
 
     /*

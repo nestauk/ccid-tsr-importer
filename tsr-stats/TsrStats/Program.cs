@@ -53,6 +53,10 @@ internal class Program
         var sessionInsights = Analyser.AnalyseSessions(sessions);
         PrintInsights(sessionInsights);
 
+        Console.WriteLine("Analysing imported session demographics...");
+        var sessionDemographicInsights = Analyser.AnalyseSessionDemographics(sessions, sessionInsights);        
+        Console.WriteLine();
+
         Console.WriteLine("Analysing summaries...");
         var summaries = await DynamoScanner.ScanAllAsync<Summary>(context, SUMMARY_TABLE_NAME);
         var summaryInsights = Analyser.AnalyseSummaries(summaries);
@@ -65,17 +69,19 @@ internal class Program
 
         Console.WriteLine("Analysing individual workshop summaries...");
         var individualWorkshopData = await DynamoScanner.ScanAllAsync<WorkshopSummary>(context, INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME);
-        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops");
+        Console.WriteLine();
 
         Console.WriteLine("Storing analysis...");
         FileUtilities.SaveCSV(s3sessions, "output/s3sessions.csv");
         FileUtilities.SaveDictAsInsightValueCSV(s3sessionInsights, "output/s3session_insights.csv");
         FileUtilities.SaveCSV(sessions, "output/sessions.csv");
-        FileUtilities.SaveDictAsInsightValueCSV(sessionInsights, "output/session_insights.csv");
+        FileUtilities.SaveListListCSV(sessionDemographicInsights, "output/sessions_demographics.csv");
+        FileUtilities.SaveDictAsInsightValueCSV(sessionInsights, "output/sessions_insights.csv");
         FileUtilities.SaveCSV(summaries, "output/summaries.csv");
-        FileUtilities.SaveDictAsInsightValueCSV(summaryInsights, "output/summary_insights.csv");
+        FileUtilities.SaveDictAsInsightValueCSV(summaryInsights, "output/summaries_insights.csv");
         FileUtilities.SaveJson(endpointData, "output/endpoint_data.json");
         FileUtilities.SaveDictAsInsightValueCSV(endpointDataInsights, "output/endpoint_data_insights.csv");
+        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops");
 
         Console.WriteLine("Done.");
         Console.WriteLine();
