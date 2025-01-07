@@ -90,38 +90,51 @@ public class Analyser
         }
     }
 
+    public static string DescribeDemographic(string? council = null, string? age_range = null, string? ethnicity = null, string? gender = null)
+    {
+        var parts = new List<string>();
+        if (council != null) { parts.Add("Council: " + $"'{council}'"); }
+        if (age_range != null) { parts.Add("Age range: " + $"'{age_range}'"); }
+        if (ethnicity != null) { parts.Add("Ethnicity: " + $"'{ethnicity}'"); }
+        if (gender != null) { parts.Add("Gender: " + $"'{gender}'"); }
+        if (age_range == null && ethnicity == null && gender == null) { parts.Add("All participants"); }
+        return string.Join(", ", parts);
+    }
+
     private static void IncrementDemographic(Dictionary<string, int> counts, string demographic)
     {
         if (!counts.ContainsKey(demographic)) { throw new Exception("Demographic not found: " + demographic); }
         counts[demographic] += 1;
     }
 
-    public static HashSet<string> CalculateUniqueDemographicCombinations(HashSet<string> all_age_ranges, HashSet<string> all_ethnicities, HashSet<string> all_genders)
+    public static Dictionary<string,string> CalculateUniqueDemographicCombinations(IEnumerable<string> all_age_ranges, IEnumerable<string> all_ethnicities, IEnumerable<string> all_genders)
     {
-        var uniques = new HashSet<string>();
+        var uniques = new Dictionary<string,string>();
+
+        uniques.Add(NormaliseDemographic(null, null, null, null), DescribeDemographic(null, null, null, null));
 
         foreach (var gender in all_genders)
         {
-            uniques.Add(NormaliseDemographic(null, null, null, gender));
+            if (AllNotEmpty(gender)) { uniques.Add(NormaliseDemographic(null, null, null, gender), DescribeDemographic(null, null, null, gender)); }
         }
         foreach (var age_range in all_age_ranges)
         {
-            uniques.Add(NormaliseDemographic(null, age_range, null, null));
+            if (AllNotEmpty(age_range)) { uniques.Add(NormaliseDemographic(null, age_range, null, null), DescribeDemographic(null, age_range, null, null)); }
         }
         foreach (var ethnicity in all_ethnicities)
         {
-            uniques.Add(NormaliseDemographic(null, null, ethnicity, null));
+            if (AllNotEmpty(ethnicity)) { uniques.Add(NormaliseDemographic(null, null, ethnicity, null), DescribeDemographic(null, null, ethnicity, null)); }
         }
 
-        foreach (var gender in all_genders)
+        foreach (var gender in all_genders.Where(g => !string.IsNullOrWhiteSpace(g)))
         {
             foreach (var age_range in all_age_ranges)
             {
                 foreach (var ethnicity in all_ethnicities)
                 {
-                    uniques.Add(NormaliseDemographic(null, age_range, ethnicity, null));
-                    uniques.Add(NormaliseDemographic(null, age_range, null, gender));
-                    uniques.Add(NormaliseDemographic(null, null, ethnicity, gender));
+                    if (!uniques.ContainsKey(NormaliseDemographic(null, age_range, ethnicity, null))) { uniques.Add(NormaliseDemographic(null, age_range, ethnicity, null), DescribeDemographic(null, age_range, ethnicity, null)); }
+                    if (!uniques.ContainsKey(NormaliseDemographic(null, age_range, null, gender))) { uniques.Add(NormaliseDemographic(null, age_range, null, gender), DescribeDemographic(null, age_range, null, gender)); }
+                    if (!uniques.ContainsKey(NormaliseDemographic(null, null, ethnicity, gender))) { uniques.Add(NormaliseDemographic(null, null, ethnicity, gender), DescribeDemographic(null, null, ethnicity, gender)); }
                 } // all_ethnicities
             } // all_age_ranges
         } // all_genders
@@ -133,7 +146,7 @@ public class Analyser
             {
                 foreach (var ethnicity in all_ethnicities)
                 {
-                    uniques.Add(NormaliseDemographic(null, age_range, ethnicity, gender));
+                    if (AllNotEmpty(gender, age_range, ethnicity)) { uniques.Add(NormaliseDemographic(null, age_range, ethnicity, gender), DescribeDemographic(null, age_range, ethnicity, gender)); }
                 } // all_ethnicities
             } // all_age_ranges
         } // all_genders
@@ -147,11 +160,12 @@ public class Analyser
         var all_age_ranges = unique_demographics.Item1;
         var all_ethnicities = unique_demographics.Item2;
         var all_genders = unique_demographics.Item3;
-        var unique_demographic_strings = CalculateUniqueDemographicCombinations(all_age_ranges, all_ethnicities, all_genders);
+        var unique_demographic_combos = CalculateUniqueDemographicCombinations(all_age_ranges, all_ethnicities, all_genders);
+        var unique_demographic_strings = unique_demographic_combos.Keys;
 
         var data = new List<Dictionary<string, object>>();
 
-        foreach (var session in sessions)
+        foreach (var session in sessions.OrderBy(s => s.datetime!.Value))
         {
             var session_id = session.sessionId;
             var session_council_text = session.council;
@@ -165,6 +179,7 @@ public class Analyser
             {
                 if (participant.ContainsKey("demographics"))
                 {
+                    IncrementDemographic(demographic_counts, NormaliseDemographic(null, null, null, null)); // the "all participants" count
                     var demographics = participant["demographics"].AsDocument();
                     if (demographics != null)
                     {
@@ -189,7 +204,8 @@ public class Analyser
 
             var session_summary = new Dictionary<string, object>
             {
-                { "session_id", "session: " + session_id },
+                { "heading", "session: " + (data.Count() + 1).ToString("D3") },
+                { "session_id", session_id },
                 { "session_council", session_council_text },
                 { "session_datestamp", session_datestamp },
                 { "session_date", session_date }
@@ -205,25 +221,29 @@ public class Analyser
 
         var output_headers = new List<object>();
         output_headers.Add("statistic");
-        output_headers.AddRange(data.OrderBy(d => d["session_datestamp"]).Select(d => d["session_id"]));
+        output_headers.Add("description");
+        output_headers.AddRange(data.OrderBy(d => d["session_datestamp"]).Select(d => d["heading"]));
 
         var output_rows = new List<List<object>>();
-        var council_row = new List<object> { "council" };
-        council_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)["session_council"]));
-        var datestamp_row = new List<object> { "datestamp" };
-        datestamp_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)["session_datestamp"]));
-        var date_row = new List<object> { "date" };
-        date_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)["session_date"]));
+        var sid_row = new List<object> { "session_id", "A unique id for each workshop, assigned by Syndicate" };
+        sid_row.AddRange(output_headers.Skip(2).Select(h => data.Single(d => d["heading"] == h)["session_id"]));
+        var council_row = new List<object> { "council", "The local authority where the workshop took place" };
+        council_row.AddRange(output_headers.Skip(2).Select(h => data.Single(d => d["heading"] == h)["session_council"]));
+        var datestamp_row = new List<object> { "datestamp", "A unix timestamp indicating the start of the session" };
+        datestamp_row.AddRange(output_headers.Skip(2).Select(h => data.Single(d => d["heading"] == h)["session_datestamp"]));
+        var date_row = new List<object> { "date", "The date the session took place" };
+        date_row.AddRange(output_headers.Skip(2).Select(h => data.Single(d => d["heading"] == h)["session_date"]));
 
         output_rows.Add(output_headers);
+        output_rows.Add(sid_row);
         output_rows.Add(council_row);
         output_rows.Add(datestamp_row);
         output_rows.Add(date_row);
 
-        foreach (var demo in unique_demographic_strings)
+        foreach (var demo in unique_demographic_combos)
         {
-            var demo_row = new List<object>() { demo };
-            demo_row.AddRange(output_headers.Skip(1).Select(h => data.Single(d => d["session_id"] == h)[demo]));
+            var demo_row = new List<object>() { demo.Key, demo.Value };
+            demo_row.AddRange(output_headers.Skip(2).Select(h => data.Single(d => d["heading"] == h)[demo.Key]));
             output_rows.Add(demo_row);
         }
 

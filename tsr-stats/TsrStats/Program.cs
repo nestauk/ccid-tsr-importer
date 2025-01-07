@@ -62,11 +62,6 @@ internal class Program
         var summaryInsights = Analyser.AnalyseSummaries(summaries);
         PrintInsights(summaryInsights);
 
-        Console.WriteLine("Analysing endpoint...");
-        var endpointData = await EndpointReader.ReadEndpointAsync(DATA_ENDPOINT_URL);
-        var endpointDataInsights = Analyser.AnalyseEndpointData(endpointData);
-        PrintInsights(endpointDataInsights);
-
         Console.WriteLine("Analysing individual workshop summaries...");
         var individualWorkshopData = await DynamoScanner.ScanAllAsync<WorkshopSummary>(context, INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME);
         Console.WriteLine();
@@ -79,9 +74,18 @@ internal class Program
         FileUtilities.SaveDictAsInsightValueCSV(sessionInsights, "output/sessions_insights.csv");
         FileUtilities.SaveCSV(summaries, "output/summaries.csv");
         FileUtilities.SaveDictAsInsightValueCSV(summaryInsights, "output/summaries_insights.csv");
+        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops");
+        Console.WriteLine();
+
+        Console.WriteLine("Analysing endpoint...");
+        var endpointData = await EndpointReader.ReadEndpointAsync(DATA_ENDPOINT_URL);
+        var endpointDataInsights = Analyser.AnalyseEndpointData(endpointData);
+        PrintInsights(endpointDataInsights);
+
+        Console.WriteLine("Storing endpoint data...");
         FileUtilities.SaveJson(endpointData, "output/endpoint_data.json");
         FileUtilities.SaveDictAsInsightValueCSV(endpointDataInsights, "output/endpoint_data_insights.csv");
-        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops");
+        Console.WriteLine();
 
         Console.WriteLine("Done.");
         Console.WriteLine();
