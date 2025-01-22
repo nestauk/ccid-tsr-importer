@@ -13,6 +13,9 @@ These scripts assume that `bash` and `brew` are available. ([Homebrew](https://b
 | `upload-session.sh`               | Upload a specific session file to a specific dynamodb table           |
 | `upload-all-sessions.sh`          | Upload all session files found in `output/` to the TSR sessions table |
 
+> [!CAUTION]
+> `upload-all-sessions.sh` isn't advised - this will include all test sessions. Just upload individual sessions.
+
 These are supported by some original javascript scripts that can manipulate the data itself:
 
 | Script                  | purpose                                                                                  |
