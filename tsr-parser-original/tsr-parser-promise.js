@@ -1,52 +1,62 @@
-let fs = require('fs');
-let fsPromise = require('fs/promises');
-let AWS = require('aws-sdk');
+let fs = require("fs");
+let fsPromise = require("fs/promises");
+let AWS = require("aws-sdk");
 
 // get the folder from parameter, not hard coded
 // const folderName = '/Users/tomfeltwell/Code/tsr-parser/bucket-parsed/966990/1680526138699/';
 var args = process.argv.slice(2);
 let folderName = args[0];
-if (!folderName.endsWith('/')) { folderName += '/'; }
+if (!folderName.endsWith("/")) {
+  folderName += "/";
+}
 if (folderName) {
-    console.log(`Parsing directory: ${folderName}`);
+  console.log(`Parsing directory: ${folderName}`);
 } else {
-    console.err('No folder name provided');
-    process.exit(1);
+  console.err("No folder name provided");
+  process.exit(1);
 }
 
-const inputVotes = `${folderName}stage_text_input_votes.json`
+const inputVotes = `${folderName}stage_text_input_votes.json`;
 const userDemog = `${folderName}user_demographics.json`;
 const sliderVoteVotes = `${folderName}stage_slider_vote_votes.json`;
 const stageTimings = `${folderName}stage_timings.json`;
-const pollVotes = `${folderName}stage_slider_vote_results.csv`;  // This is parsed manually, CSV only
-const checkboxVotes = `${folderName}stage_checkbox_votes.csv`;  // This is parsed manually, CSV only
+const pollVotes = `${folderName}stage_slider_vote_results.csv`; // This is parsed manually, CSV only
+const checkboxVotes = `${folderName}stage_checkbox_votes.csv`; // This is parsed manually, CSV only
 
 async function readFiles(inputFile, demogFile, voteFile, timingFile, pollFile, checkboxFile) {
-  let missing = [];
-  for (let file of [inputFile, demogFile, voteFile, timingFile, pollFile, checkboxFile]) {
-    if (!fs.existsSync(file)) missing.push(file);
+  let required = [];
+  let warnings = [];
+  for (let file of [inputFile, demogFile, voteFile, timingFile, pollFile]) {
+    if (!fs.existsSync(file)) required.push(file);
   }
-  if (missing.length > 0) {
-    console.error('Missing files:', JSON.stringify(missing));
-    throw new Error('Missing files');
+  for (let file of [checkboxFile]) {
+    if (!fs.existsSync(file)) warnings.push(file);
+  }
+  if (required.length > 0) {
+    console.error("ERROR! These missing files are required:", JSON.stringify(required));
+    throw new Error("Missing files");
+  }
+  if (warnings.length > 0) {
+    console.warn("WARNING! These files are missing:", JSON.stringify(warnings));
+    console.warn("Continuing without this data may produce incomplete results.");
   }
 
   try {
-    const inputData = await fsPromise.readFile(inputFile, { encoding: 'ascii'});
-    const demogData = await fsPromise.readFile(demogFile, { encoding: 'ascii' });
-    const voteData = await fsPromise.readFile(voteFile, { encoding: 'ascii' });
-    const timingData = await fsPromise.readFile(timingFile, { encoding: 'ascii' });
-    const pollData = await fsPromise.readFile(pollFile, { encoding: 'ascii' });
-    const checkboxData = await fsPromise.readFile(checkboxFile, { encoding: 'ascii' }); 
+    const inputData = await fsPromise.readFile(inputFile, { encoding: "ascii" });
+    const demogData = await fsPromise.readFile(demogFile, { encoding: "ascii" });
+    const voteData = await fsPromise.readFile(voteFile, { encoding: "ascii" });
+    const timingData = await fsPromise.readFile(timingFile, { encoding: "ascii" });
+    const pollData = await fsPromise.readFile(pollFile, { encoding: "ascii" });
+    const checkboxData = fs.existsSync(checkboxFile) ? await fsPromise.readFile(checkboxFile, { encoding: "ascii" }) : undefined;
 
     // pollData is not parsed to JSON as this needs to be done manually
-    return { 
-      "input": JSON.parse(inputData),
-      "demog": JSON.parse(demogData),
-      "vote": JSON.parse(voteData),
-      "timing": JSON.parse(timingData),
-      "poll": pollData,
-      "checkbox": checkboxData
+    return {
+      input: JSON.parse(inputData),
+      demog: JSON.parse(demogData),
+      vote: JSON.parse(voteData),
+      timing: JSON.parse(timingData),
+      poll: pollData,
+      checkbox: checkboxData,
     };
   } catch (err) {
     console.error(err);
@@ -55,30 +65,30 @@ async function readFiles(inputFile, demogFile, voteFile, timingFile, pollFile, c
 }
 
 function extractPollResults(pollFile) {
-  console.log('Parsing poll results');
+  console.log("Parsing poll results");
   const pollData = [];
   // This is really hacky, as the embedded JSON object messes up CSV parsing because of the use of commas!
-  const lines = pollFile.split('\n');
+  const lines = pollFile.split("\n");
 
   // Ignore column heading row
   for (let i = 1; i < lines.length; i++) {
     const splitLine = lines[i].split('"{');
     let record = {
-      "stage_id": "",
-      "result": {},
-      "vote_id": ""
-    }
+      stage_id: "",
+      result: {},
+      vote_id: "",
+    };
 
-    if(splitLine.length > 1) {
+    if (splitLine.length > 1) {
       // [0] has the poll number and sess ID in
-      const res0 = splitLine[0].split(',');
+      const res0 = splitLine[0].split(",");
       record.stage_id = res0[1];
 
       // [1] has the object, and question number
       const res1 = splitLine[1].split('}"');
-      record.vote_id = res1[1].replace(',','');
+      record.vote_id = res1[1].replace(",", "");
       const cleanedObj = res1[0].replaceAll('""', '"');
-      record.result = eval('({' + cleanedObj + '})');
+      record.result = eval("({" + cleanedObj + "})");
     }
     pollData.push(record);
   }
@@ -86,33 +96,36 @@ function extractPollResults(pollFile) {
 }
 
 function extractCheckboxResults(checkboxFile) {
-  console.log('Parsing checkbox results');
+  console.log("Parsing checkbox results");
   const checkboxData = [];
-  if (!checkboxFile) { return checkboxData; }
-  
+  if (!checkboxFile) {
+    console.warn("WARNING! Checkbox data not found - some data will be missing.");
+    return checkboxData;
+  }
+
   // This is really hacky, as the embedded JSON object messes up CSV parsing because of the use of commas!
-  const lines = checkboxFile.split('\n');
+  const lines = checkboxFile.split("\n");
 
   // Ignore column heading row
   for (let i = 1; i < lines.length; i++) {
     // Split on the first "{ combination, as this is the only one in the line
     const splitLine = lines[i].split('"{');
     let record = {
-      "cast_uuid": "",
-      "stage_id": "",
-      "result": {},
-    }
+      cast_uuid: "",
+      stage_id: "",
+      result: {},
+    };
 
-    if(splitLine.length > 1) {
+    if (splitLine.length > 1) {
       // parse the first part of the line to extract the cast_uuid and stage_id
-      const res0 = splitLine[0].split(',');
+      const res0 = splitLine[0].split(",");
       record.cast_uuid = res0[1];
       record.stage_id = res0[2];
 
       // parse the second part of the line to extract the JSON object
-      let substr = splitLine[1].split('}');
+      let substr = splitLine[1].split("}");
       let cleanedObj = substr[0].replaceAll('""', '"');
-      record.result = eval('({' + cleanedObj + '})');
+      record.result = eval("({" + cleanedObj + "})");
       // console.log('record:', record);
       checkboxData.push(record);
     } else {
@@ -122,43 +135,36 @@ function extractCheckboxResults(checkboxFile) {
   return checkboxData;
 }
 
-readFiles(
-  inputVotes,
-  userDemog,
-  sliderVoteVotes,
-  stageTimings,
-  pollVotes,
-  checkboxVotes
-).then( data => {
-  console.log('Successfully read all files');
+readFiles(inputVotes, userDemog, sliderVoteVotes, stageTimings, pollVotes, checkboxVotes).then((data) => {
+  console.log("Files read - processing data...");
   // get LA name
   let session = {
     "session-id": data.input[0].session_id,
-    "council": data.input[0].vote,
-    "datetime": data.timing[0].end_time,
-    "modules": {},
-    "unfilterable_polls": []
-  }
+    council: data.input[0].vote,
+    datetime: data.timing[0].end_time,
+    modules: {},
+    unfilterable_polls: [],
+  };
 
   let modules = {
     travel: false,
     heat: false,
-    food: false
+    food: false,
   };
 
   // Check the first letter of stage id, if it's t, h, or f[number]
   for (let a = 0; a < data.timing.length; a++) {
     switch (data.timing[a].stage_id.charAt(0)) {
-      case 't':
+      case "t":
         if (!modules.travel) modules.travel = true;
         break;
-      case 'h':
+      case "h":
         if (!modules.heat) modules.heat = true;
         break;
-      case 'f':
+      case "f":
         // code
         const regex = /[A-Za-z][0-9]+/i;
-        if(data.timing[a].stage_id.search(regex) !== -1) {
+        if (data.timing[a].stage_id.search(regex) !== -1) {
           // it is food (not final question)
           modules.food = true;
         }
@@ -168,50 +174,53 @@ readFiles(
     }
   }
   session.modules = modules;
-  
+
   // Manually parse the CSV for poll data
   session.unfilterable_polls = extractPollResults(data.poll);
 
   // Manually parse the CSV for checkbox data
+  // UPDATE: survive absent checkbox data
   const all_checkbox_data = extractCheckboxResults(data.checkbox);
-  
+
   // console.log(session);
 
   // build list of unique cast_uuids
   let cast_uuids = [];
-  data.vote.forEach(vote => {
+  data.vote.forEach((vote) => {
     let uuid = vote.cast_uuid;
-    if(!cast_uuids.includes(uuid)) { cast_uuids.push(uuid); }
+    if (!cast_uuids.includes(uuid)) {
+      cast_uuids.push(uuid);
+    }
   });
 
   // create participants from unique cast_uuids
   let participants = [];
-  cast_uuids.forEach(uuid => {
-    let participant = { 
-      "uuid": uuid, 
-      "demographics": { "gender": null, "age_range": null, "ethnicity": null, "first_half_postcode": null }, 
-      "responses": [] 
+  cast_uuids.forEach((uuid) => {
+    let participant = {
+      uuid: uuid,
+      demographics: { gender: null, age_range: null, ethnicity: null, first_half_postcode: null },
+      responses: [],
     };
-    let participant_demographic = data.demog.find(d => d.uuid === uuid);
+    let participant_demographic = data.demog.find((d) => d.uuid === uuid);
     if (participant_demographic) {
       participant.demographics = {
-        "gender": participant_demographic.gender,
-        "age_range": participant_demographic.age_range,
-        "ethnicity": participant_demographic.ethnicity,
-        "first_half_postcode": participant_demographic.first_half_postcode
+        gender: participant_demographic.gender,
+        age_range: participant_demographic.age_range,
+        ethnicity: participant_demographic.ethnicity,
+        first_half_postcode: participant_demographic.first_half_postcode,
       };
     }
     participants.push(participant);
   });
 
   // for(let i = 0; i < data.demog.length; i++) {
-  //   let result = (({ 
+  //   let result = (({
   //     uuid,
   //     gender,
   //     age_range,
   //     ethnicity,
   //     first_half_postcode
-  //   }) => ({ 
+  //   }) => ({
   //     uuid,
   //     "demographics": {gender, age_range, ethnicity, first_half_postcode},
   //     "responses": []
@@ -222,24 +231,24 @@ readFiles(
   // console.log(participants);
 
   // Iterate all participants and add their checkbox data
-  for(let i = 0; i < participants.length; i++) {
+  for (let i = 0; i < participants.length; i++) {
     // Find all the checkbox data for this participant
-    const checkbox_data = all_checkbox_data.filter(e => e.cast_uuid === participants[i].uuid);
+    const checkbox_data = all_checkbox_data?.filter((e) => e.cast_uuid === participants[i].uuid);
     // console.log('found this checkbox data for participant', participants[i].uuid, checkbox_data);
     // Add to the participant object in 'checkbox' field
     participants[i].checkbox = checkbox_data;
   }
 
   // Build list of votes
-  for(let j = 0; j < data.vote.length; j++) {
+  for (let j = 0; j < data.vote.length; j++) {
     let result = (({ stage_id, vote, min_boundary, max_boundary, vote_id }) => ({ stage_id, vote, min_boundary, max_boundary, vote_id }))(data.vote[j]);
 
     // Search by cast_uuid, their uuid should be in there
-    let idx = participants.findIndex(p => p.uuid === data.vote[j].cast_uuid);
+    let idx = participants.findIndex((p) => p.uuid === data.vote[j].cast_uuid);
     // If not found, something weird is going on (e.g. a vote without a demog record)
     // DEV NOTE: Demographics are mandatory so all records should have a demog record
-    if(idx === -1) {
-      console.error('Error: vote without demog record');
+    if (idx === -1) {
+      console.error("Error: vote without demog record");
       console.warn(`${participants.length} participants`);
       console.warn(`${cast_uuids.length} cast_uuids`);
       console.warn(data.vote[j]);
@@ -259,7 +268,7 @@ readFiles(
   var marshalled = AWS.DynamoDB.Converter.marshall(session);
 
   // save
-  fs.writeFile(`${folderName}parsed.json`, JSON.stringify(marshalled), err => {
+  fs.writeFile(`${folderName}parsed.json`, JSON.stringify(marshalled), (err) => {
     if (err) {
       console.error(err);
       exit(1);
