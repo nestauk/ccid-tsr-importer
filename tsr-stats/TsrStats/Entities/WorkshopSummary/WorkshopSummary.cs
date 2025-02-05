@@ -10,7 +10,7 @@ public class WorkshopSummary
     public string id { get; set; } = null!;
     public string council { get; set; } = null!;
     public DateTime created { get; set; }
-    public long datetime { get; set; }
+    public long datetime { get; set; } // apparently this is seconds
     public string demographic { get; set; } = null!;
     public int participants { get; set; }
 
@@ -22,9 +22,11 @@ public class WorkshopSummary
     // public long timestamp { get; set; }
     // public DateTime workshopDate => DateTime.UnixEpoch.AddMilliseconds(timestamp);
     
-    public object questionTotalsObject => JsonSerializer.Deserialize<object>(questionTotals.ToJson());
+    public object questionTotalsObject => JsonSerializer.Deserialize<object>(questionTotals!.ToJson())!;
 
     public string workshopDate => DateTime.UnixEpoch.AddSeconds(datetime).ToString("yyyy-MM-dd");
+    public string workshopTime => DateTime.UnixEpoch.AddSeconds(datetime).TimeOfDay < TimeSpan.FromHours(12) ? "AM" : "PM";
+    public string? workshopNumber { get; set; }
 }
 
 // Custom property converter for the Document objects

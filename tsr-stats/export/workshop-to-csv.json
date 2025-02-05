@@ -3,6 +3,21 @@
     "rules":
     [
         {
+            "path": "workshopDate",
+            "target": "workshopDate",
+            "interpretation": "AsString"
+        },
+        {
+            "path": "workshopTime",
+            "target": "workshopTime",
+            "interpretation": "AsString"
+        },
+        {
+            "path": "workshopNumber",
+            "target": "workshopNumber",
+            "interpretation": "AsString"
+        },
+        {
             "path": "sessionId",
             "target": "search_session",
             "interpretation": "AsString"

@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tsr-question-map-generator", "tsr-question-map-generator", "{E925938C-577C-40B1-931F-3C6A596CE551}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tsr-stats", "tsr-stats", "{9C0E7D37-79DA-4F02-98B3-48C415D95423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionMapGen", "tsr-question-map-generator\QuestionMapGen\QuestionMapGen.csproj", "{113A7AC4-F664-470A-BF37-E44730F0E47C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tsr-stats", "tsr-stats", "{1B2C7115-0B03-46FA-AD87-32A8E88F7976}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsrStats", "tsr-stats\TsrStats\TsrStats.csproj", "{DBBAA4CE-7450-444B-8CF5-08D251E9EAB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsrStats", "tsr-stats\TsrStats\TsrStats.csproj", "{EBED7EEE-7B15-4D93-A42A-4AB93BADA75D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,17 +16,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{113A7AC4-F664-470A-BF37-E44730F0E47C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{113A7AC4-F664-470A-BF37-E44730F0E47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{113A7AC4-F664-470A-BF37-E44730F0E47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{113A7AC4-F664-470A-BF37-E44730F0E47C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBBAA4CE-7450-444B-8CF5-08D251E9EAB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBBAA4CE-7450-444B-8CF5-08D251E9EAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBBAA4CE-7450-444B-8CF5-08D251E9EAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBBAA4CE-7450-444B-8CF5-08D251E9EAB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBED7EEE-7B15-4D93-A42A-4AB93BADA75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBED7EEE-7B15-4D93-A42A-4AB93BADA75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBED7EEE-7B15-4D93-A42A-4AB93BADA75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBED7EEE-7B15-4D93-A42A-4AB93BADA75D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{113A7AC4-F664-470A-BF37-E44730F0E47C} = {E925938C-577C-40B1-931F-3C6A596CE551}
-		{DBBAA4CE-7450-444B-8CF5-08D251E9EAB8} = {1B2C7115-0B03-46FA-AD87-32A8E88F7976}
+		{EBED7EEE-7B15-4D93-A42A-4AB93BADA75D} = {9C0E7D37-79DA-4F02-98B3-48C415D95423}
 	EndGlobalSection
 EndGlobal

@@ -76,7 +76,7 @@ public class FileUtilities
         writer.Flush();
     }
 
-    public static void SaveAllToDirectoryByCouncil(IEnumerable<WorkshopSummary> data, string directory)
+    public static void SaveAllToDirectoryByCouncil(IEnumerable<WorkshopSummary> data, string directory, IDictionary<string,string> sessionIdToKeyMap)
     {
         Directory.CreateDirectory(directory);
 
@@ -92,8 +92,9 @@ public class FileUtilities
             var councilWorkshops = data.Where(ws => ws.council == council);
             foreach (var workshop in councilWorkshops)
             {
+                var sessionKey = sessionIdToKeyMap[workshop.sessionId];
                 File.WriteAllText(
-                    Path.Combine(councilPath, $"{Utilities.NormaliseDemographic(council)}-{workshop.sessionId}.json"),
+                    Path.Combine(councilPath, $"{Utilities.NormaliseDemographic(council)}-{sessionKey}.json"),
                     JsonSerializer.Serialize(workshop, new JsonSerializerOptions() { WriteIndented = true }));
             }
         }

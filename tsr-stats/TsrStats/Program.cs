@@ -45,6 +45,7 @@ internal class Program
         Console.WriteLine("Analysing sessions in S3...");
         var s3 = new AmazonS3Client(RegionEndpoint.EUWest2);
         var s3sessions = await S3Scanner.ScanS3Async(s3, S3_BUCKET_NAME, "syndicateos-data/nesta/");
+        var sessionIdToKeyMap = s3sessions.Where(s => !string.IsNullOrWhiteSpace(s.session_id)).ToDictionary(s => s.session_id!, s => s.path_key!);
         var s3sessionInsights = Analyser.AnalyseS3Sessions(s3sessions);
         PrintInsights(s3sessionInsights);
 
@@ -63,7 +64,12 @@ internal class Program
         PrintInsights(summaryInsights);
 
         Console.WriteLine("Analysing individual workshop summaries...");
-        var individualWorkshopData = await DynamoScanner.ScanAllAsync<WorkshopSummary>(context, INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME);
+        var individualWorkshopDataRaw = await DynamoScanner.ScanAllAsync<WorkshopSummary>(context, INDIVIDUAL_WORKSHOP_SUMMARY_TABLE_NAME);
+        var individualWorkshopData = individualWorkshopDataRaw.ToList().Select((workshop) => 
+        { 
+            workshop.workshopNumber = sessionIdToKeyMap[workshop.sessionId];
+            return workshop;
+        });
         Console.WriteLine();
 
         Console.WriteLine("Storing analysis...");
@@ -74,7 +80,7 @@ internal class Program
         FileUtilities.SaveDictAsInsightValueCSV(sessionInsights, "output/sessions_insights.csv");
         FileUtilities.SaveCSV(summaries, "output/summaries.csv");
         FileUtilities.SaveDictAsInsightValueCSV(summaryInsights, "output/summaries_insights.csv");
-        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops");
+        FileUtilities.SaveAllToDirectoryByCouncil(individualWorkshopData, "output/workshops", sessionIdToKeyMap);
         Console.WriteLine();
 
         Console.WriteLine("Analysing endpoint...");
